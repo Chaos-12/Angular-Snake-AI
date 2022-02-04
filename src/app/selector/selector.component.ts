@@ -7,10 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectorComponent implements OnInit {
 
-  menu = [
-    {text: 'User', }
-  ]
-
   constructor() { }
 
   ngOnInit(): void {
