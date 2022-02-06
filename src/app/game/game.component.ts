@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Snake } from 'src/logic/snake';
 
 @Component({
   selector: 'app-game',
@@ -18,7 +19,7 @@ export class GameComponent implements OnInit {
 
   private score : number = 0;
   private record : number = 0;
-  private snake : number[] = [2,3,4];
+  private snake : Snake = new Snake();
   private nFoods : number = 0;
 
   constructor() {
@@ -31,9 +32,9 @@ export class GameComponent implements OnInit {
   }
 
   public drawSnake(){
-    this.snake.forEach(body => {
+    this.snake.body.forEach(part => {
       const snakeElement = document.createElement('div');
-      snakeElement.style.gridColumnStart = body.toString();
+      snakeElement.style.gridColumnStart = part.toString();
       // snakeElement.style.backgroundColor = 'black';
       snakeElement.classList.add('snake');
       this.screen.appendChild(snakeElement);
