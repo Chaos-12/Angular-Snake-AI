@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+
+.snake {
+  background-color: greenyellow;
+  border: 0.25vmin solid black;
+}
+
+.food {
+  border-radius: 50%;
+  background-color: red;
+  border: 0.25vmin solid black;
+}

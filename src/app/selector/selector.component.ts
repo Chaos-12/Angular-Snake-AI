@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from '../home/home.component';
-import { ViewUserComponent } from '../view-user/view-user.component';
+import { PlayComponent } from '../play/play.component';
 
 @Component({
   selector: 'app-selector',
@@ -10,7 +10,7 @@ import { ViewUserComponent } from '../view-user/view-user.component';
 export class SelectorComponent implements OnInit {
   menu = [
     { text: 'Home', icon: 'home', component: HomeComponent },
-    { text: 'User', icon: 'calculator', component: ViewUserComponent },
+    { text: 'Play', icon: 'calculator', component: PlayComponent },
   ]
   actual: any = this.menu[0].component;
 
