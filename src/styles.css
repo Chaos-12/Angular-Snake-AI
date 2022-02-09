@@ -3,15 +3,15 @@
   background-color: greenyellow;
 }
 
-.east {
+.rotate90 {
   transform: rotate(90deg);
 }
 
-.north {
+.rotate180 {
   transform: rotate(180deg);
 }
 
-.west {
+.rotate270 {
   transform: rotate(270deg);
 }
 

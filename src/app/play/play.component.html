@@ -1,7 +1,7 @@
 <p>Welcome to the 1-player mode</p>
 
-<button type="button" (click)="start()">Start</button>
-<button type="button" (click)="stop()">Pause</button>
+<button type="button" *ngIf="isPaused" (click)="start()">Start</button>
+<button type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
 <button type="button" (click)="reset()">Reset</button>
 
 <main class="game-board"></main>

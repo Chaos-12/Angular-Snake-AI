@@ -11,10 +11,10 @@
 
 .header .btn {
   color: white;
+  font-size: 1.5rem;
   background-color: black;
   text-decoration: none;
   padding: 2px 5px;
-  border-radius: 25px;
 }
 
 .header .btn:hover {

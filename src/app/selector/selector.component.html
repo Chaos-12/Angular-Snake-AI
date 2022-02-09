@@ -1,8 +1,9 @@
 <header class="header">
-  <img src="../../assets/Food2.png" alt="snake logo">
-    <div *ngFor="let item of menu; let i=index;">
-      <button [class.active]="item.component === actual" type="button" (click)="select(i)">{{item.text}}</button>
-    </div>
+  <div *ngFor="let item of menu; let i=index;">
+    <button class="btn" [class.active]="item.component === actual" type="button" (click)="select(i)">
+      <img src="../../assets/Food2.png" alt="snake logo">  {{item.text}}
+    </button>
+  </div>
 </header>
 <main class="container-fluid">
   <ng-container *ngComponentOutlet="actual"></ng-container>

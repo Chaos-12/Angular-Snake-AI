@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Board, BoardPosition } from 'src/logic/board';
+import { Board, BoardPosition, Direction } from 'src/logic/board';
 import { Snake } from 'src/logic/snake';
 
 @Component({
@@ -24,6 +24,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
   constructor() {
     this.snake = new Snake();
     this.board = new Board(this.snake);
+    this.listenArrowKeys();
   }
   
   ngOnInit():void{
@@ -54,12 +55,15 @@ export class PlayComponent implements OnInit, AfterViewInit {
     }
     window.requestAnimationFrame(this.nextStep.bind(this));
     const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000;
-    if (secondsSinceLastRender < 1){
+    if (secondsSinceLastRender < 0.2){
       return;
     }
     this.lastRenderTime = currentTime;
     this.board.moveSnake();
     this.draw();
+    if(!this.snake.isAlive){
+      this.stop();
+    }
   }
 
   public record():number{
@@ -73,7 +77,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
   private draw():void{
     this.gameBoard.innerHTML = '';
     this.drawDiv(this.board.food, ['food']);
-    this.drawDiv(this.snake.head, ['snake', 'snake-head']);
+    this.drawDiv(this.snake.head, ['snake', 'snake-head', `rotate${this.snake.direction*90}`]);
     this.snake.body.forEach(part => {
       this.drawDiv(part, ['snake', 'snake-body']);
     });
@@ -87,5 +91,25 @@ export class PlayComponent implements OnInit, AfterViewInit {
       element.classList.add(text);
     })
     this.gameBoard.appendChild(element);
+  }
+
+  private listenArrowKeys():void{
+    window.addEventListener('keydown', e =>{
+      switch (e.key){
+        case 'ArrowUp':
+          this.snake.newDirection(Direction.north);
+          console.log('hey');
+          break;
+        case 'ArrowDown':
+          this.snake.newDirection(Direction.south);
+          break;
+        case 'ArrowLeft':
+          this.snake.newDirection(Direction.west);
+          break;
+        case 'ArrowRight':
+          this.snake.newDirection(Direction.east);
+          break;
+      }
+    })
   }
 }

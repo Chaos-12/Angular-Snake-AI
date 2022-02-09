@@ -1,7 +1,7 @@
 import { Snake, SnakeDeath } from "./snake";
 
 export enum Direction {
-  north = 0, east = 1, south = 2, west = 3
+  south = 0, west = 1, north = 2, east = 3,
 }
 
 export class BoardPosition {
