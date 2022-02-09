@@ -1,6 +1,11 @@
 
 .snake {
   background-color: greenyellow;
+  border-radius: 13px;
+}
+
+.snake-head {
+  border: 1px solid black;
 }
 
 .rotate90 {

@@ -9,8 +9,6 @@ import { Snake } from 'src/logic/snake';
 })
 export class PlayComponent implements OnInit, AfterViewInit {
 
-  public name:string = 'user';
-
   private pause:boolean = true;
   get isPaused(){
     return this.pause;
@@ -36,6 +34,9 @@ export class PlayComponent implements OnInit, AfterViewInit {
   }
 
   public start(){
+    if(!this.snake.isAlive){
+      this.reset();
+    }
     this.pause = false;
     window.requestAnimationFrame(this.nextStep.bind(this));
   }
