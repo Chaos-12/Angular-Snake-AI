@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { SelectorComponent } from './selector/selector.component';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
-import { GameComponent } from './game/game.component';
-import { UserGameComponent } from './game/userGame.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +13,6 @@ import { UserGameComponent } from './game/userGame.component';
     SelectorComponent,
     HomeComponent,
     PlayComponent,
-    GameComponent,
-    UserGameComponent
   ],
   imports: [
     BrowserModule,

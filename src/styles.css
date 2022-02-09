@@ -1,11 +1,24 @@
 
 .snake {
   background-color: greenyellow;
-  border: 0.25vmin solid black;
+}
+
+.east {
+  transform: rotate(90deg);
+}
+
+.north {
+  transform: rotate(180deg);
+}
+
+.west {
+  transform: rotate(270deg);
 }
 
 .food {
-  border-radius: 50%;
-  background-color: red;
-  border: 0.25vmin solid black;
+  background: url('assets/Food2.png') center no-repeat;
+  background-size: contain;
+  /* border-radius: 50%; */
+  /* background-color: red; */
+  /* border: 0.25vmin solid black; */
 }

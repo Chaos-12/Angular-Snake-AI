@@ -9,8 +9,8 @@ import { PlayComponent } from '../play/play.component';
 })
 export class SelectorComponent implements OnInit {
   menu = [
-    { text: 'Home', icon: 'home', component: HomeComponent },
-    { text: 'Play', icon: 'calculator', component: PlayComponent },
+    { text: 'Home', component: HomeComponent },
+    { text: 'Play', component: PlayComponent },
   ]
   actual: any = this.menu[0].component;
 
