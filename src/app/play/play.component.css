@@ -1,9 +1,13 @@
 .game-board {
   background-color: rgba(0, 0, 0, 0.6);
-  width: 90vmin;
-  height: 90vmin;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(10, 1fr);
   align-self: center;
+  padding: 10px;
+}
+
+.field {
+  display: flex;
+  font-size: 2rem;
 }

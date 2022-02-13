@@ -1,24 +1,34 @@
-.header {
-  display: flex;
-  flex-flow: row wrap;
-  background-color: black;
-  color: white;
-  padding: 10px;
-  align-items: stretch;
-  position: sticky;
-  top: 0;
+
+.icon {
+  aspect-ratio: 1/1;
+  width: 1rem;
 }
 
-.header .btn {
-  color: white;
-  font-size: 1.5rem;
-  background-color: black;
-  text-decoration: none;
-  padding: 2px 5px;
+.tab-content {
+  color: var(--color-contrast);
+  background-color: var(--color-main);
+  display: none;
+  padding: 100px 20px;
+  height: 100vmin;
+  border-style: groove;
 }
 
-.header .btn:hover {
-  color: black;
-  background-color: white;
-  text-decoration: none;
+.tab-link {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 50%;
+}
+
+.tab-link:hover {
+  background-color: var(--color-main);
+}
+
+.selected {
+  background-color: var(--color-main);
 }

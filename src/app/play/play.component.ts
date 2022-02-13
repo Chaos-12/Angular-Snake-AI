@@ -9,9 +9,10 @@ import { Snake } from 'src/logic/snake';
 })
 export class PlayComponent implements OnInit, AfterViewInit {
 
-  private pause:boolean = true;
+  public score:number = 0;
+  private paused:boolean = true;
   get isPaused(){
-    return this.pause;
+    return this.paused;
   }
   private lastRenderTime:number = 0;
 
@@ -37,12 +38,12 @@ export class PlayComponent implements OnInit, AfterViewInit {
     if(!this.snake.isAlive){
       this.reset();
     }
-    this.pause = false;
+    this.paused = false;
     window.requestAnimationFrame(this.nextStep.bind(this));
   }
 
   public stop(){
-    this.pause = true;
+    this.paused = true;
   }
 
   public reset(){
@@ -51,7 +52,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
   }
 
   public nextStep(currentTime:any){
-    if(this.pause){
+    if(this.paused){
       return;
     }
     window.requestAnimationFrame(this.nextStep.bind(this));
@@ -71,8 +72,8 @@ export class PlayComponent implements OnInit, AfterViewInit {
     return this.snake.Record;
   }
 
-  public score():number{
-    return this.snake.score;
+  public updateScore():void{
+    this.score = this.snake.score;
   }
 
   private draw():void{
@@ -82,6 +83,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
     this.snake.body.forEach(part => {
       this.drawDiv(part, ['snake', 'snake-body']);
     });
+    this.updateScore();
   }
 
   private drawDiv(position:BoardPosition, textClass:string[]):void{
@@ -110,6 +112,9 @@ export class PlayComponent implements OnInit, AfterViewInit {
         case 'ArrowRight':
           this.snake.newDirection(Direction.east);
           break;
+      }
+      if(this.paused){
+        this.start();
       }
     })
   }

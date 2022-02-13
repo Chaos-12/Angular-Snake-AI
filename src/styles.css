@@ -1,11 +1,39 @@
+:root {
+  --snake-radius: 0%;
+  --head-radius: 40%;
+  --color-main: black;
+  --color-contrast: white;
+}
+
+body, html {
+  height: 100%;
+}
 
 .snake {
   background-color: greenyellow;
-  border-radius: 13px;
+  /* border: 1px solid black; */
 }
 
 .snake-head {
-  border: 1px solid black;
+  /* background: url('assets/PixelSnakeFace.png') center no-repeat; */
+  /* background-color: greenyellow; */
+  border-radius: var(--default-radius) var(--default-radius) var(--head-radius) var(--head-radius);
+}
+
+.snake-body {
+  border-radius: var(--default-radius);
+}
+
+.food {
+  background: url('assets/PixelFood.png') center no-repeat;
+  background-size: contain;
+  /* border-radius: 50%; */
+  /* background-color: red; */
+  /* border: 0.25vmin solid black; */
+}
+
+.square {
+  aspect-ratio: 1/1;
 }
 
 .rotate90 {
@@ -20,10 +48,30 @@
   transform: rotate(270deg);
 }
 
-.food {
-  background: url('assets/Food2.png') center no-repeat;
-  background-size: contain;
-  /* border-radius: 50%; */
-  /* background-color: red; */
-  /* border: 0.25vmin solid black; */
+.width33 {
+  width: 33%;
+}
+
+.width50 {
+  width: 50%;
+}
+
+.width100 {
+  width: 95vmin;
+}
+
+.color-main {
+  background-color: var(--color-main);
+  color: var(--color-contrast);
+}
+
+.color-main:hover {
+  background-color: var(--color-contrast);
+  color: var(--color-main);
+}
+
+.button {
+  font-size: 1.5rem;
+  text-decoration: none;
+  padding: 2px 5px;
 }

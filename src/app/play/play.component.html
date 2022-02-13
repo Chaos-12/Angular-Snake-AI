@@ -1,7 +1,13 @@
-<p>Welcome to the 1-player mode</p>
-
-<button type="button" *ngIf="isPaused" (click)="start()">Start</button>
-<button type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
-<button type="button" (click)="reset()">Reset</button>
-
-<main class="game-board"></main>
+<div class="card-user">
+  <div class="header">
+    <input class="title width100" type="text" placeholder="Your name">
+    <div class="field width50">
+      <label>Score </label><output type="number">{{score}}</output>
+    </div>
+  </div>
+  <main class="game-board square"></main>
+  <nav>
+    <button class="button color-main width100" type="button" *ngIf="isPaused" (click)="start()">Start</button>
+    <button class="button color-main width100" type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
+  </nav>
+</div>
