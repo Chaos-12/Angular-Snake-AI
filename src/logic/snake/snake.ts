@@ -1,8 +1,4 @@
-import { Direction, BoardPosition } from "./board";
-
-export enum SnakeDeath {
-  wall, bite
-}
+import { Direction, BoardPosition, SnakeDeath } from "../index";
 
 export class Snake {
 

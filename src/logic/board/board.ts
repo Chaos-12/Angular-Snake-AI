@@ -1,32 +1,4 @@
-import { Snake, SnakeDeath } from "./snake";
-
-export enum Direction {
-  south = 0, west = 1, north = 2, east = 3,
-}
-
-export class BoardPosition {
-  constructor(public x:number, public y:number){ }
-
-  public equals(position:BoardPosition):boolean{
-    if(this.x === position.x && this.y === position.y){
-      return true;
-    }
-    return false;
-  }
-
-  public forward(direction:Direction):BoardPosition{
-    switch(direction){
-      case Direction.north:
-        return new BoardPosition(this.x, this.y -1);
-      case Direction.east:
-        return new BoardPosition(this.x +1, this.y);
-      case Direction.south:
-        return new BoardPosition(this.x, this.y +1);
-      case Direction.west:
-        return new BoardPosition(this.x -1, this.y);
-    }
-  }
-}
+import { BoardPosition, Snake, SnakeDeath } from "../index";
 
 export class Board {
   public food:BoardPosition = new BoardPosition(this.width, this.height);

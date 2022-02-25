@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Board, BoardPosition, Direction } from 'src/logic/board';
-import { Snake } from 'src/logic/snake';
+import { Board, BoardPosition, Direction, Snake } from 'src/logic/index';
 
 @Component({
   selector: 'app-play',
@@ -25,7 +24,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
     this.board = new Board(this.snake);
     this.listenArrowKeys();
   }
-  
+
   ngOnInit():void{
   }
 
