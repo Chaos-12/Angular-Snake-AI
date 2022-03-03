@@ -1,35 +1,41 @@
 :root {
-  --snake-radius: 0%;
-  --head-radius: 40%;
-  --color-main: black;
+  --color-main: blue;
   --color-contrast: white;
 }
 
-body, html {
+html, body {
+  color: white;
   height: 100%;
+  margin: 0px;
+  min-width: 200px;
 }
 
 .snake {
   background-color: greenyellow;
-  /* border: 1px solid black; */
+  border: 1px solid black;
 }
 
 .snake-head {
+  border-radius: 0% 0% 30% 30%;
   /* background: url('assets/PixelSnakeFace.png') center no-repeat; */
   /* background-color: greenyellow; */
-  border-radius: var(--default-radius) var(--default-radius) var(--head-radius) var(--head-radius);
-}
-
-.snake-body {
-  border-radius: var(--default-radius);
 }
 
 .food {
   background: url('assets/PixelFood.png') center no-repeat;
   background-size: contain;
-  /* border-radius: 50%; */
-  /* background-color: red; */
-  /* border: 0.25vmin solid black; */
+}
+
+.board {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  align-self: center;
+  justify-self: center;
+  padding: 10px;
+  min-width: 200px;
+  max-width: 500px;
 }
 
 .square {
@@ -57,21 +63,5 @@ body, html {
 }
 
 .width100 {
-  width: 95vmin;
-}
-
-.color-main {
-  background-color: var(--color-main);
-  color: var(--color-contrast);
-}
-
-.color-main:hover {
-  background-color: var(--color-contrast);
-  color: var(--color-main);
-}
-
-.button {
-  font-size: 1.5rem;
-  text-decoration: none;
-  padding: 2px 5px;
+  width: 100%;
 }

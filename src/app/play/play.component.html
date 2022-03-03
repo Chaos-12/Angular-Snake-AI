@@ -1,13 +1,19 @@
-<div class="card-user">
-  <div class="header">
-    <input class="title width100" type="text" placeholder="Your name">
-    <div class="field width50">
+<div class="card-wrapper">
+  <div class="card">
+    <header class="card-title">User SNAKE</header>
+    <main class="board board-user square"></main>
+    <menu class="controls-wrapper">
+        <button class="control-left" (click)="changeSnakeDirection(1)">Left</button>
+        <button class="control-up" (click)="changeSnakeDirection(2)">Up</button>
+        <button class="control-down" (click)="changeSnakeDirection(0)">Down</button>
+        <button class="control-right" (click)="changeSnakeDirection(3)">Right</button>
+        <button class="control-reset" type="button" *ngIf="isPaused" (click)="reset()">Reset</button>
+        <button class="control-start" type="button" *ngIf="isPaused" (click)="start()">Start</button>
+        <button class="control-step" type="button" *ngIf="isPaused" (click)="moveSnake()">1 Step</button>
+        <button class="control-pause" type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
+    </menu>
+    <!-- <nav>
       <label>Score </label><output type="number">{{score}}</output>
-    </div>
+    </nav> -->
   </div>
-  <main class="game-board square"></main>
-  <nav>
-    <button class="button color-main width100" type="button" *ngIf="isPaused" (click)="start()">Start</button>
-    <button class="button color-main width100" type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
-  </nav>
 </div>

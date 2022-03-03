@@ -4,17 +4,13 @@
   width: 1rem;
 }
 
-.tab-content {
-  color: var(--color-contrast);
+.header {
   background-color: var(--color-main);
-  display: none;
-  padding: 100px 20px;
-  height: 100vmin;
-  border-style: groove;
+  height: 50px;
 }
 
-.tab-link {
-  background-color: #555;
+.header-link {
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   float: left;
   border: none;
@@ -25,8 +21,9 @@
   width: 50%;
 }
 
-.tab-link:hover {
-  background-color: var(--color-main);
+.header-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: 0.3s;
 }
 
 .selected {

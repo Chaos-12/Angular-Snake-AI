@@ -28,12 +28,12 @@ export class PlayComponent implements OnInit, AfterViewInit {
   ngOnInit():void{
   }
 
-  ngAfterViewInit(){
-    this.gameBoard = document.querySelector('.game-board');
-    this.draw();
+  ngAfterViewInit():void{
+    this.gameBoard = document.querySelector('.board-user');
+    this.drawBoard();
   }
 
-  public start(){
+  public start():void{
     if(!this.snake.isAlive){
       this.reset();
     }
@@ -41,16 +41,17 @@ export class PlayComponent implements OnInit, AfterViewInit {
     window.requestAnimationFrame(this.nextStep.bind(this));
   }
 
-  public stop(){
+  public stop():void{
     this.paused = true;
   }
 
-  public reset(){
+  public reset():void{
+    this.stop();
     this.snake.reset();
-    this.draw();
+    this.drawBoard();
   }
 
-  public nextStep(currentTime:any){
+  public nextStep(currentTime:any):void{
     if(this.paused){
       return;
     }
@@ -60,11 +61,15 @@ export class PlayComponent implements OnInit, AfterViewInit {
       return;
     }
     this.lastRenderTime = currentTime;
-    this.board.moveSnake();
-    this.draw();
+    this.moveSnake();
     if(!this.snake.isAlive){
       this.stop();
     }
+  }
+
+  public moveSnake():void{
+    this.board.moveSnake();
+    this.drawBoard();
   }
 
   public record():number{
@@ -75,7 +80,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
     this.score = this.snake.score;
   }
 
-  private draw():void{
+  private drawBoard():void{
     this.gameBoard.innerHTML = '';
     this.drawDiv(this.board.food, ['food']);
     this.drawDiv(this.snake.head, ['snake', 'snake-head', `rotate${this.snake.direction*90}`]);
@@ -95,25 +100,27 @@ export class PlayComponent implements OnInit, AfterViewInit {
     this.gameBoard.appendChild(element);
   }
 
+  public changeSnakeDirection(direction:Direction):void{
+    this.snake.newDirection(direction);
+    this.drawBoard();
+  }
+
   private listenArrowKeys():void{
     window.addEventListener('keydown', e =>{
       switch (e.key){
         case 'ArrowUp':
-          this.snake.newDirection(Direction.north);
+          this.changeSnakeDirection(Direction.north);
           console.log('hey');
           break;
         case 'ArrowDown':
-          this.snake.newDirection(Direction.south);
+          this.changeSnakeDirection(Direction.south);
           break;
         case 'ArrowLeft':
-          this.snake.newDirection(Direction.west);
+          this.changeSnakeDirection(Direction.west);
           break;
         case 'ArrowRight':
-          this.snake.newDirection(Direction.east);
+          this.changeSnakeDirection(Direction.east);
           break;
-      }
-      if(this.paused){
-        this.start();
       }
     })
   }
