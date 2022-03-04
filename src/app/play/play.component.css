@@ -1,3 +1,8 @@
+:host {
+  --arrow-border: 50%;
+  --option-border: 20px;
+  --def-padding: 20;
+}
 
 .card-wrapper {
   display: flex;
@@ -8,20 +13,11 @@
 
 .card {
   background-color: blue;
-  display: grid;
-  grid-template-rows: auto;
-  align-self: center;
-  align-items: center;
-  padding: 0px;
-  display: flexbox;
-  align-content: center;
-  border-radius: 10px;
-  object-fit: contain;
-  justify-content: center;
+  border-radius: 20px;
 }
 
 .card-title {
-  color: white;
+  color: var(--color-font);
   float: center;
   border: none;
   outline: none;
@@ -33,70 +29,74 @@
   size: 1rem;
 }
 
-menu {
+.board-wrapper {
+  position:relative;
+  width: 250px;
+  height: 250px;
+}
+
+.stats {
+  color: var(--color-font);
+  text-align: center;
+}
+
+.button-wrapper {
+  display: grid;
   padding: 0px;
-  margin: 0px;
-  display: flexbox;
   align-content: center;
+  grid-auto-columns: repeat(3 1fr);
+  margin: 10px;
 }
 
 .button {
-  background-color: rgba(255, 255, 255, 0.6);
-  color: white;
+  background-color: var(--color-main);
+  color: var(--color-font);
   float: left;
-  border: none;
+  margin: 2px;
+  border: 3px solid var(--color-font);
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
   font-size: 17px;
-  width: 50%;
-  border-radius: 8px;
 }
 
 .button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--color-selected);
   transition: 0.4s;
 }
 
-.controls-wrapper {
-  display: grid;
-  grid-auto-columns: repeat(3 1fr);
-  grid-auto-rows: minmax(auto, 50px);
-}
-
-.control-wrapper > button {
-  border-radius: 5px;
-  margin: 5px;
-}
-
-.control-left {
+.button-left {
   grid-area: 1 / 1 / span 2 / span 1;
+  border-radius: var(--arrow-border) 0 0 var(--arrow-border);
 }
 
-.control-up {
+.button-up {
   grid-area: 1 / 2 / span 1 / span 1;
 }
 
-.control-down {
+.button-down {
   grid-area: 2 / 2 / span 1 / span 1;
 }
 
-.control-right {
+.button-right {
   grid-area: 1 / 3 / span 2 / span 1;
+  border-radius: 0 var(--arrow-border) var(--arrow-border) 0;
 }
 
-.control-reset {
+.button-reset {
   grid-area: 3 / 1 / span 1 / span 1;
+  border-radius: var(--option-border) 0 0 var(--option-border);
 }
 
-.control-start {
+.button-start {
   grid-area: 3 / 2 / span 1 / span 1;
 }
 
-.control-step {
+.button-step {
   grid-area: 3 / 3 / span 1 / span 1;
+  border-radius: 0 var(--option-border) var(--option-border) 0;
 }
 
-.control-pause {
+.button-pause {
   grid-area: 3 / 1 / span 1 / span 3;
+  border-radius: var(--option-border) var(--option-border) var(--option-border) var(--option-border);
 }

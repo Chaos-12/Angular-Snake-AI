@@ -1,3 +1,3 @@
 export enum SnakeDeath {
-  wall, bite
+  wall = "wall", bite = "bite"
 }

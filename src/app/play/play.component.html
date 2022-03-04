@@ -1,19 +1,24 @@
 <div class="card-wrapper">
   <div class="card">
     <header class="card-title">User SNAKE</header>
-    <main class="board board-user square"></main>
-    <menu class="controls-wrapper">
-        <button class="control-left" (click)="changeSnakeDirection(1)">Left</button>
-        <button class="control-up" (click)="changeSnakeDirection(2)">Up</button>
-        <button class="control-down" (click)="changeSnakeDirection(0)">Down</button>
-        <button class="control-right" (click)="changeSnakeDirection(3)">Right</button>
-        <button class="control-reset" type="button" *ngIf="isPaused" (click)="reset()">Reset</button>
-        <button class="control-start" type="button" *ngIf="isPaused" (click)="start()">Start</button>
-        <button class="control-step" type="button" *ngIf="isPaused" (click)="moveSnake()">1 Step</button>
-        <button class="control-pause" type="button" *ngIf="!isPaused" (click)="stop()">Pause</button>
+    <main class="board-wrapper">
+      <output class="board board-user square"></output>
+      <output class="extended blur stats" *ngIf="!isSnakeAlive">
+        <h1>Death by {{snakeDeath}}</h1>
+        <h3>nº steps: {{snakeSteps}}</h3>
+        <h3>nº foods: {{snakeFoods}}</h3>
+        <h2>SCORE: {{snakeScore}}</h2>
+      </output>
+    </main>
+    <menu class="button-wrapper">
+      <button class="button button-left" (click)="changeSnakeDirection(1)">&#9664;</button>
+      <button class="button button-up" (click)="changeSnakeDirection(2)">&#9650;</button>
+      <button class="button button-down" (click)="changeSnakeDirection(0)">&#9660;</button>
+      <button class="button button-right" (click)="changeSnakeDirection(3)">&#9654;</button>
+      <button class="button button-reset" *ngIf="isPaused" (click)="reset()">&#10227;</button>
+      <button class="button button-start" *ngIf="isPaused" (click)="start()">&#9655;</button>
+      <button class="button button-step" *ngIf="isPaused" (click)="moveSnake()">&#10140;</button>
+      <button class="button button-pause" *ngIf="!isPaused" (click)="stop()">&#9724;</button>
     </menu>
-    <!-- <nav>
-      <label>Score </label><output type="number">{{score}}</output>
-    </nav> -->
   </div>
 </div>

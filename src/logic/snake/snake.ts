@@ -3,13 +3,19 @@ import { Direction, BoardPosition, SnakeDeath } from "../index";
 export class Snake {
 
   private successfulSteps:number=0;
+  get nSteps():number{
+    return this.successfulSteps;
+  }
   private nFoodEaten:number=0;
+  get nFood():number{
+    return this.nFoodEaten;
+  }
   get score(){
     return this.successfulSteps + this.nFoodEaten*100;
   }
-  private record:number=0;
-  get Record(){
-    return this.record;
+  private myRecord:number=0;
+  get record(){
+    return this.myRecord;
   }
 
   private lastDirection:Direction = Direction.east;
@@ -28,6 +34,12 @@ export class Snake {
   get isAlive():boolean{
     return this.death === undefined;
   }
+  get deathReason():string{
+    if (this.death === undefined) {
+      return '';
+    }
+    return this.death.toString();
+  }
 
   constructor(){
     this.reset();
@@ -38,7 +50,7 @@ export class Snake {
     this.successfulSteps = 0;
     this.nFoodEaten = 0;
     this.lastDirection = Direction.east;
-    this.nextDirection = this.lastDirection;
+    this.nextDirection = Direction.east;
     this.head = new BoardPosition(length,1);
     this.body = [];
     for(let i=1; i<length;i++){
@@ -95,8 +107,8 @@ export class Snake {
 
   public kill(reason:SnakeDeath):void{
     this.death = reason;
-    if(this.record < this.score){
-      this.record = this.score;
+    if(this.myRecord < this.score){
+      this.myRecord = this.score;
     }
   }
 

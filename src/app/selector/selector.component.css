@@ -5,6 +5,7 @@
 }
 
 .header {
+  position: sticky;
   background-color: var(--color-main);
   height: 50px;
 }
@@ -22,7 +23,7 @@
 }
 
 .header-link:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-selected);
   transition: 0.3s;
 }
 

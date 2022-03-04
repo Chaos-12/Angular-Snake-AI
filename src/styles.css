@@ -1,10 +1,11 @@
 :root {
   --color-main: blue;
-  --color-contrast: white;
+  --color-selected: rgba(255, 255, 255, 0.4);
+  --color-font: white;
 }
 
 html, body {
-  color: white;
+  color: var(--color-font);
   height: 100%;
   margin: 0px;
   min-width: 200px;
@@ -54,14 +55,15 @@ html, body {
   transform: rotate(270deg);
 }
 
-.width33 {
-  width: 33%;
-}
-
-.width50 {
-  width: 50%;
-}
-
-.width100 {
+.extended {
+  position: absolute;
   width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.blur {
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
 }
