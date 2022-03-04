@@ -1,6 +1,6 @@
-<header class="header">
+<header>
   <div *ngFor="let item of menu; let i=index;">
-    <button class="header-link" [class.selected]="item.component === actual" type="button" (click)="select(i)">
+    <button class="link" [class.selected]="item.component === actual" type="button" (click)="select(i)">
       <img class="icon" src="../../assets/PixelFood.png">  {{item.text}}
     </button>
   </div>
@@ -8,3 +8,4 @@
 <main>
   <ng-container class="tab-content" *ngComponentOutlet="actual"></ng-container>
 </main>
+<footer></footer>

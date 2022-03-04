@@ -86,10 +86,8 @@ export class Snake {
   }
 
   public isOppositeDirection(direction:Direction):boolean{
-    if(this.lastDirection - direction === 2){
-      return true;
-    }
-    if(this.lastDirection - direction === -2){
+    let dif = this.lastDirection - direction;
+    if(dif === 2 || dif === -2){
       return true;
     }
     return false;

@@ -43,11 +43,11 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit():void{
-    window.addEventListener('keyup', this.keyPress, false);
+    window.addEventListener('keydown', this.keyPress, false);
   }
 
   ngOnDestroy():void{
-    window.removeEventListener('keyup', this.keyPress, false);
+    window.removeEventListener('keydown', this.keyPress, false);
   }
 
   private keyPress = (e:KeyboardEvent) => {

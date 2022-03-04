@@ -7,12 +7,15 @@
 .card-wrapper {
   display: flex;
   object-fit: contain;
+  align-items: center;
   justify-content: center;
-  padding: 20px;
+  position: relative;
+  height: 100%;
 }
 
 .card {
-  background-color: blue;
+  background-color: var(--color-main);
+  height: fit-content;
   border-radius: 20px;
 }
 
@@ -31,8 +34,8 @@
 
 .board-wrapper {
   position:relative;
-  width: 250px;
-  height: 250px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .stats {
@@ -57,6 +60,7 @@
   outline: none;
   cursor: pointer;
   font-size: 17px;
+  box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .button:hover {
@@ -82,7 +86,7 @@
   border-radius: 0 var(--arrow-border) var(--arrow-border) 0;
 }
 
-.button-reset {
+.button-reset-small {
   grid-area: 3 / 1 / span 1 / span 1;
   border-radius: var(--option-border) 0 0 var(--option-border);
 }
@@ -96,7 +100,7 @@
   border-radius: 0 var(--option-border) var(--option-border) 0;
 }
 
-.button-pause {
+.button-pause, .button-reset-big {
   grid-area: 3 / 1 / span 1 / span 3;
   border-radius: var(--option-border) var(--option-border) var(--option-border) var(--option-border);
 }

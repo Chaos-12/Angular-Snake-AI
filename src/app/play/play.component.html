@@ -1,5 +1,5 @@
 <div class="card-wrapper">
-  <div class="card">
+  <div class="card shadow">
     <header class="card-title">User SNAKE</header>
     <main class="board-wrapper">
       <output class="board board-user square"></output>
@@ -15,10 +15,11 @@
       <button class="button button-up" (click)="changeSnakeDirection(2)">&#9650;</button>
       <button class="button button-down" (click)="changeSnakeDirection(0)">&#9660;</button>
       <button class="button button-right" (click)="changeSnakeDirection(3)">&#9654;</button>
-      <button class="button button-reset" *ngIf="isPaused" (click)="reset()">&#10227;</button>
-      <button class="button button-start" *ngIf="isPaused" (click)="start()">&#9655;</button>
-      <button class="button button-step" *ngIf="isPaused" (click)="moveSnake()">&#10140;</button>
-      <button class="button button-pause" *ngIf="!isPaused" (click)="stop()">&#9724;</button>
+      <button class="button button-reset-small" *ngIf="isPaused && isSnakeAlive" (click)="reset()">&#10227;</button>
+      <button class="button button-start" *ngIf="isPaused && isSnakeAlive" (click)="start()">&#9655;</button>
+      <button class="button button-step" *ngIf="isPaused && isSnakeAlive" (click)="moveSnake()">&#10140;</button>
+      <button class="button button-pause" *ngIf="!isPaused && isSnakeAlive" (click)="stop()">&#2405;</button>
+      <button class="button button-reset-big" *ngIf="!isSnakeAlive" (click)="reset()">&#10227;</button>
     </menu>
   </div>
 </div>
