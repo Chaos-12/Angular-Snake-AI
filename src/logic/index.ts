@@ -5,3 +5,5 @@ export * from "./snake/snake";
 export * from "./snake/snakeDeath";
 export * from "./network/neuron";
 export * from "./network/neuronType";
+export * from "./network/connection";
+export * from "./network/network";

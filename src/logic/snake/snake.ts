@@ -2,18 +2,18 @@ import { Direction, BoardPosition, SnakeDeath } from "../index";
 
 export class Snake {
 
-  private successfulSteps:number=0;
+  private successfulSteps:number = 0;
   get nSteps():number{
     return this.successfulSteps;
   }
-  private nFoodEaten:number=0;
+  private nFoodEaten:number = 0;
   get nFood():number{
     return this.nFoodEaten;
   }
   get score(){
     return this.successfulSteps + this.nFoodEaten*100;
   }
-  private myRecord:number=0;
+  private myRecord:number = 0;
   get record(){
     return this.myRecord;
   }

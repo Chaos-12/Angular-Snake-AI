@@ -1,3 +1,3 @@
 export enum NeuronType {
-  input, hidden, output
+  bias, input, hidden, output
 }
