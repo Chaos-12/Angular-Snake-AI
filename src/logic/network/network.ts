@@ -2,13 +2,17 @@ import { Connection, Neuron, NeuronType } from "../index";
 
 export class Network {
 
-  public neurons:Map<number,Neuron> = new Map<number,Neuron>();
+  public neuronMap:Map<number,Neuron> = new Map<number,Neuron>();
+
+  public biasNeuron:Neuron = new Neuron(NeuronType.bias, 0);
+  public inputNeurons:Array<Neuron> = [];
   public hiddenNeurons:Array<Neuron> = [];
+  public outputNeurons:Array<Neuron> = [];
 
   public deepness = 1;
 
   constructor(private readonly nInputs:number, private readonly nOutputs:number){
-    this.createNeuron(NeuronType.bias);
+    this.createNeuron(NeuronType.bias, 0);
     for(let i=0; i < nInputs; i++){
       this.createNeuron(NeuronType.input);
     }
@@ -17,17 +21,30 @@ export class Network {
     }
   }
 
-  public createNeuron(type:NeuronType, id:number = this.neurons.size):void{
-    let neuron = new Neuron(type, id);
-    this.neurons.set(id, neuron);
-    if(type === NeuronType.hidden || type === NeuronType.output){
-      this.createConnection(0, id);
+  public createNeuron(type:NeuronType, id:number = this.neuronMap.size):void{
+    let newNeuron = new Neuron(type, id);
+    switch(type){
+      case NeuronType.bias:
+        this.biasNeuron = newNeuron;
+        break;
+      case NeuronType.input:
+        this.inputNeurons.push(newNeuron);
+        break;
+      case NeuronType.hidden:
+        this.hiddenNeurons.push(newNeuron);
+        this.createConnection(this.biasNeuron.id, newNeuron.id, 1);
+        break;
+      case NeuronType.output:
+        this.outputNeurons.push(newNeuron);
+        this.createConnection(this.biasNeuron.id, newNeuron.id, 1);
+        break;
     }
+    this.neuronMap.set(id, newNeuron);
   }
 
   public createConnection(startId:number, finalId:number, weight:number = 1):void{
-    let startNeuron = this.neurons.get(startId);
-    let finalNeuron = this.neurons.get(finalId);
+    let startNeuron = this.neuronMap.get(startId);
+    let finalNeuron = this.neuronMap.get(finalId);
     if (startNeuron === undefined || finalNeuron === undefined){
       return;
     }
@@ -36,64 +53,63 @@ export class Network {
   }
 
   public propagateInput(input:Array<number>):void{
-    //Clear the weights of all neurons
-    for (let neuron of this.neurons.values()){
+    if (this.inputNeurons.length !== input.length){
+      return;
+    }
+    //Set the weights of all neurons
+    this.biasNeuron.weight = 1;
+    for (let neuron of this.inputNeurons){
+      neuron.weight = input[neuron.id-1];
+    }
+    for (let neuron of this.hiddenNeurons){
       neuron.weight = 0;
     }
-    let bias = this.neurons.get(0);
-    if (bias !== undefined){
-      bias.weight=1;
+    for (let neuron of this.outputNeurons){
+      neuron.weight = 0;
     }
-    //Assign the weights to input neurons
-    for (let i=1; i<this.nInputs; i++){
-      let inputNeuron = this.neurons.get(i);
-      if (inputNeuron !== undefined){
-        inputNeuron.weight = input[i];
-      }
+    //Propagate the weights (in order)
+    this.biasNeuron.propagateWeight();
+    for (let neuron of this.inputNeurons){
+      neuron.propagateWeight();
     }
-    //Propagate through hidden neurons
-    for (let hiddenNeuron of this.hiddenNeurons){
-      hiddenNeuron.propagateWeight();
+    for (let neuron of this.hiddenNeurons){
+      neuron.propagateWeight();
     }
   }
 
   public obtainOutput():number{
-    let index = this.nInputs+1;
-    let maximum = this.neurons.get(index)?.weight;
-    if (maximum !== undefined){
-      for (let i=1; i <= this.nOutputs; i++){
-        let outputNeuron = this.neurons.get(this.nInputs+1+i);
-        if (outputNeuron !== undefined && maximum < outputNeuron.weight){
-          maximum = outputNeuron.weight;
-          index = outputNeuron.id;
-        }
+    let index = 0;
+    let maximum = this.outputNeurons[0].weight;
+    for (let neuron of this.outputNeurons){
+      if (maximum < neuron.weight){
+        maximum = neuron.weight;
+        index = this.outputNeurons.indexOf(neuron);
       }
     }
-    return index - this.nInputs -1;
+    return index;
   }
 
   public orderNetwork(){
-    //Assign layer 0 to input neurons (and propagate from them)
-    for (let i=1; i <= this.nInputs; i++){
-      this.neurons.get(i)?.assignLayer(0);
+    //Assign layer 0 to input neuronMap (and propagate from them)
+    for (let neuron of this.inputNeurons){
+      neuron.assignLayer(0);
     }
-    //The deepness of the network is the highest between output neurons
+    //The deepness of the network is the highest between output neuronMap
     this.deepness = 1;
-    for (let i=this.nInputs+1; i <= this.nInputs+this.nOutputs; i++){
-      let outputNeuron = this.neurons.get(i);
-      if(outputNeuron !== undefined && this.deepness < outputNeuron.layer){
-        this.deepness = outputNeuron.layer;
+    for (let neuron of this.outputNeurons){
+      if (this.deepness < neuron.layer){
+        this.deepness = neuron.layer;
       }
     }
     //All output neurons should be at the same (last) layer
-    for (let i=this.nInputs+1; i <= this.nInputs+this.nOutputs; i++){
-      this.neurons.get(i)?.assignLayer(this.deepness);
+    for (let neuron of this.outputNeurons){
+      neuron.assignLayer(this.deepness);
     }
-    //We order the id of the nodes acording to the layers
+    //We order the neurons acording to the layers
     this.hiddenNeurons = [];
     for (let d = 0; d <= this.deepness; d++){
       let positionInLayer = 0;
-      for (let neuron of this.neurons.values()){
+      for (let neuron of this.neuronMap.values()){
         if (neuron.layer === d){
           neuron.index = positionInLayer;
           positionInLayer ++;

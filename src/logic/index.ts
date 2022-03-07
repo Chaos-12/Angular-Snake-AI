@@ -7,3 +7,4 @@ export * from "./network/neuron";
 export * from "./network/neuronType";
 export * from "./network/connection";
 export * from "./network/network";
+export * from "./ia/iaService";

@@ -3,7 +3,7 @@ import { BoardPosition, Snake, SnakeDeath } from "../index";
 export class Board {
   public food:BoardPosition = new BoardPosition(this.width, this.height);
 
-  constructor(private snake:Snake, public height:number=10, public width:number=10){
+  constructor(public snake:Snake, public height:number=10, public width:number=10){
     this.generateRandomFood();
   }
 
