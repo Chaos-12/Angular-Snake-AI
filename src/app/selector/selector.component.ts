@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CreateComponent } from '../create/create.component';
 import { HomeComponent } from '../home/home.component';
 import { PlayComponent } from '../play/play.component';
 
@@ -11,6 +12,7 @@ export class SelectorComponent implements OnInit {
   menu = [
     { text: 'Home', component: HomeComponent },
     { text: 'Play', component: PlayComponent },
+    { text: 'Create', component: CreateComponent},
   ]
   actual: any = this.menu[0].component;
 

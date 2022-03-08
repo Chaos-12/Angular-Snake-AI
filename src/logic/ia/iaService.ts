@@ -23,18 +23,11 @@ export class IaService {
       input[IaService.indexFood + Direction.north] = 1;
     }
     //1 if there is a wall in that direction // 0 otherwise
-    if (snakeHead.x === board.width){
-      input[IaService.indexWall + Direction.east] = 1;
-    }
-    if (snakeHead.x === 1){
-      input[IaService.indexWall + Direction.west] = 1;
-    }
-    if (snakeHead.y === board.height){
-      input[IaService.indexWall + Direction.south] = 1;
-    }
-    if (snakeHead.y === 1){
-      input[IaService.indexWall + Direction.north] = 1;
-    }
+    Directions.forEach(direction => {
+      if (!board.contains(snakeHead.forward(direction))){
+        input[IaService.indexWall + direction] = 1;
+      }
+    })
     //1 if there is a body in that direction // 0 otherwise
     Directions.forEach(direction => {
       if (board.snake.contains(snakeHead.forward(direction))){

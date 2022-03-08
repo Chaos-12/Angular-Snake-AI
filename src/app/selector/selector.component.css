@@ -7,14 +7,14 @@
 header {
   position: relative;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 34% 33% 33%;
   background-color: var(--color-main);
   height: 5%;
   width: 100%;
 }
 
 header .link {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-main);
   color: white;
   height: 100%;
   width: 100%;
@@ -25,12 +25,8 @@ header .link {
 }
 
 header .link:hover {
-  background-color: var(--color-selected) !important;
+  background-color: var(--color-selected);
   transition: 0.3s;
-}
-
-.selected {
-  background-color: var(--color-main) !important;
 }
 
 main {

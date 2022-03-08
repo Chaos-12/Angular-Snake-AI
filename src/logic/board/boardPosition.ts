@@ -21,6 +21,5 @@ export class BoardPosition {
       case Direction.west:
         return new BoardPosition(this.x -1, this.y);
     }
-    return this;
   }
 }
