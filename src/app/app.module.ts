@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SelectorComponent } from './selector/selector.component';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
+import { CreateComponent } from './create/create.component';
+import { IaBuilder } from 'src/logic';
 
 @NgModule({
   declarations: [
@@ -13,12 +15,15 @@ import { PlayComponent } from './play/play.component';
     SelectorComponent,
     HomeComponent,
     PlayComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    IaBuilder
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

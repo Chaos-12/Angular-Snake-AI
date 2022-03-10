@@ -3,11 +3,11 @@
     <header class="card-title">User SNAKE</header>
     <main class="board-wrapper">
       <output class="board board-user square"></output>
-      <output class="extended blur stats" *ngIf="!isSnakeAlive">
-        <h1>Death by {{snakeDeath}}</h1>
-        <h3>nº steps: {{snakeSteps}}</h3>
-        <h3>nº foods: {{snakeFoods}}</h3>
-        <h2>SCORE: {{snakeScore}}</h2>
+      <output class="extended blur stats" *ngIf="!snake.isAlive">
+        <h1>Death by {{snake.deathReason}}</h1>
+        <h3>nº steps: {{snake.nSteps}}</h3>
+        <h3>nº foods: {{snake.nFood}}</h3>
+        <h2>SCORE: {{snake.score}}</h2>
       </output>
     </main>
     <menu class="button-wrapper">
@@ -15,11 +15,11 @@
       <button class="button button-up" (click)="changeSnakeDirection(2)">&#9650;</button>
       <button class="button button-down" (click)="changeSnakeDirection(0)">&#9660;</button>
       <button class="button button-right" (click)="changeSnakeDirection(3)">&#9654;</button>
-      <button class="button button-reset-small" *ngIf="isPaused && isSnakeAlive" (click)="reset()">&#10227;</button>
-      <button class="button button-start" *ngIf="isPaused && isSnakeAlive" (click)="start()">&#9655;</button>
-      <button class="button button-step" *ngIf="isPaused && isSnakeAlive" (click)="moveSnake()">&#10140;</button>
-      <button class="button button-pause" *ngIf="!isPaused && isSnakeAlive" (click)="stop()">&#2405;</button>
-      <button class="button button-reset-big" *ngIf="!isSnakeAlive" (click)="reset()">&#10227;</button>
+      <button class="button button-reset-small" *ngIf="isPaused && snake.isAlive" (click)="reset()">&#10227;</button>
+      <button class="button button-start" *ngIf="isPaused && snake.isAlive" (click)="start()">&#9655;</button>
+      <button class="button button-step" *ngIf="isPaused && snake.isAlive" (click)="moveSnake()">&#10140;</button>
+      <button class="button button-pause" *ngIf="!isPaused && snake.isAlive" (click)="stop()">&#2405;</button>
+      <button class="button button-reset-big" *ngIf="!snake.isAlive" (click)="reset()">&#10227;</button>
     </menu>
   </div>
 </div>

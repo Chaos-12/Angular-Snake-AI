@@ -8,3 +8,4 @@ export * from "./network/neuronType";
 export * from "./network/connection";
 export * from "./network/network";
 export * from "./ia/iaService";
+export * from "./ia/iaBuilder";

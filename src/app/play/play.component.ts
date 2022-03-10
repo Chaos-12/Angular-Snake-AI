@@ -17,25 +17,7 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private gameBoard:any;
   private board:Board;
-  private snake:Snake;
-  get isSnakeAlive():boolean{
-    return this.snake.isAlive;
-  }
-  get snakeDeath():string{
-    return this.snake.deathReason;
-  }
-  get snakeSteps():number{
-    return this.snake.nSteps;
-  }
-  get snakeFoods():number{
-    return this.snake.nFood;
-  }
-  get snakeScore():number{
-    return this.snake.score;
-  }
-  get snakeRecord():number{
-    return this.snake.record;
-  }
+  public snake:Snake;
 
   constructor() {
     this.snake = new Snake();

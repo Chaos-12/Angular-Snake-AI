@@ -27,18 +27,6 @@ html, body {
   background-size: contain;
 }
 
-.board {
-  background-color: rgba(0, 0, 0, 0.6);
-  display: grid;
-  grid-template-rows: repeat(10, 1fr);
-  grid-template-columns: repeat(10, 1fr);
-  align-self: center;
-  justify-self: center;
-  padding: 10px;
-  min-width: 200px;
-  max-width: 500px;
-}
-
 .square {
   aspect-ratio: 1/1;
 }
@@ -70,4 +58,83 @@ html, body {
 
 .shadow {
   box-shadow: 10px 10px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  object-fit: contain;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+
+}
+
+.card {
+  background-color: var(--color-main);
+  height: fit-content;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.card-title {
+  color: var(--color-font);
+  float: center;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  font-size: 17px;
+}
+
+.card-field {
+  size: 1rem;
+}
+
+.board-wrapper {
+  position:relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+.board {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  align-self: center;
+  justify-self: center;
+  padding: 10px;
+  min-width: 200px;
+  max-width: 500px;
+}
+
+.stats {
+  color: var(--color-font);
+  text-align: center;
+}
+
+.button-wrapper {
+  display: grid;
+  padding: 0px;
+  align-content: center;
+  grid-auto-columns: repeat(3 1fr);
+  margin: 10px;
+}
+
+.button {
+  background-color: var(--color-main);
+  color: var(--color-font);
+  float: left;
+  margin: 2px;
+  border: 3px solid var(--color-font);
+  outline: none;
+  cursor: pointer;
+  font-size: 17px;
+  box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button:hover {
+  background-color: var(--color-selected);
+  transition: 0.4s;
 }

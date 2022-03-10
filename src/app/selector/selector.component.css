@@ -32,10 +32,12 @@ header .link:hover {
 main {
   position: relative;
   height: 92%;
+  overflow: scroll;
+  padding: auto;
 }
 
 footer {
-  position: sticky;
+  position: relative;
   background-color: var(--color-main);
   height: 3%;
   bottom: 0;
