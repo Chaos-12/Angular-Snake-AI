@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +8,7 @@ import { SelectorComponent } from './selector/selector.component';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { CreateComponent } from './create/create.component';
-import { IaBuilder } from 'src/logic';
+import { BoardDrawer, IaBuilder } from 'src/utils';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,12 @@ import { IaBuilder } from 'src/logic';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [
-    IaBuilder
+    IaBuilder,
+    BoardDrawer,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Board, BoardPosition, Direction, Snake } from 'src/logic/index';
+import { Board, Direction, Snake } from 'src/logic/index';
+import { BoardDrawer } from 'src/utils';
 
 @Component({
   selector: 'app-play',
@@ -19,7 +20,7 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
   private board:Board;
   public snake:Snake;
 
-  constructor() {
+  constructor(private boardDrawer:BoardDrawer) {
     this.snake = new Snake();
     this.board = new Board(this.snake);
   }
@@ -59,26 +60,26 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
     this.drawBoard();
   }
 
-  public start():void{
+  public startAnimation():void{
     this.paused = false;
-    window.requestAnimationFrame(this.nextStep.bind(this));
+    window.requestAnimationFrame(this.nextAnimation.bind(this));
   }
 
-  public stop():void{
+  public pauseAnimation():void{
     this.paused = true;
   }
 
   public reset():void{
-    this.stop();
+    this.pauseAnimation();
     this.snake.reset();
     this.drawBoard();
   }
 
-  public nextStep(currentTime:any):void{
+  public nextAnimation(currentTime:any):void{
     if(this.paused){
       return;
     }
-    window.requestAnimationFrame(this.nextStep.bind(this));
+    window.requestAnimationFrame(this.nextAnimation.bind(this));
     const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000;
     if (secondsSinceLastRender < 0.2){
       return;
@@ -86,7 +87,7 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
     this.lastRenderTime = currentTime;
     this.moveSnake();
     if(!this.snake.isAlive){
-      this.stop();
+      this.pauseAnimation();
     }
   }
 
@@ -96,21 +97,6 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private drawBoard():void{
-    this.gameBoard.innerHTML = '';
-    this.drawDiv(this.board.food, ['food']);
-    this.drawDiv(this.snake.head, ['snake', 'snake-head', `rotate${this.snake.direction*90}`]);
-    this.snake.body.forEach(part => {
-      this.drawDiv(part, ['snake', 'snake-body']);
-    });
-  }
-
-  private drawDiv(position:BoardPosition, textClass:string[]):void{
-    const element = document.createElement('div');
-    element.style.gridColumn = position.x.toString();
-    element.style.gridRow = position.y.toString();
-    textClass.forEach( text => {
-      element.classList.add(text);
-    })
-    this.gameBoard.appendChild(element);
+    this.boardDrawer.drawBoard(this.gameBoard, this.board);
   }
 }

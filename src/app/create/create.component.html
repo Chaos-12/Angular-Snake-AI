@@ -1,11 +1,34 @@
-<div class="card-wrapper">
-  <div class="card shadow" *ngFor="let ia of createdIas; let i=index;">
+<menu class="card-wrapper">
+  <form class="card">
+    <header class="card-title">IA Tolerances</header>
+    <menu class="input-wrapper">
+      <label>Food:</label>
+      <input class="input-number" [(ngModel)]="foodTolerance" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      <label>Wall:</label>
+      <input class="input-number" [(ngModel)]="wallTolerance" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      <label>Body:</label>
+      <input class="input-number" [(ngModel)]="bodyTolerance" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      <button class="button button-submit" type="button" (click)="createIa()">+</button>
+    </menu>
+  </form>
+  <div class="card">
+    <header class="card-title">Simulation Controls</header>
+    <div class="control-wrapper">
+      <button class="button button-reset-small rounded-left" *ngIf="isPaused" (click)="resetAll()">&#10227;</button>
+      <button class="button button-start" *ngIf="isPaused" (click)="startAll()">&#9655;</button>
+      <button class="button button-step rounded-right" *ngIf="isPaused" (click)="moveAllSnake()">&#10140;</button>
+      <button class="button button-pause rounded-right rounded-left" *ngIf="!isPaused" (click)="stopAll()">&#2405;</button>
+    </div>
+  </div>
+</menu>
+<main class="card-wrapper">
+  <div class="card" *ngFor="let ia of createdIas; let i=index;">
       <header class="card-title">{{createdIas[i].name}}</header>
       <main class="board-wrapper">
         <output class="board board-ia square"></output>
       </main>
       <menu class="button-wrapper">
-        <button class="button button-start" *ngIf="createdIas[i].snake.isAlive" (click)="deleteIa(i)">&#10006;</button>
+        <button class="button button-start" *ngIf="createdIas[i].snake.isAlive" (click)="drawBoard(i)">&#10006;</button>
         <!-- <button class="button button-reset-small" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="reset()">&#10227;</button>
         <button class="button button-start" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="start()">&#9655;</button>
         <button class="button button-step" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="moveSnake()">&#10140;</button>
@@ -13,5 +36,4 @@
         <button class="button button-reset-big" *ngIf="!snake.isAlive" (click)="reset()">&#10227;</button> -->
       </menu>
   </div>
-  <button class="button" (click)="createIa()">+</button>
-</div>
+</main>

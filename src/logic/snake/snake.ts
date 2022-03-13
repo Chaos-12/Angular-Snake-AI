@@ -1,4 +1,4 @@
-import { Direction, BoardPosition, SnakeDeath } from "../index";
+import { Direction, Position, SnakeDeath } from "../index";
 
 export class Snake {
 
@@ -24,8 +24,8 @@ export class Snake {
     return this.nextDirection;
   }
 
-  public head:BoardPosition = new BoardPosition(1,1);
-  public body:BoardPosition[] = [];
+  public head:Position = new Position(1,1);
+  public body:Position[] = [];
   get length():number{
     return this.body.length+1;
   }
@@ -51,10 +51,10 @@ export class Snake {
     this.nFoodEaten = 0;
     this.lastDirection = Direction.east;
     this.nextDirection = Direction.east;
-    this.head = new BoardPosition(length,1);
+    this.head = new Position(length,1);
     this.body = [];
     for(let i=1; i<length;i++){
-      this.body.push(new BoardPosition(i,1));
+      this.body.push(new Position(i,1));
     }
   }
 
@@ -73,7 +73,7 @@ export class Snake {
     this.successfulSteps ++;
   }
 
-  public contains(position:BoardPosition):boolean{
+  public contains(position:Position):boolean{
     if(this.head.equals(position)){
       return true;
     }
