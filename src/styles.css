@@ -7,8 +7,13 @@
 html, body {
   color: var(--color-font);
   height: 100%;
-  margin: 0px;
+  margin: 0;
   min-width: 200px;
+}
+
+menu {
+  margin: 0;
+  padding: 0;
 }
 
 .snake {
@@ -97,7 +102,7 @@ html, body {
 }
 
 .board-wrapper {
-  position:relative;
+  position: relative;
   width: fit-content;
   height: fit-content;
 }

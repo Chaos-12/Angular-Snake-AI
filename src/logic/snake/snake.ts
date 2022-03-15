@@ -1,4 +1,4 @@
-import { Direction, Position, SnakeDeath } from "../index";
+import { Direction, Position, SnakeDeath } from "src/logic";
 
 export class Snake {
 

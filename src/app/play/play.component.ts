@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Board, Direction, Snake } from 'src/logic/index';
+import { Board, Direction, Snake } from 'src/logic';
 import { BoardDrawer } from 'src/utils';
 
 @Component({

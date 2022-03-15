@@ -1,4 +1,4 @@
-import { Position, Snake, SnakeDeath } from "../index";
+import { Position, Snake, SnakeDeath } from "src/logic";
 
 export class Board {
   public food:Position = new Position(this.width, this.height);

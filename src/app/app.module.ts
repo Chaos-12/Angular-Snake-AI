@@ -8,7 +8,8 @@ import { SelectorComponent } from './selector/selector.component';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { CreateComponent } from './create/create.component';
-import { BoardDrawer, IaBuilder } from 'src/utils';
+import { BoardDrawer } from 'src/utils';
+import { NetworkBuilder } from 'src/logic';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { BoardDrawer, IaBuilder } from 'src/utils';
     AppRoutingModule
   ],
   providers: [
-    IaBuilder,
+    NetworkBuilder,
     BoardDrawer,
   ],
   bootstrap: [AppComponent]

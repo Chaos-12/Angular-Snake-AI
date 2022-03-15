@@ -1,4 +1,4 @@
-import { Connection, NeuronType } from "../index";
+import { Connection, NeuronType } from "src/logic";
 
 export class Neuron {
 
