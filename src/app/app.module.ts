@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { CreateComponent } from './create/create.component';
 import { BoardDrawer } from 'src/utils';
-import { NetworkBuilder } from 'src/logic';
+import { InputProvider, NetworkBuilder } from 'src/logic';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { NetworkBuilder } from 'src/logic';
   providers: [
     NetworkBuilder,
     BoardDrawer,
+    InputProvider,
   ],
   bootstrap: [AppComponent]
 })

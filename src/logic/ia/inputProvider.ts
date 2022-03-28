@@ -1,17 +1,22 @@
+import { Injectable } from "@angular/core";
 import { Board, Direction, Directions } from "src/logic";
 
+@Injectable()
 export class InputProvider {
 
   public static readonly indexFood = 0;
   public static readonly indexWall = 4;
   public static readonly indexBody = 8;
 
-  public provideInput(board:Board):Array<number>{
-    return this.getBinariInput(board);
+  public getInputFrom(board:Board):Array<number>{
+    return this.getBinaryInput(board);
   }
 
-  private getBinariInput(board:Board):Array<number>{
+  public getBinaryInput(board:Board):Array<number>{
     let inputs = new Array<number>(12);
+    for(let i=0; i<12; i++){
+      inputs[i]=0;
+    }
     let snakeHead = board.snake.head;
     //1 if the food is in that direction // 0 otherwise
     if (snakeHead.x < board.food.x){
@@ -39,9 +44,5 @@ export class InputProvider {
       }
     })
     return inputs;
-  }
-
-  public getDirection(value:number):Direction{
-    return Directions[value];
   }
 }

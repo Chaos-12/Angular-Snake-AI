@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Ia, NetworkBuilder } from 'src/logic';
+import { Directions, Ia, InputProvider, NetworkBuilder } from 'src/logic';
 import { BoardDrawer } from 'src/utils';
 
 
@@ -18,16 +18,24 @@ export class CreateComponent implements OnInit {
   public bodyTolerance:number = 90;
 
   private gameBoards:any = [];
-  public isPaused:boolean = true;
+  private lastRenderTime = 0;
+  private paused:boolean = true;
+  get isPaused():boolean{
+    return this.paused;
+  }
 
-  constructor(private iaBuilder:NetworkBuilder, private boardDrawer:BoardDrawer) { }
+  constructor(private iaBuilder:NetworkBuilder, private boardDrawer:BoardDrawer, private inputProvider:InputProvider) { }
 
   ngOnInit(): void {
   }
 
+  public loadBoards():void{
+    this.gameBoards = document.querySelectorAll('.board-ia');
+  }
+
   public createIa():void{
     let name = `IA-${this.foodTolerance}-${this.wallTolerance}-${this.bodyTolerance}`;
-    let network = this.iaBuilder.buildNetwork([this.foodTolerance, this.wallTolerance, this.bodyTolerance], 4);
+    let network = this.iaBuilder.buildNetwork([this.foodTolerance/100, -this.wallTolerance/100, -this.bodyTolerance/100], 4);
     this.createdIas.push(new Ia(name, network));
   }
 
@@ -35,8 +43,14 @@ export class CreateComponent implements OnInit {
     this.createdIas.splice(index,1);
   }
 
-  public loadBoards():void{
-    this.gameBoards = document.querySelectorAll('.board-ia');
+  public moveIa(index:number):void{
+    let ia = this.createdIas[index];
+    ia.board.moveSnake();
+    let input = this.inputProvider.getInputFrom(ia.board);
+    ia.network.propagateInput(input);
+    let newDirection = Directions[ia.network.obtainOutput()];
+    ia.snake.newDirection(newDirection);
+    this.drawBoard(index);
   }
 
   public drawBoard(index:number):void{
@@ -45,19 +59,39 @@ export class CreateComponent implements OnInit {
   }
 
   public resetAll():void{
-
+    this.pauseAnimation();
+    for(let i=0; i<this.createdIas.length; i++){
+      this.createdIas[i].snake.reset();
+      this.drawBoard(i);
+    }
   }
 
   public startAll():void{
-
+    this.paused = false;
+    window.requestAnimationFrame(this.nextAnimation.bind(this));
   }
 
-  public stopAll():void{
-
+  public pauseAnimation():void{
+    this.paused = true;
   }
 
-  public moveAllSnake():void{
+  public nextAnimation(currentTime:any):void{
+    if(this.paused){
+      return;
+    }
+    window.requestAnimationFrame(this.nextAnimation.bind(this));
+    const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000;
+    if (secondsSinceLastRender < 0.2){
+      return;
+    }
+    this.lastRenderTime = currentTime;
+    this.moveAll();
+  }
 
+  public moveAll():void{
+    for(let i=0; i<this.createdIas.length; i++){
+      this.moveIa(i);
+    }
   }
 
 }

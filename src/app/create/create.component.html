@@ -1,5 +1,5 @@
 <menu class="card-wrapper">
-  <form class="card">
+  <form class="card" *ngIf="isPaused">
     <header class="card-title">IA Tolerances</header>
     <menu class="input-wrapper">
       <label>Food:</label>
@@ -11,13 +11,13 @@
       <button class="button button-submit" type="button" (click)="createIa()">+</button>
     </menu>
   </form>
-  <div class="card">
+  <div class="card" *ngIf="createdIas.length>0">
     <header class="card-title">Simulation Controls</header>
     <div class="control-wrapper">
       <button class="button button-reset-small rounded-left" *ngIf="isPaused" (click)="resetAll()">&#10227;</button>
       <button class="button button-start" *ngIf="isPaused" (click)="startAll()">&#9655;</button>
-      <button class="button button-step rounded-right" *ngIf="isPaused" (click)="moveAllSnake()">&#10140;</button>
-      <button class="button button-pause rounded-right rounded-left" *ngIf="!isPaused" (click)="stopAll()">&#2405;</button>
+      <button class="button button-step rounded-right" *ngIf="isPaused" (click)="moveAll()">&#10140;</button>
+      <button class="button button-pause rounded-right rounded-left" *ngIf="!isPaused" (click)="pauseAnimation()">&#2405;</button>
     </div>
   </div>
 </menu>
@@ -28,7 +28,7 @@
         <output class="board board-ia square"></output>
       </main>
       <menu class="button-wrapper">
-        <button class="button button-start" *ngIf="createdIas[i].snake.isAlive" (click)="drawBoard(i)">&#10006;</button>
+        <button class="button button-start" *ngIf="isPaused" (click)="deleteIa(i)">&#10006;</button>
         <!-- <button class="button button-reset-small" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="reset()">&#10227;</button>
         <button class="button button-start" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="start()">&#9655;</button>
         <button class="button button-step" *ngIf="isPaused && createdIas[i].snake.isAlive" (click)="moveSnake()">&#10140;</button>
