@@ -11,26 +11,27 @@
       <button class="button button-submit" type="button" (click)="createIa()">+</button>
     </menu>
   </form>
-  <div class="card" *ngIf="createdIas.length>0">
+  <div class="card" *ngIf="iaList.length>0">
     <header class="card-title">Simulation Controls</header>
     <div class="control-wrapper">
-      <button class="button button-reset-small rounded-left" *ngIf="isPaused" (click)="resetAll()">&#10227;</button>
+      <button class="button button-reset-small rounded-left" (click)="resetAll()">&#10227;</button>
       <button class="button button-start" *ngIf="isPaused" (click)="startAll()">&#9655;</button>
-      <button class="button button-step rounded-right" *ngIf="isPaused" (click)="moveAll()">&#10140;</button>
-      <button class="button button-pause rounded-right rounded-left" *ngIf="!isPaused" (click)="pauseAnimation()">&#2405;</button>
+      <button class="button button-pause" *ngIf="!isPaused" (click)="pauseAnimation()">&#2405;</button>
+      <button class="button button-step rounded-right" (click)="moveAll()">&#10140;</button>
     </div>
   </div>
 </menu>
 <main class="card-wrapper">
-  <div class="card" *ngFor="let ia of createdIas; let i=index;">
-      <header class="card-title">{{createdIas[i].name}}</header>
+  <div class="card" *ngFor="let ia of iaList; let i=index;">
+      <header class="card-title">{{iaList[i].name}}</header>
       <main class="board-wrapper">
         <output class="board board-ia square"></output>
-        <output class="extended blur stats" *ngIf="!createdIas[i].snake.isAlive">
-          <h1>Death by {{createdIas[i].snake.deathReason}}</h1>
-          <h3>nº steps: {{createdIas[i].snake.nSteps}}</h3>
-          <h3>nº foods: {{createdIas[i].snake.nFood}}</h3>
-          <h2>SCORE: {{createdIas[i].snake.score}}</h2>
+        <output class="extended blur stats" *ngIf="!iaList[i].snake.isAlive">
+          <p class="text-big bold">Death by {{iaList[i].snake.deathReason}}</p>
+          <p class="text-small">nº steps: {{iaList[i].snake.nSteps}}</p>
+          <p class="text-small">nº foods: {{iaList[i].snake.nFood}}</p>
+          <p class="text-medium bold">SCORE: {{iaList[i].snake.score}}</p>
+          <p class="text-medium bold">Record: {{iaList[i].snake.record}}</p>
         </output>
       </main>
       <menu class="button-wrapper">

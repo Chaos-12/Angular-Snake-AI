@@ -1,23 +1,11 @@
-import { Position, Snake, SnakeDeath } from "src/logic";
+import { BoardItemGenerator, Position, Snake, SnakeDeath } from "src/logic";
 
 export class Board {
   public food:Position = new Position(this.width, this.height);
 
-  constructor(public snake:Snake, public height:number=10, public width:number=10){
-    this.generateRandomFood();
-  }
 
-  public generateRandomFood():void{
-    let generated = false;
-    while(!generated){
-      let x = Math.ceil(Math.random()*this.width);
-      let y = Math.ceil(Math.random()*this.height);
-      let newPosition = new Position(x,y);
-      if(!this.snake.contains(newPosition)){
-        this.food = newPosition;
-        generated = true;
-      }
-    }
+  constructor(public snake:Snake, public height:number=10, public width:number=10){
+    BoardItemGenerator.generateRandomFood(this);
   }
 
   public contains(position:Position):boolean{
@@ -37,7 +25,7 @@ export class Board {
     }
     if(this.food.equals(newPosition)){
       this.snake.move(true);
-      this.generateRandomFood();
+      BoardItemGenerator.generateRandomFood(this);
     } else {
       this.snake.move(false);
     }

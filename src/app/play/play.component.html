@@ -4,10 +4,10 @@
     <main class="board-wrapper">
       <output class="board board-user square"></output>
       <output class="extended blur stats" *ngIf="!snake.isAlive">
-        <h1>Death by {{snake.deathReason}}</h1>
-        <h3>nº steps: {{snake.nSteps}}</h3>
-        <h3>nº foods: {{snake.nFood}}</h3>
-        <h2>SCORE: {{snake.score}}</h2>
+        <p class="text-big bold">Death by {{snake.deathReason}}</p>
+        <p class="text-small">nº steps: {{snake.nSteps}}</p>
+        <p class="text-small">nº foods: {{snake.nFood}}</p>
+        <p class="text-medium bold">SCORE: {{snake.score}}</p>
       </output>
     </main>
     <menu class="button-wrapper">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Directions, Ia, InputProvider, NetworkBuilder } from 'src/logic';
 import { BoardDrawer } from 'src/utils';
 
@@ -8,10 +8,10 @@ import { BoardDrawer } from 'src/utils';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent implements OnInit, OnDestroy {
 
   public addMode:boolean = true;
-  public createdIas:Array<Ia> = [];
+  public iaList:Array<Ia> = [];
 
   public foodTolerance:number = 50;
   public wallTolerance:number = 74;
@@ -26,6 +26,10 @@ export class CreateComponent implements OnInit {
 
   constructor(private iaBuilder:NetworkBuilder, private boardDrawer:BoardDrawer, private inputProvider:InputProvider) { }
 
+  ngOnDestroy(): void {
+    this.iaList = [];
+  }
+
   ngOnInit(): void {
   }
 
@@ -36,15 +40,15 @@ export class CreateComponent implements OnInit {
   public createIa():void{
     let name = `IA-${this.foodTolerance}-${this.wallTolerance}-${this.bodyTolerance}`;
     let network = this.iaBuilder.buildNetwork([this.foodTolerance/100, -this.wallTolerance/100, -this.bodyTolerance/100], 4);
-    this.createdIas.push(new Ia(name, network));
+    this.iaList.push(new Ia(name, network));
   }
 
   public deleteIa(index:number):void{
-    this.createdIas.splice(index,1);
+    this.iaList.splice(index,1);
   }
 
   public moveIa(index:number):void{
-    let ia = this.createdIas[index];
+    let ia = this.iaList[index];
     ia.board.moveSnake();
     let input = this.inputProvider.getInputFrom(ia.board);
     ia.network.propagateInput(input);
@@ -55,13 +59,13 @@ export class CreateComponent implements OnInit {
 
   public drawBoard(index:number):void{
     let gameBoard = document.querySelectorAll('.board-ia')[index];
-    this.boardDrawer.drawBoard(gameBoard, this.createdIas[index].board);
+    this.boardDrawer.drawBoard(gameBoard, this.iaList[index].board);
   }
 
   public resetAll():void{
     this.pauseAnimation();
-    for(let i=0; i<this.createdIas.length; i++){
-      this.createdIas[i].snake.reset();
+    for(let i=0; i<this.iaList.length; i++){
+      this.iaList[i].snake.reset();
       this.drawBoard(i);
     }
   }
@@ -89,7 +93,7 @@ export class CreateComponent implements OnInit {
   }
 
   public moveAll():void{
-    for(let i=0; i<this.createdIas.length; i++){
+    for(let i=0; i<this.iaList.length; i++){
       this.moveIa(i);
     }
   }

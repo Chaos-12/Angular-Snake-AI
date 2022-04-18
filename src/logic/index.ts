@@ -1,4 +1,5 @@
 export * from "./board/board";
+export * from "./board/boardItemGenerator";
 export * from "./board/direction";
 export * from "./board/position";
 export * from "./ia";
