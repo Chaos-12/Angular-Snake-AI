@@ -11,6 +11,9 @@ export class BoardDrawer {
     board.snake.body.forEach(part => {
       this.appendDiv(parent, part, ['snake', 'snake-body']);
     });
+    board.rocks.forEach(rock => {
+      this.appendDiv(parent, rock, ['rock']);
+    })
   }
 
   private appendDiv(parent:Element, position:Position, classes:string[]):void{

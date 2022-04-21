@@ -50,7 +50,12 @@ menu {
 }
 
 .food {
-  background: url('assets/PixelFood.png') center no-repeat;
+  background: url('assets/FoodL.png') center no-repeat;
+  background-size: contain;
+}
+
+.rock {
+  background: url('assets/RockL.png') center no-repeat;
   background-size: contain;
 }
 
@@ -132,8 +137,8 @@ menu {
 .board {
   background-color: rgba(0, 0, 0, 0.6);
   display: grid;
-  grid-template-rows: repeat(10, 1fr);
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  grid-template-columns: repeat(11, 1fr);
   align-self: center;
   justify-self: center;
   padding: 10px;

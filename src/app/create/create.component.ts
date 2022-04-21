@@ -65,7 +65,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   public resetAll():void{
     this.pauseAnimation();
     for(let i=0; i<this.iaList.length; i++){
-      this.iaList[i].snake.reset();
+      this.iaList[i].board.reset();
       this.drawBoard(i);
     }
   }

@@ -71,7 +71,7 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public reset():void{
     this.pauseAnimation();
-    this.snake.reset();
+    this.board.reset();
     this.drawBoard();
   }
 

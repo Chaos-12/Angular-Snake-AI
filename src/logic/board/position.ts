@@ -1,4 +1,4 @@
-import { Direction } from "src/logic";
+import { Direction, Directions } from "src/logic";
 
 export class Position {
 
@@ -22,5 +22,14 @@ export class Position {
       case Direction.west:
         return new Position(this.x -1, this.y);
     }
+  }
+
+  public neighborhood():Set<Position>{
+    let result = new Set<Position>();
+    result.add(this);
+    Directions.forEach(direction => {
+      result.add(this.forward(direction));
+    });
+    return result;
   }
 }
