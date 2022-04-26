@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions } from "src/logic";
+import { Board, Direction, Directions, Position } from "src/logic";
 
 @Injectable()
 export class InputProvider {
@@ -44,5 +44,33 @@ export class InputProvider {
       }
     })
     return inputs;
+  }
+
+  public distanceHeadToFood(board:Board):Array<number>{
+    let distances = new Array<number>(4);
+    distances[Direction.east] = board.food.x - board.snake.head.x;
+    distances[Direction.west] = -distances[Direction.east];
+    distances[Direction.south] = board.food.y - board.snake.head.y;
+    distances[Direction.north] = -distances[Direction.south];
+    distances.map( value => Math.max(0, value) );
+    return distances;
+  }
+
+  public distanceHeadToWall(board:Board):Array<number>{
+    let distances = new Array<number>(Directions.length);
+    for(let dir=0; dir<Directions.length; dir++){
+      let searching = true;
+      let distance = 0;
+      let position = board.snake.head;
+      while(searching){
+        distance ++;
+        position = position.forward(dir);
+        if(board.hasRockIn(position) || !board.contains(position)){
+          searching = false;
+          distances[dir] = distance;
+        }
+      }
+    }
+    return distances;
   }
 }
