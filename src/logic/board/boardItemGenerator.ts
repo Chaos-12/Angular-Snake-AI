@@ -1,5 +1,4 @@
-import { Position, Board } from "src/logic";
-import { PositionSet } from "./positionSet";
+import { Position, Board, PositionGenerator } from "src/logic";
 
 export class BoardItemGenerator {
 
@@ -16,7 +15,7 @@ export class BoardItemGenerator {
       }
       tries ++;
     }*/
-    let foodPositions = new PositionSet();
+    let foodPositions = new PositionGenerator();
     foodPositions.addException(board.snake.head);
     board.snake.body.forEach(position => {
       foodPositions.addException(position);
@@ -26,11 +25,10 @@ export class BoardItemGenerator {
     });
     foodPositions.generateValidPositions(1,board.width,1,board.height);
     board.food = foodPositions.getRandom();
-
   }
 
   public static generateRandomRock(board:Board):void{
-    let rockPositions = new PositionSet();
+    let rockPositions = new PositionGenerator();
     rockPositions.addException(board.food);
     board.snake.head.neighborhood().forEach(position => {
       rockPositions.addException(position);

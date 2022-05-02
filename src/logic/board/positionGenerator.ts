@@ -1,30 +1,19 @@
 import { Position } from "src/logic";
+import { PositionSetList } from "./positionSetList";
 
-export class PositionSet {
+export class PositionGenerator {
 
-  private exceptionMap:Map<number,Set<number>> = new Map<number, Set<number>>();
+  private exceptionMap:PositionSetList = new PositionSetList();
   public validPositions:Array<Position> = new Array<Position>();
 
   constructor() { }
 
   public addException(position:Position):void{
-    let exceptionSet = this.exceptionMap.get(position.x);
-    if (exceptionSet === undefined){
-      exceptionSet = new Set();
-    }
-    exceptionSet.add(position.y);
-    this.exceptionMap.set(position.x, exceptionSet);
+    this.exceptionMap.add(position);
   }
 
   public isValidPosition(position:Position):boolean{
-    let exceptionSet = this.exceptionMap.get(position.x);
-    if (exceptionSet === undefined){
-      return true;
-    }
-    if (exceptionSet.has(position.y)){
-      return false;
-    }
-    return true;
+    return !this.exceptionMap.contains(position);
   }
 
   public generateValidPositions(minX:number, maxX:number, minY:number, maxY:number, filter:(position:Position) => boolean = (position:Position) => true):void{
