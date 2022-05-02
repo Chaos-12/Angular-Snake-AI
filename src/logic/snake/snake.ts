@@ -1,4 +1,4 @@
-import { Direction, Position, SnakeDeath } from "src/logic";
+import { Direction, Position, PositionSetList, SnakeDeath } from "src/logic";
 
 export class Snake {
 
@@ -25,9 +25,9 @@ export class Snake {
   }
 
   public head:Position = new Position(1,1);
-  public body:Position[] = [];
+  public body:PositionSetList = new PositionSetList();
   get length():number{
-    return this.body.length+1;
+    return this.body.length()+1;
   }
 
   private death:SnakeDeath|undefined = undefined;
@@ -52,9 +52,9 @@ export class Snake {
     this.lastDirection = Direction.east;
     this.nextDirection = Direction.east;
     this.head = new Position(length,1);
-    this.body = [];
+    this.body = new PositionSetList();
     for(let i=1; i<length;i++){
-      this.body.push(new Position(i,1));
+      this.body.add(new Position(i,1));
     }
   }
 
@@ -62,13 +62,13 @@ export class Snake {
     if(!this.isAlive){
       return;
     }
-    this.body.push(this.head);
+    this.body.add(this.head);
     this.head = this.head.forward(this.nextDirection);
     this.lastDirection = this.nextDirection;
     if(eating){
       this.nFoodEaten ++;
     } else {
-      this.body.shift();
+      this.body.removeFirst();
     }
     this.successfulSteps ++;
   }
@@ -77,12 +77,7 @@ export class Snake {
     if(this.head.equals(position)){
       return true;
     }
-    for(let i=0; i<this.body.length; i++){
-      if(this.body[i].equals(position)){
-        return true;
-      }
-    }
-    return false;
+    return this.body.contains(position);
   }
 
   public isOppositeDirection(direction:Direction):boolean{
