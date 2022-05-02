@@ -7,8 +7,8 @@ export class PositionSetList {
 
   constructor() { }
 
-  public asList():Array<Position>{
-    return this.list;
+  public forEach(callback:(position:Position)=>void):void{
+    this.list.forEach(position => callback(position));
   }
 
   public length():number{

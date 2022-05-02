@@ -1,8 +1,8 @@
-import { BoardItemGenerator, Position, Snake, SnakeDeath } from "src/logic";
+import { BoardItemGenerator, Position, PositionSetList, Snake, SnakeDeath } from "src/logic";
 
 export class Board {
   public food:Position = new Position(this.width, this.height);
-  public rocks:Array<Position> = new Array();
+  public rocks:PositionSetList = new PositionSetList();
 
   constructor(public snake:Snake, public height:number=11, public width:number=11){
     BoardItemGenerator.generateRandomFood(this);
@@ -11,7 +11,7 @@ export class Board {
   public reset(){
     this.snake.reset();
     BoardItemGenerator.generateRandomFood(this);
-    this.rocks = new Array();
+    this.rocks.removeAll();
   }
 
   public contains(position:Position):boolean{
@@ -22,12 +22,7 @@ export class Board {
   }
 
   public hasRockIn(position:Position):boolean{
-    for(let i=0; i<this.rocks.length; i++){
-      if(this.rocks[i].equals(position)){
-        return true;
-      }
-    }
-    return false;
+    return this.rocks.contains(position);
   }
 
   public moveSnake():void{
@@ -35,11 +30,9 @@ export class Board {
     if(!this.contains(newPosition)){
       this.snake.kill(SnakeDeath.wall);
     }
-    this.rocks.forEach(rock => {
-      if(rock.equals(newPosition)){
-        this.snake.kill(SnakeDeath.rock);
-      }
-    })
+    if(this.rocks.contains(newPosition)){
+      this.snake.kill(SnakeDeath.rock);
+    }
     if(this.snake.contains(newPosition)){
       this.snake.kill(SnakeDeath.bite);
     }
