@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Network } from "src/logic";
+import { Network } from "src/main/logic";
 
 @Injectable()
 export class NetworkBuilder {

@@ -1,4 +1,4 @@
-import { Direction, Directions } from "src/logic";
+import { Direction, Directions } from "src/main/logic";
 
 export class Position {
 

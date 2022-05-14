@@ -1,4 +1,4 @@
-import { Network, NeuronType } from "src/logic";
+import { Network, NeuronType } from "src/main/logic";
 
 describe('Network tests', function(){
 

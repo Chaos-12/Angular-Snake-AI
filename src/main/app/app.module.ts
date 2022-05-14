@@ -8,8 +8,8 @@ import { SelectorComponent } from './selector/selector.component';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { CreateComponent } from './create/create.component';
-import { BoardDrawer } from 'src/utils';
-import { InputProvider, NetworkBuilder } from 'src/logic';
+import { BoardDrawer } from 'src/main/utils';
+import { InputProvider, NetworkBuilder } from 'src/main/logic';
 
 @NgModule({
   declarations: [

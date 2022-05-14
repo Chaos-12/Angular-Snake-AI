@@ -1,4 +1,4 @@
-import { Position, Board, PositionGenerator } from "src/logic";
+import { Position, Board, PositionGenerator } from "src/main/logic";
 
 export class BoardItemGenerator {
 

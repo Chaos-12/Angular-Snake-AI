@@ -1,4 +1,4 @@
-import { Direction, Position, PositionSetList, SnakeDeath } from "src/logic";
+import { Direction, Position, PositionSetList, SnakeDeath } from "src/main/logic";
 
 export class Snake {
 
@@ -41,8 +41,8 @@ export class Snake {
     return this.death.toString();
   }
 
-  constructor(){
-    this.reset();
+  constructor(length:number = 3){
+    this.reset(length);
   }
 
   public reset(length:number = 3):void{

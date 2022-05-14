@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Directions, Ia, InputProvider, NetworkBuilder } from 'src/logic';
-import { BoardDrawer } from 'src/utils';
+import { Directions, Ia, InputProvider, NetworkBuilder } from 'src/main/logic';
+import { BoardDrawer } from 'src/main/utils';
 
 
 @Component({

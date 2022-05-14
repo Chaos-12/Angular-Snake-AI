@@ -1,4 +1,4 @@
-import { Board, Network, Snake } from "src/logic";
+import { Board, Network, Snake } from "src/main/logic";
 
 export class Ia {
   public name:string;

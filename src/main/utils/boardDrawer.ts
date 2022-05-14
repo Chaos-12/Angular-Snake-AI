@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Board, Position } from "src/logic";
+import { Board, Position } from "src/main/logic";
 
 @Injectable()
 export class BoardDrawer {

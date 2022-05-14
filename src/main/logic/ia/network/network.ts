@@ -1,4 +1,4 @@
-import { Connection, Neuron, NeuronType } from "src/logic";
+import { Connection, Neuron, NeuronType } from "src/main/logic";
 
 export class Network {
 

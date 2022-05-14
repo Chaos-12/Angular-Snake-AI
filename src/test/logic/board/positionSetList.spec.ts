@@ -1,4 +1,4 @@
-import { Position, PositionSetList } from "src/logic";
+import { Position, PositionSetList } from "src/main/logic";
 
 describe('PositionSetList Test', function(){
 

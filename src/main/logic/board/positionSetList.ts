@@ -1,4 +1,4 @@
-import { Position } from "src/logic";
+import { Position } from "src/main/logic";
 
 export class PositionSetList {
 

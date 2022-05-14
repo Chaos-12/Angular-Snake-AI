@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { Board, Direction, Snake } from 'src/logic';
-import { BoardDrawer } from 'src/utils';
+import { Board, Direction, Snake } from 'src/main/logic';
+import { BoardDrawer } from 'src/main/utils';
 
 @Component({
   selector: 'app-play',

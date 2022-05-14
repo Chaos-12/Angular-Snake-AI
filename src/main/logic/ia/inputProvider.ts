@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Position } from "src/logic";
+import { Board, Direction, Directions, Position } from "src/main/logic";
 
 @Injectable()
 export class InputProvider {
@@ -31,10 +31,13 @@ export class InputProvider {
     if (snakeHead.y > board.food.y){
       inputs[InputProvider.indexFood + Direction.north] = 1;
     }
-    //1 if there is a wall in that direction // 0 otherwise
+    //1 if there is a wall/rock in that direction // 0 otherwise
     Directions.forEach(direction => {
       if (!board.contains(snakeHead.forward(direction))){
         inputs[InputProvider.indexWall + direction] = 1;
+      }
+      if(board.hasRockIn(snakeHead.forward(direction))){
+        inputs[InputProvider.indexBody + direction] = 1;
       }
     })
     //1 if there is a body in that direction // 0 otherwise
