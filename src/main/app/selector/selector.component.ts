@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateComponent } from '../create/create.component';
-import { HomeComponent } from '../home/home.component';
-import { PlayComponent } from '../play/play.component';
+import { CreateComponent, HomeComponent, PlayComponent } from 'src/main/app';
 
 @Component({
   selector: 'app-selector',

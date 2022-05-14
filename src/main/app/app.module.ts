@@ -2,12 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SelectorComponent } from './selector/selector.component';
-import { HomeComponent } from './home/home.component';
-import { PlayComponent } from './play/play.component';
-import { CreateComponent } from './create/create.component';
+import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/app';
 import { BoardDrawer } from 'src/main/utils';
 import { InputProvider, NetworkBuilder } from 'src/main/logic';
 
