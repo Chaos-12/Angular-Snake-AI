@@ -1,10 +1,10 @@
 import { BoardItemGenerator, Position, PositionSetList, Snake, SnakeDeath } from "src/main/logic";
 
 export class Board {
-  public food:Position = new Position(this.width, this.height);
+  public food:Position = new Position(this.width, this.width);
   public rocks:PositionSetList = new PositionSetList();
 
-  constructor(public snake:Snake, public height:number=11, public width:number=11){
+  constructor(public snake:Snake, public width:number=11){
     BoardItemGenerator.generateRandomFood(this);
   }
 
@@ -15,7 +15,7 @@ export class Board {
   }
 
   public contains(position:Position):boolean{
-    if(1<=position.x && position.x<=this.width && 1<=position.y && position.y<=this.height){
+    if(1<=position.x && position.x<=this.width && 1<=position.y && position.y<=this.width){
       return true;
     }
     return false;

@@ -23,7 +23,7 @@ export class BoardItemGenerator {
     board.rocks.forEach(rock => {
       foodPositions.addException(rock);
     });
-    foodPositions.generateValidPositions(1,board.width,1,board.height);
+    foodPositions.generateValidPositions(1,board.width,1,board.width);
     board.food = foodPositions.getRandom();
   }
 
@@ -40,7 +40,7 @@ export class BoardItemGenerator {
       rockPositions.addException(rock);
     });
     let evenFilter = (position:Position) => (position.x%2===0 && position.y%2===0);
-    rockPositions.generateValidPositions(1,board.width,1,board.height, evenFilter);
+    rockPositions.generateValidPositions(1,board.width,1,board.width, evenFilter);
     board.rocks.add(rockPositions.getRandom());
   }
 }
