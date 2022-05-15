@@ -1,6 +1,7 @@
 import { Position, PositionSetList } from "src/main/logic";
+import { TestUtils } from "src/test/testUtils";
 
-describe('PositionSetList Test', function(){
+describe(TestUtils.title('PositionSetList'), function(){
 
   let validPositions = new Array<Position>();
 
@@ -17,7 +18,7 @@ describe('PositionSetList Test', function(){
         for(let i=0; i<number; i++){
           testList.add(validPositions[i]);
         }
-        expect(testList.length()).toBe(number);
+        expect(testList.length).toBe(number);
       })
     })
   })
@@ -27,10 +28,10 @@ describe('PositionSetList Test', function(){
       it(`Position(${position.x}, ${position.y})`, function(){
         let testList = new PositionSetList();
         expect(testList.contains(position)).toBeFalse();
-        expect(testList.length()).toBe(0);
+        expect(testList.length).toBe(0);
         testList.add(position);
         expect(testList.contains(position)).toBeTrue();
-        expect(testList.length()).toBe(1);
+        expect(testList.length).toBe(1);
       })
     })
   })
@@ -41,10 +42,10 @@ describe('PositionSetList Test', function(){
         let testList = new PositionSetList();
         testList.add(position);
         expect(testList.contains(position)).toBeTrue();
-        expect(testList.length()).toBe(1);
+        expect(testList.length).toBe(1);
         testList.removeFirst();
         expect(testList.contains(position)).toBeFalse();
-        expect(testList.length()).toBe(0);
+        expect(testList.length).toBe(0);
       })
     })
   })
@@ -54,9 +55,9 @@ describe('PositionSetList Test', function(){
     testList.add(validPositions[0]);
     expect(testList.contains(validPositions[0])).toBeTrue();
     testList.add(validPositions[1]);
-    expect(testList.length()).toBe(2);
+    expect(testList.length).toBe(2);
     testList.removeFirst();
-    expect(testList.length()).toBe(1);
+    expect(testList.length).toBe(1);
     expect(testList.contains(validPositions[0])).toBeFalse();
   })
 

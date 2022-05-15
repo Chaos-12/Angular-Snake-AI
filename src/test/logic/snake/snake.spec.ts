@@ -1,7 +1,8 @@
 import { Snake, SnakeDeath } from "src/main/logic"
+import { TestUtils } from "src/test/testUtils";
 
 
-describe('Snake test', function(){
+describe(TestUtils.title('Snake'), function(){
 
   it('Counters start at 0', function(){
     let snake = new Snake();

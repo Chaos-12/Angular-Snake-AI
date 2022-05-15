@@ -1,6 +1,7 @@
 import { Network, NeuronType } from "src/main/logic";
+import { TestUtils } from "src/test/testUtils";
 
-describe('Network tests', function(){
+describe(TestUtils.title('Network'), function(){
 
   let cases = [1,2,5,12];
 

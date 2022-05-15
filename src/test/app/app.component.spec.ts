@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from 'src/main/app/app.component';
+import { TestUtils } from 'src/test/testUtils';
 
-describe('AppComponent', () => {
+describe(TestUtils.title('AppComponent'), () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
