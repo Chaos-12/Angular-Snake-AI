@@ -11,7 +11,7 @@ export class PositionSetList {
     this.list.forEach(position => callback(position));
   }
 
-  public length():number{
+  get length():number{
     return this.list.length;
   }
 

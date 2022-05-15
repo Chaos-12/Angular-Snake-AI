@@ -27,7 +27,7 @@ export class Snake {
   public head:Position = new Position(1,1);
   public body:PositionSetList = new PositionSetList();
   get length():number{
-    return this.body.length()+1;
+    return this.body.length+1;
   }
 
   private death:SnakeDeath|undefined = undefined;
