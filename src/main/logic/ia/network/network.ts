@@ -1,22 +1,31 @@
-import { Connection, Neuron, NeuronType } from "src/main/logic";
+import { Connection, Neuron, NeuronType, Directions, Input, InputType } from "src/main/logic";
 
 export class Network {
 
   public neuronMap:Map<number,Neuron> = new Map<number,Neuron>();
 
   public biasNeuron:Neuron = new Neuron(NeuronType.bias, 0);
-  public inputNeurons:Array<Neuron> = [];
+
+  public foodNeurons:Array<Neuron> = [];
+  public bodyNeurons:Array<Neuron> = [];
+  public wallNeurons:Array<Neuron> = [];
+  public rockNeurons:Array<Neuron> = [];
+  get inputNeurons():Array<Neuron>{
+    return this.foodNeurons.concat(this.bodyNeurons, this.wallNeurons, this.rockNeurons);
+  }
+
   public hiddenNeurons:Array<Neuron> = [];
   public outputNeurons:Array<Neuron> = [];
 
   public deepness = 1;
 
-  constructor(private readonly nInputs:number, private readonly nOutputs:number){
+  constructor( ){
     this.createNeuron(NeuronType.bias, 0);
-    for(let i=0; i < nInputs; i++){
-      this.createNeuron(NeuronType.input);
-    }
-    for(let i=0; i < nOutputs; i++){
+    for(let dir of Directions){
+      this.createInputNeuron(InputType.food);
+      this.createInputNeuron(InputType.body);
+      this.createInputNeuron(InputType.wall);
+      this.createInputNeuron(InputType.rock);
       this.createNeuron(NeuronType.output);
     }
   }
@@ -28,8 +37,7 @@ export class Network {
         this.biasNeuron = newNeuron;
         break;
       case NeuronType.input:
-        this.inputNeurons.push(newNeuron);
-        break;
+        throw new Error('Input Neuron should be created with specific method.');
       case NeuronType.hidden:
         this.hiddenNeurons.push(newNeuron);
         this.createConnection(this.biasNeuron.id, newNeuron.id, 1);
@@ -42,24 +50,44 @@ export class Network {
     this.neuronMap.set(id, newNeuron);
   }
 
+  private createInputNeuron(type:InputType, id:number = this.neuronMap.size):void{
+    let newNeuron = new Neuron(NeuronType.input, id);
+    switch(type){
+      case InputType.food:
+        this.foodNeurons.push(newNeuron);
+        break;
+      case InputType.body:
+        this.bodyNeurons.push(newNeuron);
+        break;
+      case InputType.wall:
+        this.wallNeurons.push(newNeuron);
+        break;
+      case InputType.rock:
+        this.rockNeurons.push(newNeuron);
+        break;
+    }
+    this.neuronMap.set(id, newNeuron);
+  }
+
   public createConnection(startId:number, finalId:number, weight:number = 1):void{
     let startNeuron = this.neuronMap.get(startId);
     let finalNeuron = this.neuronMap.get(finalId);
     if (startNeuron === undefined || finalNeuron === undefined){
       return;
     }
-    let link = new Connection(startNeuron, finalNeuron, weight);
-    startNeuron.addConnection(link);
+    let newLink = new Connection(startNeuron, finalNeuron, weight);
+    startNeuron.addConnection(newLink);
   }
 
-  public propagateInput(input:Array<number>):void{
-    if (this.inputNeurons.length !== input.length){
-      return;
-    }
-    //Set the weights of all neurons
+  public propagateInput(input:Input):void{
+    let nDirections = Directions.length;
+    //Set the new weights of all neurons
     this.biasNeuron.weight = 1;
-    for (let neuron of this.inputNeurons){
-      neuron.weight = input[neuron.id-1];
+    for (let dir of Directions){
+      this.foodNeurons[dir].weight = input.food[dir];
+      this.bodyNeurons[dir].weight = input.body[dir];
+      this.wallNeurons[dir].weight = input.wall[dir];
+      this.rockNeurons[dir].weight = input.rock[dir];
     }
     for (let neuron of this.hiddenNeurons){
       neuron.weight = 0;

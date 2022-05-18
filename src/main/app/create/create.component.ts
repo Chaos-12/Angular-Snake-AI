@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Directions, Ia, InputProvider, NetworkBuilder } from 'src/main/logic';
+import { Directions, Ia, InputProvider, ToleranceManager, Tolerances } from 'src/main/logic';
 import { BoardDrawer } from 'src/main/utils';
 
 
@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     return this.paused;
   }
 
-  constructor(private iaBuilder:NetworkBuilder, private boardDrawer:BoardDrawer, private inputProvider:InputProvider) { }
+  constructor(private iaBuilder:ToleranceManager, private boardDrawer:BoardDrawer, private inputProvider:InputProvider) { }
 
   ngOnDestroy(): void {
     this.iaList = [];
@@ -39,7 +39,8 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public createIa():void{
     let name = `IA-${this.foodTolerance}-${this.wallTolerance}-${this.bodyTolerance}`;
-    let network = this.iaBuilder.buildNetwork([this.foodTolerance/100, -this.wallTolerance/100, -this.bodyTolerance/100], 4);
+    let tolerances = new Tolerances(this.foodTolerance/100, -this.bodyTolerance/100, -this.wallTolerance/100, -this.wallTolerance/100);
+    let network = this.iaBuilder.buildNetwork(tolerances);
     this.iaList.push(new Ia(name, network));
   }
 

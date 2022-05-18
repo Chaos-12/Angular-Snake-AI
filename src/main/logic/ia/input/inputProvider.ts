@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Position } from "src/main/logic";
+import { Board, Direction, Directions, Position, Input } from "src/main/logic";
+import { MathUtils } from "src/main/utils";
 
 @Injectable()
 export class InputProvider {
@@ -8,8 +9,15 @@ export class InputProvider {
   public static readonly indexWall = 4;
   public static readonly indexBody = 8;
 
-  public getInputFrom(board:Board):Array<number>{
-    return this.getBinaryInput(board);
+  public getInputFrom(board:Board):Input{
+    let foodDistances = this.distancesToFood(board);
+    let rockDistances = this.distancesToRocks(board);
+    let bodyDistances = this.distancesToBody(board);
+    let foodInput = this.invertValues(foodDistances, board.width);
+    let rockInput = this.invertValues(rockDistances, board.width);
+    let bodyInput = this.invertValues(bodyDistances, board.width);
+    let input = new Input(foodInput, bodyInput, rockInput, rockInput);
+    return input;
   }
 
   public getBinaryInput(board:Board):Array<number>{
@@ -37,7 +45,7 @@ export class InputProvider {
         inputs[InputProvider.indexWall + direction] = 1;
       }
       if(board.hasRockIn(snakeHead.forward(direction))){
-        inputs[InputProvider.indexBody + direction] = 1;
+        inputs[InputProvider.indexWall + direction] = 1;
       }
     })
     //1 if there is a body in that direction // 0 otherwise
@@ -49,7 +57,7 @@ export class InputProvider {
     return inputs;
   }
 
-  public distanceHeadToFood(board:Board):Array<number>{
+  public distancesToFood(board:Board):Array<number>{
     let distances = new Array<number>(4);
     distances[Direction.east] = board.food.x - board.snake.head.x;
     distances[Direction.west] = -distances[Direction.east];
@@ -59,7 +67,7 @@ export class InputProvider {
     return distances;
   }
 
-  public distanceHeadToWall(board:Board):Array<number>{
+  public distancesUntilCondition(board:Board, condition:(position:Position)=>Boolean):Array<number>{
     let distances = new Array<number>(Directions.length);
     for(let dir=0; dir<Directions.length; dir++){
       let searching = true;
@@ -68,12 +76,36 @@ export class InputProvider {
       while(searching){
         distance ++;
         position = position.forward(dir);
-        if(board.hasRockIn(position) || !board.contains(position)){
+        if(condition(position)){
           searching = false;
           distances[dir] = distance;
+        } else if(!board.contains(position)){
+          searching = false;
+          distances[dir] = 0;
         }
       }
     }
     return distances;
   }
+
+  public distancesToRocks(board:Board):Array<number>{
+    return this.distancesUntilCondition(board, (pos)=>board.hasRockIn(pos)||!board.contains(pos) );
+  }
+
+  public distancesToBody(board:Board):Array<number>{
+    return this.distancesUntilCondition(board, (pos)=>board.snake.contains(pos) );
+  }
+
+  private invertValues(values:Array<number>, maximumValue:number):Array<number>{
+    let newValues = new Array<number>(values.length);
+    for(let i=0; i<values.length; i++){
+      if(values[i] > 0){
+        newValues[i] = MathUtils.invertUnitary(MathUtils.makeUnitary(values[i], 0, maximumValue));
+      } else {
+        newValues[i] = 0;
+      }
+    }
+    return newValues;
+  }
+
 }

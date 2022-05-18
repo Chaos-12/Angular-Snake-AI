@@ -1,4 +1,4 @@
-import { Network, NeuronType } from "src/main/logic";
+import { Directions, InputTypes, Network, NeuronType } from "src/main/logic";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('Network'), function(){
@@ -6,58 +6,28 @@ describe(TestUtils.title('Network'), function(){
   let cases = [1,2,5,12];
 
   it('Bias neuron in network is bias type', function(){
-    let network = new Network(1,1);
+    let network = new Network();
     expect(network.biasNeuron.type).toBe(NeuronType.bias);
   });
 
-  describe('Input neurons in network are input type', function(){
-    cases.forEach(number => {
-      it(`${number} input neurons`, function(){
-        let network = new Network(number,1);
-        network.inputNeurons.forEach(neuron => {
-          expect(neuron.type).toBe(NeuronType.input);
-        });
-      });
-    });
-  });
+  it('Right number of input neurons', function(){
+    let network = new Network();
+    expect(network.inputNeurons.length).toBe(Directions.length*InputTypes.length);
+  })
 
-  describe('Right number of input neurons', function(){
-    cases.forEach(number => {
-      it(`${number} input neurons`, function(){
-        let network = new Network(number,1);
-        expect(network.inputNeurons.length).toBe(number);
-      });
-    });
-  });
-
-  describe('Output neurons in network are output type', function(){
-    cases.forEach(number => {
-      it(`${number} output neurons`, function(){
-        let network = new Network(1, number);
-        network.outputNeurons.forEach(neuron => {
-          expect(neuron.type).toBe(NeuronType.output);
-        });
-      });
-    });
-  });
-
-  describe('Right number of output neurons', function(){
-    cases.forEach(number => {
-      it(`${number} output neurons`, function(){
-        let network = new Network(1, number);
-        expect(network.outputNeurons.length).toBe(number);
-      });
-    });
-  });
+  it('Right number of output neurons', function(){
+    let network = new Network();
+    expect(network.outputNeurons.length).toBe(Directions.length);
+  })
 
   describe('Computes deepness ok', function(){
     cases.forEach(number => {
       it(`${number} hidden neurons`, function(){
-        let network = new Network(1,1);
-        let inputId = 1;
-        let outputId = 2;
-        let idNewNeuron = 10;
-        network.createNeuron(NeuronType.hidden, idNewNeuron);
+        let network = new Network();
+        let inputId = network.inputNeurons[0].id;
+        let outputId = network.outputNeurons[0].id;
+        network.createNeuron(NeuronType.hidden);
+        let idNewNeuron = network.hiddenNeurons[0].id;
         network.createConnection(inputId, idNewNeuron);
         for (let i=1; i<number; i++){
           idNewNeuron ++;

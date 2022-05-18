@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/app';
 import { BoardDrawer } from 'src/main/utils';
-import { InputProvider, NetworkBuilder } from 'src/main/logic';
+import { InputProvider, ToleranceManager } from 'src/main/logic';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { InputProvider, NetworkBuilder } from 'src/main/logic';
     AppRoutingModule
   ],
   providers: [
-    NetworkBuilder,
+    ToleranceManager,
     BoardDrawer,
     InputProvider,
   ],
