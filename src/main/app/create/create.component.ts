@@ -13,9 +13,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   public addMode:boolean = true;
   public iaList:Array<Ia> = [];
 
-  public foodTolerance:number = 50;
-  public wallTolerance:number = 74;
-  public bodyTolerance:number = 90;
+  public tolerances:Tolerances = new Tolerances(20, 75, 80, 75);
 
   private gameBoards:any = [];
   private lastRenderTime = 0;
@@ -31,15 +29,16 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.createIa(new Tolerances(100, 0, 0, 0));
+    this.createIa(new Tolerances(10, 50, 50, 50));
   }
 
   public loadBoards():void{
     this.gameBoards = document.querySelectorAll('.board-ia');
   }
 
-  public createIa():void{
-    let name = `IA-${this.foodTolerance}-${this.wallTolerance}-${this.bodyTolerance}`;
-    let tolerances = new Tolerances(this.foodTolerance/100, -this.bodyTolerance/100, -this.wallTolerance/100, -this.wallTolerance/100);
+  public createIa(tolerances:Tolerances):void{
+    let name = `IA-${tolerances.food}-${tolerances.body}-${tolerances.wall}`;
     let network = this.iaBuilder.buildNetwork(tolerances);
     this.iaList.push(new Ia(name, network));
   }
@@ -50,11 +49,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public moveIa(index:number):void{
     let ia = this.iaList[index];
-    ia.board.moveSnake();
-    let input = this.inputProvider.getInputFrom(ia.board);
-    ia.network.propagateInput(input);
-    let newDirection = Directions[ia.network.obtainOutput()];
-    ia.snake.newDirection(newDirection);
+    ia.nextStep(this.inputProvider);
     this.drawBoard(index);
   }
 
@@ -66,7 +61,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   public resetAll():void{
     this.pauseAnimation();
     for(let i=0; i<this.iaList.length; i++){
-      this.iaList[i].board.reset();
+      this.iaList[i].reset();
       this.drawBoard(i);
     }
   }

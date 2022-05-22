@@ -1,4 +1,5 @@
-import { Connection, Neuron, NeuronType, Directions, Input, InputType } from "src/main/logic";
+import { Connection, Neuron, NeuronType, Directions, Input, InputType, Direction } from "src/main/logic";
+import { MathUtils } from "src/main/utils";
 
 export class Network {
 
@@ -105,16 +106,12 @@ export class Network {
     }
   }
 
-  public obtainOutput():number{
-    let index = 0;
-    let maximum = this.outputNeurons[0].weight;
-    for (let neuron of this.outputNeurons){
-      if (maximum < neuron.weight){
-        maximum = neuron.weight;
-        index = this.outputNeurons.indexOf(neuron);
-      }
+  public obtainOutput():Array<Direction>{
+    let output = new Array<number>(Directions.length);
+    for(let dir of Directions){
+      output[dir] = this.outputNeurons[dir].weight;
     }
-    return index;
+    return MathUtils.getOrderedIndexesOf(output);
   }
 
   public orderNetwork(){

@@ -92,9 +92,6 @@ export class Snake {
     if(!this.isAlive){
       return;
     }
-    if(this.isOppositeDirection(direction)){
-      return;
-    }
     this.nextDirection = direction;
   }
 
