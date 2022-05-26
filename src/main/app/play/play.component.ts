@@ -9,6 +9,8 @@ import { BoardDrawer } from 'src/main/utils';
 })
 export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  public readonly directions = Direction;
+
   private paused:boolean = true;
   get isPaused():boolean{
     return this.paused;

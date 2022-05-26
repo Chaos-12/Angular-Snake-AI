@@ -11,10 +11,12 @@
       </output>
     </main>
     <menu class="button-wrapper">
-      <button class="button button-left rounded-left" (click)="changeSnakeDirection(1)">&#9664;</button>
-      <button class="button button-up" (click)="changeSnakeDirection(2)">&#9650;</button>
-      <button class="button button-down" (click)="changeSnakeDirection(0)">&#9660;</button>
-      <button class="button button-right rounded-right" (click)="changeSnakeDirection(3)">&#9654;</button>
+      <button class="button input-left" (click)="changeSnakeDirection(directions.west)">&#9664;</button>
+      <button class="button input-up" (click)="changeSnakeDirection(directions.north)">&#9650;</button>
+      <button class="button input-down" (click)="changeSnakeDirection(directions.south)">&#9660;</button>
+      <button class="button input-right" (click)="changeSnakeDirection(directions.east)">&#9654;</button>
+    </menu>
+    <menu class="button-wrapper">
       <button class="button button-reset-small rounded-left" *ngIf="isPaused && snake.isAlive" (click)="reset()">&#10227;</button>
       <button class="button button-start" *ngIf="isPaused && snake.isAlive" (click)="startAnimation()">&#9655;</button>
       <button class="button button-step rounded-right" *ngIf="isPaused && snake.isAlive" (click)="moveSnake()">&#10140;</button>

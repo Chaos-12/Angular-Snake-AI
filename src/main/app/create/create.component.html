@@ -1,15 +1,23 @@
 <menu class="card-wrapper">
-  <form class="card" *ngIf="isPaused">
+  <form class="card">
     <header class="card-title">IA Tolerances</header>
     <menu class="input-wrapper">
-      <label>Food:</label>
-      <input class="input-number" [(ngModel)]="tolerances.food" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
-      <label>Body:</label>
-      <input class="input-number" [(ngModel)]="tolerances.body" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
-      <label>Wall:</label>
-      <input class="input-number" [(ngModel)]="tolerances.wall" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
-      <label>Rock:</label>
-      <input class="input-number" [(ngModel)]="tolerances.rock" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      <div class="input-card">
+        <label>Food:</label>
+        <input class="input-number" [(ngModel)]="tolerances.food" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      </div>
+      <div class="input-card">
+        <label>Body:</label>
+        <input class="input-number" [(ngModel)]="tolerances.body" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      </div>
+      <div class="input-card">
+        <label>Wall:</label>
+        <input class="input-number" [(ngModel)]="tolerances.wall" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      </div>
+      <div class="input-card">
+        <label>Rock:</label>
+        <input class="input-number" [(ngModel)]="tolerances.rock" [ngModelOptions]="{standalone: true}" type="number" min="0" max="100" step="5">
+      </div>
       <button class="button button-submit" type="button" (click)="createIa(tolerances)">+</button>
     </menu>
   </form>

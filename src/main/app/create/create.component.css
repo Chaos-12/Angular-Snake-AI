@@ -30,3 +30,12 @@
   padding: 5px;
   margin: 0;
 }
+
+.input-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.input-card {
+  padding: 5px;
+}

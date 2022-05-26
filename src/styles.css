@@ -11,6 +11,11 @@ html, body {
   min-width: 200px;
 }
 
+menu {
+  margin: 0;
+  padding: 0;
+}
+
 .text-big {
   font-size: 2rem;
   margin-top: 1rem;
@@ -31,11 +36,6 @@ html, body {
 
 .bold {
   font-weight: bold;
-}
-
-menu {
-  margin: 0;
-  padding: 0;
 }
 
 .snake {
@@ -151,14 +151,6 @@ menu {
   text-align: center;
 }
 
-.button-wrapper {
-  display: grid;
-  padding: 0px;
-  align-content: center;
-  grid-auto-columns: repeat(3 1fr);
-  margin: 10px;
-}
-
 .button {
   background-color: var(--color-main);
   color: var(--color-font);
@@ -174,4 +166,32 @@ menu {
 .button:hover {
   background-color: var(--color-selected);
   transition: 0.4s;
+}
+
+.button-wrapper {
+  display: grid;
+  padding: 0px;
+  align-content: center;
+  grid-auto-columns: repeat(3 1fr);
+  margin: 10px;
+}
+
+.input-up {
+  grid-area: 1 / 2 / span 1 / span 1;
+}
+
+.input-down {
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+
+.input-right {
+  grid-area: 1 / 3 / span 2 / span 1;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.input-left {
+  grid-area: 1 / 1 / span 2 / span 1;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
 }
