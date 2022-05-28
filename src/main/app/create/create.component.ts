@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Directions, Ia, InputProvider, ToleranceManager, Tolerances } from 'src/main/logic';
-import { BoardDrawer } from 'src/main/utils';
 
 
 @Component({
@@ -15,14 +14,13 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public tolerances:Tolerances = new Tolerances(20, 75, 80, 75);
 
-  private gameBoards:any = [];
   private lastRenderTime = 0;
   private paused:boolean = true;
   get isPaused():boolean{
     return this.paused;
   }
 
-  constructor(private iaBuilder:ToleranceManager, private boardDrawer:BoardDrawer, private inputProvider:InputProvider) { }
+  constructor(private iaBuilder:ToleranceManager, private inputProvider:InputProvider) { }
 
   ngOnDestroy(): void {
     this.iaList = [];
@@ -31,10 +29,6 @@ export class CreateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createIa(new Tolerances(100, 0, 0, 0));
     this.createIa(new Tolerances(10, 50, 50, 50));
-  }
-
-  public loadBoards():void{
-    this.gameBoards = document.querySelectorAll('.board-ia');
   }
 
   public createIa(tolerances:Tolerances):void{
@@ -50,19 +44,12 @@ export class CreateComponent implements OnInit, OnDestroy {
   public moveIa(index:number):void{
     let ia = this.iaList[index];
     ia.nextStep(this.inputProvider);
-    this.drawBoard(index);
-  }
-
-  public drawBoard(index:number):void{
-    let gameBoard = document.querySelectorAll('.board-ia')[index];
-    this.boardDrawer.drawBoard(gameBoard, this.iaList[index].board);
   }
 
   public resetAll():void{
     this.pauseAnimation();
     for(let i=0; i<this.iaList.length; i++){
       this.iaList[i].reset();
-      this.drawBoard(i);
     }
   }
 

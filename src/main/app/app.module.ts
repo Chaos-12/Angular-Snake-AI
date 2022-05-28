@@ -3,7 +3,6 @@ import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent, BoardComponent } from 'src/main/app';
-import { BoardDrawer } from 'src/main/utils';
 import { InputProvider, ToleranceManager } from 'src/main/logic';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { InputProvider, ToleranceManager } from 'src/main/logic';
   ],
   providers: [
     ToleranceManager,
-    BoardDrawer,
     InputProvider,
   ],
   bootstrap: [AppComponent]

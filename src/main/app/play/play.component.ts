@@ -1,13 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Board, Direction, Snake } from 'src/main/logic';
-import { BoardDrawer } from 'src/main/utils';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css']
 })
-export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PlayComponent implements OnInit, OnDestroy {
 
   public readonly directions = Direction;
 
@@ -18,11 +17,10 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private lastRenderTime:number = 0;
 
-  private gameBoard:any;
   public board:Board;
   public snake:Snake;
 
-  constructor(private boardDrawer:BoardDrawer) {
+  constructor() {
     this.snake = new Snake();
     this.board = new Board(this.snake);
   }
@@ -54,12 +52,6 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public changeSnakeDirection(direction:Direction):void{
     this.snake.newDirection(direction);
-    this.drawBoard();
-  }
-
-  ngAfterViewInit():void{
-    this.gameBoard = document.querySelector('.board-user');
-    this.drawBoard();
   }
 
   public startAnimation():void{
@@ -74,7 +66,6 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
   public reset():void{
     this.pauseAnimation();
     this.board.reset();
-    this.drawBoard();
   }
 
   public nextAnimation(currentTime:any):void{
@@ -95,10 +86,5 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public moveSnake():void{
     this.board.moveSnake();
-    this.drawBoard();
-  }
-
-  private drawBoard():void{
-    this.boardDrawer.drawBoard(this.gameBoard, this.board);
   }
 }
