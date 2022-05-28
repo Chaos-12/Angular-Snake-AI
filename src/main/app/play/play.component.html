@@ -10,6 +10,7 @@
         <p class="text-medium bold">SCORE: {{snake.score}}</p>
       </output>
     </main>
+    <app-board [board]="board"></app-board>
     <menu class="button-wrapper">
       <button class="button input-left" (click)="changeSnakeDirection(directions.west)">&#9664;</button>
       <button class="button input-up" (click)="changeSnakeDirection(directions.north)">&#9650;</button>

@@ -3,7 +3,7 @@ import { Position } from "src/main/logic";
 export class PositionSetList {
 
   private coordinateMap:Map<number,Set<number>> = new Map<number,Set<number>>();
-  private list:Array<Position> = [];
+  public list:Array<Position> = [];
 
   constructor() { }
 

@@ -1,0 +1,31 @@
+
+
+.snake {
+  background-color: greenyellow;
+  border: 1px solid black;
+}
+
+.snake-head {
+  border-radius: 0% 0% 30% 30%;
+  /* background: url('assets/PixelSnakeFace.png') center no-repeat; */
+  /* background-color: greenyellow; */
+}
+
+.food {
+  background: url('../../../assets/FoodL.png') center no-repeat;
+  background-size: contain;
+}
+
+.rock {
+  background: url('../../../assets/RockL.png') center no-repeat;
+  background-size: contain;
+}
+
+@for $i from 1 through 11 {
+  .row#{$i}{
+    grid-row: $i;
+  }
+  .column#{$i}{
+    grid-column: $i;
+  }
+}

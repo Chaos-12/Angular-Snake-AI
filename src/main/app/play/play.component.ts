@@ -19,7 +19,7 @@ export class PlayComponent implements OnInit, OnDestroy, AfterViewInit {
   private lastRenderTime:number = 0;
 
   private gameBoard:any;
-  private board:Board;
+  public board:Board;
   public snake:Snake;
 
   constructor(private boardDrawer:BoardDrawer) {

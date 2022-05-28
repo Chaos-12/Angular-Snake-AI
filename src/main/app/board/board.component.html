@@ -1,0 +1,14 @@
+<main class="board-wrapper">
+  <output class="board square">
+    <div class="snake snake-head row{{board.snake.head.y}} column{{board.snake.head.x}} rotate{{90*board.snake.direction}}"></div>
+    <div *ngFor="let part of board.snake.body.list" class="snake snake-body row{{part.y}} column{{part.x}}"></div>
+    <div class="food row{{board.food.y}} column{{board.food.x}}"></div>
+    <div *ngFor="let rock of board.rocks.list" class="rock row{{rock.y}} column{{rock.x}}"></div>
+  </output>
+  <output class="extended blur stats" *ngIf="!board.snake.isAlive">
+    <p class="text-big bold">Death by {{board.snake.deathReason}}</p>
+    <p class="text-small">nº steps: {{board.snake.nSteps}}</p>
+    <p class="text-small">nº foods: {{board.snake.nFood}}</p>
+    <p class="text-medium bold">SCORE: {{board.snake.score}}</p>
+  </output>
+</main>
