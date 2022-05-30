@@ -1,6 +1,7 @@
 export * from "./board/board.component";
 export * from "./create/create.component";
 export * from "./home/home.component";
+export * from "./input/input.component";
 export * from "./play/play.component";
 export * from "./selector/selector.component";
 export * from "./app-routing.module";

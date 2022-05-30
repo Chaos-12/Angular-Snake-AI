@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Position, PositionSetList, Board } from "src/main/logic";
+import { Board } from "src/main/logic";
 
 
 @Component({
@@ -10,10 +10,10 @@ import { Position, PositionSetList, Board } from "src/main/logic";
 export class BoardComponent implements OnInit {
 
   @Input()
-  public board! : Board;
+  public board!:Board;
 
   @Input()
-  public allowedCheats : boolean = false;
+  public allowedCheats:boolean = false;
 
   constructor(){ }
 

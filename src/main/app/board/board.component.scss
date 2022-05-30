@@ -1,4 +1,15 @@
-
+.board {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  grid-template-rows: repeat(11, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+  align-self: center;
+  justify-self: center;
+  padding: 10px;
+  min-width: 200px;
+  max-width: 500px;
+}
 
 .snake {
   background-color: greenyellow;

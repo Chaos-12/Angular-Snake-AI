@@ -27,7 +27,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.createIa(new Tolerances(100, 0, 0, 0));
+    this.createIa(new Tolerances(80, 10, 10, 10));
     this.createIa(new Tolerances(10, 50, 50, 50));
   }
 

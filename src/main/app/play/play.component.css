@@ -19,3 +19,23 @@
 .button-pause, .button-reset-big {
   grid-area: 3 / 1 / span 1 / span 3;
 }
+
+.input-up {
+  grid-area: 1 / 2 / span 1 / span 1;
+}
+
+.input-down {
+  grid-area: 2 / 2 / span 1 / span 1;
+}
+
+.input-right {
+  grid-area: 1 / 3 / span 2 / span 1;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.input-left {
+  grid-area: 1 / 1 / span 2 / span 1;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}

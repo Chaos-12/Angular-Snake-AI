@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent, BoardComponent } from 'src/main/app';
 import { InputProvider, ToleranceManager } from 'src/main/logic';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { InputProvider, ToleranceManager } from 'src/main/logic';
     PlayComponent,
     CreateComponent,
     BoardComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
