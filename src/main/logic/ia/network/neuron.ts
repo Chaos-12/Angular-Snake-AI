@@ -5,7 +5,7 @@ export class Neuron {
   public layer:number = 0;
   public index:number = 0;
 
-  public weight:number = 1;
+  public weight:number = 0;
 
   private connections:Map<number,Connection> = new Map<number,Connection>();
 

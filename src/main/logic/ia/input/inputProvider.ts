@@ -9,10 +9,22 @@ export class InputProvider {
   public readonly rockCondition = (board:Board, position:Position) => board.hasRockIn(position);
 
   public getInputFrom(board:Board):Input{
+    return this.getRegularInputFrom(board);
+  }
+
+  private getBinaryInput(board:Board):Input{
     let foodInput = this.getBinaryInputFood(board);
     let bodyInput = this.checkConditionNearHead(board, this.bodyCondition);
     let wallInput = this.checkConditionNearHead(board, this.wallContidion);
     let rockInput = this.checkConditionNearHead(board, this.rockCondition);
+    return new Input(foodInput, bodyInput, rockInput, wallInput);
+  }
+
+  private getRegularInputFrom(board:Board):Input{
+    let foodInput = this.getDistancesToFood(board).map(distance => this.invertValue(distance, board.width));
+    let bodyInput = this.getRegularInput(board, this.bodyCondition);
+    let wallInput = this.getRegularInput(board, this.wallContidion);
+    let rockInput = this.getRegularInput(board, this.rockCondition);
     return new Input(foodInput, bodyInput, rockInput, wallInput);
   }
 
@@ -30,7 +42,7 @@ export class InputProvider {
     return distances;
   }
 
-  public getDistancesUntilCondition(board:Board, condition:(position:Position)=>Boolean):Array<number>{
+  public getDistancesUntilCondition(board:Board, condition:(board:Board, position:Position)=>Boolean):Array<number>{
     let distances = new Array<number>(Directions.length);
     for(let dir of Directions){
       let searching = true;
@@ -39,7 +51,7 @@ export class InputProvider {
       while(searching){
         distance ++;
         position = position.forward(dir);
-        if(condition(position)){
+        if(condition(board, position)){
           searching = false;
           distances[dir] = distance;
         } else if(!board.contains(position)){
@@ -68,7 +80,7 @@ export class InputProvider {
     return this.getDistancesToFood(board).map(distance => this.invertValue(distance, board.width));
   }
 
-  public getRegularInput(board:Board, condition:(position:Position)=>Boolean):Array<number>{
+  public getRegularInput(board:Board, condition:(board:Board, position:Position)=>Boolean):Array<number>{
     return this.getDistancesUntilCondition(board, condition).map(distance => this.invertValue(distance, board.width));
   }
 

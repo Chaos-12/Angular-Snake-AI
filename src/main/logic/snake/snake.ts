@@ -2,6 +2,9 @@ import { Direction, Position, PositionSetList, SnakeDeath } from "src/main/logic
 
 export class Snake {
 
+  private static readonly foodEnergy:number = 100;
+  public energy:number = Snake.foodEnergy;
+
   private successfulSteps:number = 0;
   get nSteps():number{
     return this.successfulSteps;
@@ -49,6 +52,7 @@ export class Snake {
     this.death = undefined;
     this.successfulSteps = 0;
     this.nFoodEaten = 0;
+    this.energy = Snake.foodEnergy;
     this.lastDirection = Direction.east;
     this.nextDirection = Direction.east;
     this.head = new Position(length,1);
@@ -67,10 +71,16 @@ export class Snake {
     this.lastDirection = this.nextDirection;
     if(eating){
       this.nFoodEaten ++;
+      this.energy = Snake.foodEnergy;
     } else {
       this.body.removeFirst();
+      this.energy --;
     }
     this.successfulSteps ++;
+
+    if(this.energy < 0){
+      this.kill(SnakeDeath.hunger);
+    }
   }
 
   public contains(position:Position):boolean{

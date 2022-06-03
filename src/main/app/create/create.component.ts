@@ -9,10 +9,10 @@ import { Directions, Ia, InputProvider, ToleranceManager, Tolerances } from 'src
 })
 export class CreateComponent implements OnInit, OnDestroy {
 
-  public addMode:boolean = true;
   public iaList:Array<Ia> = [];
+  public tolList:Array<Tolerances> = [];
 
-  public tolerances:Tolerances = new Tolerances(20, 75, 80, 75);
+  public tolerances:Tolerances = new Tolerances(0, 0, 0, 0);
 
   private lastRenderTime = 0;
   private paused:boolean = true;
@@ -27,18 +27,21 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.createIa(new Tolerances(80, 10, 10, 10));
-    this.createIa(new Tolerances(10, 50, 50, 50));
+    this.createIa(new Tolerances(100, -100, -100, -100));
+    this.createIa(new Tolerances(40, -100, -20, -100));
+    this.createIa(new Tolerances(30, -100, -10, -80));
+    this.createIa(new Tolerances(25, -100, -25, -30));
   }
 
   public createIa(tolerances:Tolerances):void{
-    let name = `IA-${tolerances.food}-${tolerances.body}-${tolerances.wall}`;
     let network = this.iaBuilder.buildNetwork(tolerances);
-    this.iaList.push(new Ia(name, network));
+    this.iaList.push(new Ia(network));
+    this.tolList.push(tolerances);
   }
 
   public deleteIa(index:number):void{
-    this.iaList.splice(index,1);
+    this.iaList.splice(index, 1);
+    this.tolList.splice(index, 1);
   }
 
   public moveIa(index:number):void{
@@ -73,12 +76,25 @@ export class CreateComponent implements OnInit, OnDestroy {
     }
     this.lastRenderTime = currentTime;
     this.moveAll();
+    if(this.areAllSnakeDead()){
+      this.resetAll();
+      this.startAll();
+    }
   }
 
   public moveAll():void{
     for(let i=0; i<this.iaList.length; i++){
       this.moveIa(i);
     }
+  }
+
+  public areAllSnakeDead():Boolean{
+    for(let ia of this.iaList){
+      if(ia.snake.isAlive){
+        return false;
+      }
+    }
+    return true;
   }
 
 }

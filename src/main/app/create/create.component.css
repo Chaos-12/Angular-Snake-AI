@@ -31,11 +31,16 @@
   margin: 0;
 }
 
-.input-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .input-card {
   padding: 5px;
+}
+
+.button-delete {
+  position: absolute;
+  width: 10px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: red !important;
+  top: 10px;
+  right: 10px;
 }
