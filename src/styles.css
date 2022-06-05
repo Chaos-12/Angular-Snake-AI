@@ -2,7 +2,7 @@
   --color-main: rgb(52, 152, 219);
   --color-selected: rgba(255, 255, 255, 0.4);
   --color-font: white;
-  --color-input-positive: rgb(127,255,0);
+  --color-positive: rgb(127,255,0);
 }
 
 html, body {

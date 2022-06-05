@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, HostBinding, Input, OnInit } from "@angular/core";
 import { Board } from "src/main/logic";
 
 
@@ -14,6 +14,11 @@ export class BoardComponent implements OnInit {
 
   @Input()
   public allowedCheats:boolean = false;
+
+  @HostBinding('style.--snake-energy')
+  public get snakeEnergy(){
+    return `${this.board.snake.energy}%`;
+  }
 
   constructor(){ }
 

@@ -3,6 +3,7 @@
   <div *ngFor="let part of board.snake.body.list" class="snake snake-body row{{part.y}} column{{part.x}}"></div>
   <div class="food row{{board.food.y}} column{{board.food.x}}"></div>
   <div *ngFor="let rock of board.rocks.list" class="rock row{{rock.y}} column{{rock.x}}"></div>
+  <div class="energy-bar"></div>
   <output class="extended blur stats" *ngIf="!board.snake.isAlive">
     <p class="text-big bold">Death by {{board.snake.deathReason}}</p>
     <p class="text-small">nº steps: {{board.snake.nSteps}}</p>
