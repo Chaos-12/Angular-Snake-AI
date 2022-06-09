@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent, BoardComponent } from 'src/main/app';
+import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent, BoardComponent, InputComponent } from 'src/main/app';
 import { InputProvider, ToleranceManager } from 'src/main/logic';
-import { InputComponent } from './input/input.component';
+import { PubSubService } from 'src/main/utils';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { InputComponent } from './input/input.component';
   providers: [
     ToleranceManager,
     InputProvider,
+    PubSubService,
   ],
   bootstrap: [AppComponent]
 })
