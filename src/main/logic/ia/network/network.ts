@@ -20,7 +20,7 @@ export class Network {
 
   public deepness = 1;
 
-  constructor( ){
+  constructor(){
     this.createNeuron(NeuronType.bias, 0);
     for(let dir of Directions){
       this.createInputNeuron(InputType.food);

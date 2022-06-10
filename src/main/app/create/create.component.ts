@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Directions, Ia, InputProvider, ToleranceManager, Tolerances } from 'src/main/logic';
+import { PubSubService, Subject } from 'src/main/utils';
 
 
 @Component({
@@ -13,7 +14,6 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public iaList:Array<Ia> = [];
   public tolList:Array<Tolerances> = [];
-  public framesUntilReset:Array<number> = [];
 
   public tolerances:Tolerances = new Tolerances(0, 0, 0, 0);
 
@@ -23,11 +23,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     return this.paused;
   }
 
-  constructor(private iaBuilder:ToleranceManager, private inputProvider:InputProvider) { }
-
-  ngOnDestroy(): void {
-    this.iaList = [];
-  }
+  constructor(private pubSub:PubSubService, private iaBuilder:ToleranceManager, private inputProvider:InputProvider) { }
 
   ngOnInit(): void {
     this.createIa(new Tolerances(100, -100, -100, -100));
@@ -36,31 +32,19 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.createIa(new Tolerances(25, -100, -25, -30));
   }
 
+  ngOnDestroy(): void {
+    this.iaList = [];
+  }
+
   public createIa(tolerances:Tolerances):void{
     let network = this.iaBuilder.buildNetwork(tolerances);
     this.iaList.push(new Ia(network));
     this.tolList.push(tolerances);
-    this.framesUntilReset.push(-1);
   }
 
   public deleteIa(index:number):void{
     this.iaList.splice(index, 1);
     this.tolList.splice(index, 1);
-    this.framesUntilReset.splice(index, 1);
-  }
-
-  public moveIa(index:number):void{
-    let ia = this.iaList[index];
-    ia.nextStep(this.inputProvider);
-    if(!ia.snake.isAlive){
-      if(this.framesUntilReset[index] < 0){
-        this.framesUntilReset[index] = CreateComponent.deathResetFrames;
-      }
-      if(this.framesUntilReset[index] == 0){
-        ia.reset();
-      }
-      this.framesUntilReset[index] --;
-    }
   }
 
   public resetAll():void{
@@ -93,8 +77,10 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   public moveAll():void{
-    for(let i=0; i<this.iaList.length; i++){
-      this.moveIa(i);
+    this.pubSub.post(Subject.animation, Subject.play);
+    for(let ia of this.iaList){
+      ia.makeSnakeDecide(this.inputProvider);
+      ia.checkForReset();
     }
   }
 

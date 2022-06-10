@@ -51,7 +51,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public changeSnakeDirection(direction:Direction):void{
-    this.snake.newDirection(direction);
+    this.snake.lookTo(direction);
   }
 
   public startAnimation():void{

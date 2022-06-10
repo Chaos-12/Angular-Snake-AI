@@ -98,7 +98,7 @@ export class Snake {
     return false;
   }
 
-  public newDirection(direction:Direction):void{
+  public lookTo(direction:Direction):void{
     if(!this.isAlive){
       return;
     }
