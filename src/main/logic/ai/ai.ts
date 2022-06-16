@@ -1,14 +1,14 @@
 import { Board, InputProvider, Network, Snake } from "src/main/logic";
 
-export class Ia {
+export class Ai {
 
   private static readonly maxResetFrames = 10;
-  public framesUntilReset = Ia.maxResetFrames;
+  public framesUntilReset = Ai.maxResetFrames;
 
   public snake:Snake;
   public board:Board;
 
-  constructor(public network:Network, private autoRestart:Boolean = false){
+  constructor(public network:Network){
     this.snake = new Snake();
     this.board = new Board(this.snake);
     this.network = network;
@@ -25,7 +25,7 @@ export class Ia {
   public checkForReset():void{
     if(!this.snake.isAlive){
       if(this.framesUntilReset < 0){
-        this.framesUntilReset = Ia.maxResetFrames;
+        this.framesUntilReset = Ai.maxResetFrames;
       }
       if(this.framesUntilReset == 0){
         this.reset();

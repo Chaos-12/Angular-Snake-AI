@@ -23,7 +23,7 @@ export class BoardComponent implements OnInit, Subscriber{
 
   constructor(private pubSub:PubSubService){ }
 
-  ngOnInit(): void {
+  ngOnInit():void{
     this.pubSub.subscribe(this, Subject.animation);
   }
 
@@ -31,7 +31,14 @@ export class BoardComponent implements OnInit, Subscriber{
     this.board.moveSnake();
   }
 
-  public notify(){
-    this.nextStep();
+  public notify(subject:Subject){
+    switch(subject){
+      case Subject.next:
+        this.nextStep();
+        break;
+      case Subject.reset:
+        this.board.reset();
+        break;
+    }
   }
 }

@@ -1,9 +1,6 @@
-<div class="card">
-  <header class="card-title">Simulation Controls</header>
-  <div class="control-wrapper">
-    <button class="button button-reset-small rounded-left" (click)="pressReset()">&#10227;</button>
-    <button class="button button-start" *ngIf="isPaused" (click)="pressPlay()">&#9655;</button>
-    <button class="button button-pause" *ngIf="!isPaused" (click)="pressPause()">&#2405;</button>
-    <button class="button button-step rounded-right" (click)="pressNext()">&#10140;</button>
-  </div>
+<div class="button-wrapper">
+  <button class="button button-reset rounded-left" (click)="reset()">&#10227;</button>
+  <button class="button button-start" *ngIf="!isOn" (click)="play()">&#9655;</button>
+  <button class="button button-pause" *ngIf="isOn" (click)="pause()">&#2405;</button>
+  <button class="button button-step rounded-right" (click)="next()">&#10140;</button>
 </div>

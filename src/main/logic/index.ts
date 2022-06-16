@@ -4,6 +4,6 @@ export * from "./board/direction";
 export * from "./board/position";
 export * from "./board/positionGenerator";
 export * from "./board/positionSetList";
-export * from "./ia";
+export * from "./ai";
 export * from "./snake/snake";
 export * from "./snake/snakeDeath";

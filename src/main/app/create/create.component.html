@@ -21,18 +21,14 @@
       <button class="button button-submit" type="button" (click)="createIa(tolerances)">+</button>
     </menu>
   </form>
-  <div class="card" *ngIf="iaList.length>0">
+  <div class="card" *ngIf="aiList.length>0">
     <header class="card-title">Simulation Controls</header>
-    <div class="control-wrapper">
-      <button class="button button-reset-small rounded-left" (click)="resetAll()">&#10227;</button>
-      <button class="button button-start" *ngIf="isPaused" (click)="startAll()">&#9655;</button>
-      <button class="button button-pause" *ngIf="!isPaused" (click)="pauseAnimation()">&#2405;</button>
-      <button class="button button-step rounded-right" (click)="moveAll()">&#10140;</button>
-    </div>
+    <app-animation></app-animation>
   </div>
 </menu>
 <main class="card-wrapper">
-  <div class="card" *ngFor="let ia of iaList; let i=index;">
+  <app-ai [aiList]="aiList"></app-ai>
+  <div class="card" *ngFor="let ia of aiList; let i=index;">
       <header class="card-title">Custom AI #{{i}}</header>
       <button class="button-delete" (click)="deleteIa(i)"></button>
       <app-board [board]="ia.board"></app-board>

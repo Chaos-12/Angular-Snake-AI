@@ -1,4 +1,4 @@
-export * from "./ia";
+export * from "./ai";
 export * from "./input/input";
 export * from "./input/inputProvider";
 export * from "./input/inputType";

@@ -1,4 +1,5 @@
 export * from "./board/board.component";
+export * from "./animation/animation.component";
 export * from "./create/create.component";
 export * from "./home/home.component";
 export * from "./input/input.component";

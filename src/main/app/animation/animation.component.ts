@@ -1,34 +1,49 @@
 import { Component, OnInit } from "@angular/core";
 import { PubSubService, Subject } from "src/main/utils";
 
-
 @Component({
   selector: 'app-animation',
   templateUrl: './animation.component.html',
   styleUrls: ['./animation.component.css']
 })
-export class BoardComponent implements OnInit {
+export class AnimationComponent implements OnInit {
 
-  public isPaused = true;
+  private lastRenderTime = 0;
+  public isOn = false;
 
   constructor(private pubSub:PubSubService){ }
 
   ngOnInit(): void {
   }
 
-  public pressPlay():void{
-    this.pubSub.post(Subject.animation, Subject.play);
+  public play():void{
+    this.isOn = true;
+    window.requestAnimationFrame(this.nextFrame.bind(this));
   }
 
-  public pressPause():void{
-    this.pubSub.post(Subject.animation, Subject.pause);
+  public pause():void{
+    this.isOn = false;
   }
 
-  public pressNext():void{
+  public next():void{
     this.pubSub.post(Subject.animation, Subject.next);
   }
 
-  public pressReset():void{
+  public reset():void{
+    this.pause();
     this.pubSub.post(Subject.animation, Subject.reset);
+  }
+
+  private nextFrame(currentTime:number):void{
+    if(!this.isOn){
+      return;
+    }
+    window.requestAnimationFrame(this.nextFrame.bind(this));
+    const secondsSinceLastRender = (currentTime - this.lastRenderTime) / 1000;
+    if(secondsSinceLastRender < 0.2){
+      return;
+    }
+    this.lastRenderTime = currentTime;
+    this.next();
   }
 }
