@@ -1,16 +1,19 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Ai, InputProvider } from 'src/main/logic';
+import { Ai, InputProvider, Tolerances } from 'src/main/logic';
 import { PubSubService, Subject, Subscriber } from "src/main/utils";
 
 @Component({
-  selector: 'app-ai',
-  templateUrl: './ai.component.html',
-  styleUrls: ['./ai.component.css']
+  selector: 'app-input-list',
+  templateUrl: './input-list.component.html',
+  styleUrls: ['./input-list.component.css']
 })
-export class AiComponent implements OnInit, Subscriber{
+export class InputListComponent implements OnInit, Subscriber{
 
   @Input()
-  public aiList!:Array<Ai>;
+  public ai!:Ai;
+
+  @Input()
+  public tolerances!:Tolerances;
 
   constructor(private pubSub:PubSubService, private inputProvider:InputProvider){ }
 
@@ -21,15 +24,11 @@ export class AiComponent implements OnInit, Subscriber{
   public notify(subject:Subject){
     switch(subject){
       case Subject.next:
-        for(let ai of this.aiList){
-          ai.makeSnakeDecide(this.inputProvider);
-          ai.checkForReset();
-        }
+        this.ai.makeSnakeDecide(this.inputProvider);
+        this.ai.checkForReset();
         break;
       case Subject.reset:
-        for(let ai of this.aiList){
-          ai.reset();
-        }
+        this.ai.reset();
         break;
     }
   }

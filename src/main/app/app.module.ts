@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule, AppComponent, SelectorComponent, HomeComponent, PlayComponent, CreateComponent, BoardComponent, InputComponent, AnimationComponent } from 'src/main/app';
+import { AppRoutingModule, AppComponent } from 'src/main/app';
+import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/app/modes';
+import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/app/common';
 import { InputProvider, ToleranceManager } from 'src/main/logic';
 import { PubSubService } from 'src/main/utils';
-import { AiComponent } from './ai/ai.component';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,9 @@ import { AiComponent } from './ai/ai.component';
     PlayComponent,
     CreateComponent,
     BoardComponent,
-    InputComponent,
+    InputItemComponent,
     AnimationComponent,
-    AiComponent
+    InputListComponent
   ],
   imports: [
     BrowserModule,

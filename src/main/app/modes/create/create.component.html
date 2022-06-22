@@ -27,16 +27,10 @@
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-ai [aiList]="aiList"></app-ai>
-  <div class="card" *ngFor="let ia of aiList; let i=index;">
+  <div class="card" *ngFor="let ai of aiList; let i=index;">
       <header class="card-title">Custom AI #{{i}}</header>
       <button class="button-delete" (click)="deleteIa(i)"></button>
-      <app-board [board]="ia.board"></app-board>
-      <div class="input-wrapper">
-        <app-input [title]="'Food'" [value]="tolList[i].food" [inputs]="ia.network.foodNeurons"></app-input>
-        <app-input [title]="'Body'" [value]="tolList[i].body" [inputs]="ia.network.bodyNeurons"></app-input>
-        <app-input [title]="'Wall'" [value]="tolList[i].wall" [inputs]="ia.network.wallNeurons"></app-input>
-        <app-input [title]="'Rock'" [value]="tolList[i].rock" [inputs]="ia.network.rockNeurons"></app-input>
-      </div>
+      <app-board [board]="ai.board"></app-board>
+      <app-input-list [tolerances]="tolList[i]" [ai]="ai"></app-input-list>
   </div>
 </main>

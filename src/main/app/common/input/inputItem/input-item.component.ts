@@ -3,11 +3,11 @@ import { Direction, DirectionLabels, Neuron } from "src/main/logic";
 
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  selector: 'app-input-item',
+  templateUrl: './input-item.component.html',
+  styleUrls: ['./input-item.component.scss']
 })
-export class InputComponent implements OnInit {
+export class InputItemComponent implements OnInit {
 
   public labels = DirectionLabels;
 
