@@ -125,6 +125,8 @@ menu {
 .button:hover {
   background-color: var(--color-selected);
   transition: 0.4s;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
 .button-wrapper {
@@ -133,4 +135,14 @@ menu {
   align-content: center;
   grid-auto-flow: column;
   margin: 10px;
+}
+
+.button-delete-card {
+  position: absolute;
+  font-size: smaller;
+  margin: 4px;
+  border-radius: 100%;
+  aspect-ratio: 1/1;
+  top: 0px;
+  right: 0px;
 }
