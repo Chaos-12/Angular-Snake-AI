@@ -1,6 +1,6 @@
 <header>
   <div *ngFor="let item of menu; let i=index;">
-    <button class="link" type="button" (click)="select(i)">
+    <button class="link" type="button" (click)="select(i)" [ngClass]="{'selected':item.component === actual}">
       <img class="icon" src="../../../assets/FoodL.png" *ngIf="item.component === actual">  {{item.text}}
     </button>
   </div>

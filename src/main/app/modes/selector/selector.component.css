@@ -26,7 +26,7 @@ header .link {
 
 header .link:hover {
   background-color: var(--color-selected);
-  transition: 0.3s;
+  transition: 1s;
 }
 
 main {
@@ -41,4 +41,9 @@ footer {
   background-color: var(--color-main);
   height: 3%;
   bottom: 0;
+}
+
+.selected {
+  border: 2px solid var(--color-font) !important;
+  border-radius: 100px;
 }
