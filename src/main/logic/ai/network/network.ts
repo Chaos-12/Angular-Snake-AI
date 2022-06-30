@@ -1,5 +1,5 @@
 import { Connection, Neuron, NeuronType, Directions, Input, InputType, Direction } from "src/main/logic";
-import { MathUtils } from "src/main/utils";
+import { InnovationUtil, MathUtils } from "src/main/utils";
 
 export class Network {
 
@@ -20,6 +20,9 @@ export class Network {
 
   public deepness = 1;
 
+  public connections:Set<number> = new Set();
+  public innovation:number = 0;
+
   constructor(){
     this.createNeuron(NeuronType.bias, 0);
     for(let dir of Directions){
@@ -31,7 +34,10 @@ export class Network {
     }
   }
 
-  public createNeuron(type:NeuronType, id:number = this.neuronMap.size):void{
+  public createNeuron(type:NeuronType, id:number=this.neuronMap.size):void{
+    if(this.neuronMap.has(id)){
+      return;
+    }
     let newNeuron = new Neuron(type, id);
     switch(type){
       case NeuronType.bias:
@@ -52,6 +58,9 @@ export class Network {
   }
 
   private createInputNeuron(type:InputType, id:number = this.neuronMap.size):void{
+    if(this.neuronMap.has(id)){
+      return;
+    }
     let newNeuron = new Neuron(NeuronType.input, id);
     switch(type){
       case InputType.food:
@@ -70,14 +79,27 @@ export class Network {
     this.neuronMap.set(id, newNeuron);
   }
 
-  public createConnection(startId:number, finalId:number, weight:number = 1):void{
+  public createConnection(startId:number, finalId:number, weight:number=1, enabled=true):void{
     let startNeuron = this.neuronMap.get(startId);
     let finalNeuron = this.neuronMap.get(finalId);
     if (startNeuron === undefined || finalNeuron === undefined){
       return;
     }
-    let newLink = new Connection(startNeuron, finalNeuron, weight);
+    let newLink = new Connection(startNeuron, finalNeuron, weight, enabled);
     startNeuron.addConnection(newLink);
+    let newInnovation = InnovationUtil.getOrCreateInnovation(startId, finalId);
+    this.connections.add(newInnovation);
+    if(newInnovation > this.innovation){
+      this.innovation = newInnovation;
+    }
+  }
+
+  public getConnection(startId:number, finalId:number):Connection|undefined{
+    let startNeuron = this.neuronMap.get(startId);
+    if (startNeuron === undefined){
+      return undefined;
+    }
+    return startNeuron.connections.get(finalId);
   }
 
   public propagateInput(input:Input):void{
@@ -114,7 +136,7 @@ export class Network {
     return MathUtils.getOrderedIndexesOf(output);
   }
 
-  public orderNetwork(){
+  public orderNetwork():void{
     //Assign layer 0 to input neuronMap (and propagate from them)
     for (let neuron of this.inputNeurons){
       neuron.assignLayer(0);

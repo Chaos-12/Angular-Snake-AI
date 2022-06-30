@@ -2,13 +2,11 @@ import { Neuron } from "src/main/logic";
 
 export class Connection {
 
-  public enabled:boolean = true;
-
   get endNeuron():number{
     return this.to.id;
   }
 
-  constructor(private readonly from:Neuron, private readonly to:Neuron, private readonly weight:number) { }
+  constructor(public readonly from:Neuron, public readonly to:Neuron, public weight:number, public enabled:boolean = true) { }
 
   public propagateWeight():void{
     if (this.enabled){

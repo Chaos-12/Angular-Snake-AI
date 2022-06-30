@@ -7,7 +7,7 @@ export class Neuron {
 
   public weight:number = 0;
 
-  private connections:Map<number,Connection> = new Map<number,Connection>();
+  public connections:Map<number,Connection> = new Map<number,Connection>();
 
   constructor(public readonly type:NeuronType, public readonly id:number){ }
 

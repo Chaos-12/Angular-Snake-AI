@@ -1,3 +1,4 @@
+export * from "./neat/innovationUtil";
 export * from "./pubSub/pubSubService";
 export * from "./pubSub/subscriber";
 export * from "./pubSub/subject";
