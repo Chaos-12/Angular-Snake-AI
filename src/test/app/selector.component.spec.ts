@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectorComponent } from 'src/main/app';
+import { TestUtils } from 'src/test/testUtils';
 
-describe('SelectorComponent', () => {
+describe(TestUtils.title('SelectorComponent'), () => {
   let component: SelectorComponent;
   let fixture: ComponentFixture<SelectorComponent>;
 

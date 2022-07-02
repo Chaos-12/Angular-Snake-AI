@@ -17,18 +17,4 @@ export class Connection {
   public propagateDeepness():void{
     this.to.assignLayer(this.from.layer+1);
   }
-
-  public equals(other:any):boolean{
-    if(!(other instanceof Connection)){
-      return false;
-    }
-    if(!this.from.equals(other.from)){
-      return false;
-    }
-    if(!this.to.equals(other.to)){
-      return false;
-    }
-    return true;
-  }
-
 }

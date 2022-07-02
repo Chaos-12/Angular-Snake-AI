@@ -33,18 +33,4 @@ export class Neuron {
       link.propagateWeight();
     }
   }
-
-  public equals(other:any):boolean{
-    if (!(other instanceof Neuron)){
-      return false;
-    }
-    if (this.id !== other.id){
-      return false;
-    }
-    if (this.type !== other.type){
-      return false;
-    }
-    return true;
-  }
-
 }

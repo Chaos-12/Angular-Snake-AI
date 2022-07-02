@@ -1,5 +1,5 @@
 import { Connection, Neuron, NeuronType, Directions, Input, InputType, Direction } from "src/main/logic";
-import { InnovationUtil, MathUtils } from "src/main/utils";
+import { InnovationUtils, MathUtils } from "src/main/utils";
 
 export class Network {
 
@@ -20,7 +20,7 @@ export class Network {
 
   public deepness = 1;
 
-  public connections:Set<number> = new Set();
+  public connections:Map<number,Connection> = new Map();
   public innovation:number = 0;
 
   constructor(){
@@ -87,19 +87,11 @@ export class Network {
     }
     let newLink = new Connection(startNeuron, finalNeuron, weight, enabled);
     startNeuron.addConnection(newLink);
-    let newInnovation = InnovationUtil.getOrCreateInnovation(startId, finalId);
-    this.connections.add(newInnovation);
+    let newInnovation = InnovationUtils.getOrCreateInnovation(startId, finalId);
+    this.connections.set(newInnovation, newLink);
     if(newInnovation > this.innovation){
       this.innovation = newInnovation;
     }
-  }
-
-  public getConnection(startId:number, finalId:number):Connection|undefined{
-    let startNeuron = this.neuronMap.get(startId);
-    if (startNeuron === undefined){
-      return undefined;
-    }
-    return startNeuron.connections.get(finalId);
   }
 
   public propagateInput(input:Input):void{
