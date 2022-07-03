@@ -24,18 +24,18 @@ export function mergeNetworks(father:Network, mother:Network, child:Network = ne
   return child;
 }
 
-export function mergeConnectionInto(father:Connection, mother:Connection, child:Network):void{
+export function mergeConnectionInto(father:Connection, mother:Connection, network:Network):void{
   if(father.enabled === mother.enabled){
     if(Math.random() < 0.5){
-      child.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
+      network.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
     } else {
-      child.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
+      network.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
     }
   } else {
     if(father.enabled){
-      child.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
+      network.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
     } else {
-      child.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
+      network.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
     }
   }
 }

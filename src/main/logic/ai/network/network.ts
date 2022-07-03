@@ -42,19 +42,21 @@ export class Network {
     switch(type){
       case NeuronType.bias:
         this.biasNeuron = newNeuron;
+        this.neuronMap.set(id, newNeuron);
         break;
       case NeuronType.input:
         throw new Error('Input Neuron should be created with specific method.');
       case NeuronType.hidden:
         this.hiddenNeurons.push(newNeuron);
-        this.createConnection(this.biasNeuron.id, newNeuron.id, 1);
+        this.neuronMap.set(id, newNeuron);
+        this.createConnection(this.biasNeuron.id, newNeuron.id, 1, true);
         break;
       case NeuronType.output:
         this.outputNeurons.push(newNeuron);
-        this.createConnection(this.biasNeuron.id, newNeuron.id, 1);
+        this.neuronMap.set(id, newNeuron);
+        this.createConnection(this.biasNeuron.id, newNeuron.id, 1, true);
         break;
     }
-    this.neuronMap.set(id, newNeuron);
   }
 
   private createInputNeuron(type:InputType, id:number = this.neuronMap.size):void{
@@ -83,7 +85,7 @@ export class Network {
     let startNeuron = this.neuronMap.get(startId);
     let finalNeuron = this.neuronMap.get(finalId);
     if (startNeuron === undefined || finalNeuron === undefined){
-      return;
+      throw new Error('No connection can be created since the network lacks the neurons involved');
     }
     let newLink = new Connection(startNeuron, finalNeuron, weight, enabled);
     startNeuron.addConnection(newLink);
