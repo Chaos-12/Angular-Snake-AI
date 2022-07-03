@@ -10,14 +10,14 @@ export function mergeNetworks(father:Network, mother:Network, child:Network = ne
   for(let fatherConnection of father.connections){
     let motherConnection = mother.connections.get(fatherConnection[0]);
     if (motherConnection === undefined){
-      child.createConnection(fatherConnection[1].from.id, fatherConnection[1].to.id, fatherConnection[1].weight, fatherConnection[1].enabled);
+      child.createConnection(fatherConnection[1].start.id, fatherConnection[1].final.id, fatherConnection[1].weight, fatherConnection[1].enabled);
     } else {
       mergeConnectionInto(fatherConnection[1], motherConnection, child);
     }
   }
   for(let motherConnection of mother.connections){
     if (!father.connections.has(motherConnection[0])){
-      child.createConnection(motherConnection[1].from.id, motherConnection[1].to.id, motherConnection[1].weight, motherConnection[1].enabled);
+      child.createConnection(motherConnection[1].start.id, motherConnection[1].final.id, motherConnection[1].weight, motherConnection[1].enabled);
     }
   }
   child.orderNetwork();
@@ -27,15 +27,15 @@ export function mergeNetworks(father:Network, mother:Network, child:Network = ne
 export function mergeConnectionInto(father:Connection, mother:Connection, network:Network):void{
   if(father.enabled === mother.enabled){
     if(Math.random() < 0.5){
-      network.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
+      network.createConnection(father.start.id, father.final.id, father.weight, father.enabled);
     } else {
-      network.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
+      network.createConnection(mother.start.id, mother.final.id, mother.weight, mother.enabled);
     }
   } else {
     if(father.enabled){
-      network.createConnection(father.from.id, father.to.id, father.weight, father.enabled);
+      network.createConnection(father.start.id, father.final.id, father.weight, father.enabled);
     } else {
-      network.createConnection(mother.from.id, mother.to.id, mother.weight, mother.enabled);
+      network.createConnection(mother.start.id, mother.final.id, mother.weight, mother.enabled);
     }
   }
 }

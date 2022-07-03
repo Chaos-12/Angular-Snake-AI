@@ -18,10 +18,10 @@ export class Network {
   public hiddenNeurons:Array<Neuron> = [];
   public outputNeurons:Array<Neuron> = [];
 
-  public deepness = 1;
-
   public connections:Map<number,Connection> = new Map();
   public innovation:number = 0;
+
+  public neuronsPerLayer:Array<number> = new Array();
 
   constructor(){
     this.createNeuron(NeuronType.bias, 0);
@@ -136,24 +136,27 @@ export class Network {
       neuron.assignLayer(0);
     }
     //The deepness of the network is the highest between output neuronMap
-    this.deepness = 1;
+    let deepness = 1;
     for (let neuron of this.outputNeurons){
-      if (this.deepness < neuron.layer){
-        this.deepness = neuron.layer;
+      if (deepness < neuron.layer){
+        deepness = neuron.layer;
       }
     }
     //All output neurons should be at the same (last) layer
     for (let neuron of this.outputNeurons){
-      neuron.assignLayer(this.deepness);
+      neuron.assignLayer(deepness);
     }
     //We order the neurons acording to the layers
     this.hiddenNeurons = [];
-    for (let d = 0; d <= this.deepness; d++){
+    this.neuronsPerLayer = new Array<number>(deepness);
+    for (let d = 0; d <= deepness; d++){
       let positionInLayer = 0;
+      this.neuronsPerLayer[d] = 0;
       for (let neuron of this.neuronMap.values()){
         if (neuron.layer === d){
           neuron.index = positionInLayer;
           positionInLayer ++;
+          this.neuronsPerLayer[d] ++;
           if (neuron.type === NeuronType.hidden){
             this.hiddenNeurons.push(neuron);
           }
