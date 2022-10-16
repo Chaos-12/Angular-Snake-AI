@@ -12,7 +12,7 @@ export class Neuron {
   constructor(public readonly type:NeuronType, public readonly id:number){ }
 
   public addConnection(link:Connection):void{
-    this.connections.set(link.endNeuron,link);
+    this.connections.set(link.final.id,link);
   }
 
   public addWeight(value:number):void{

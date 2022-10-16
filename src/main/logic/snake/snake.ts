@@ -1,4 +1,4 @@
-import { Direction, Position, PositionSetList, SnakeDeath } from "src/main/logic";
+import { Board, Direction, OppoisiteDirection, Position, PositionSetList, SnakeDeath } from "src/main/logic";
 
 export class Snake {
 
@@ -90,12 +90,8 @@ export class Snake {
     return this.body.contains(position);
   }
 
-  public isOppositeDirection(direction:Direction):boolean{
-    let dif = this.lastDirection - direction;
-    if(dif === 2 || dif === -2){
-      return true;
-    }
-    return false;
+  private isOppositeDirection(direction:Direction):boolean{
+    return OppoisiteDirection[direction] === this.lastDirection;
   }
 
   public lookTo(direction:Direction):void{

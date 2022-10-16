@@ -4,4 +4,6 @@ export enum Direction {
 
 export const Directions:Array<Direction> = [Direction.south, Direction.west, Direction.north, Direction.east];
 
+export const OppoisiteDirection:Array<Direction> = [Direction.north, Direction.east, Direction.south, Direction.west];
+
 export const DirectionLabels:Array<string> = ["south", "west", "north", "east"];

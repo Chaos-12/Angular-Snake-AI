@@ -1,4 +1,4 @@
-import { Board, InputProvider, Network, Snake } from "src/main/logic";
+import { Board, Direction, InputProvider, Network, Snake } from "src/main/logic";
 
 export class Ai {
 
@@ -18,8 +18,28 @@ export class Ai {
     let input = inputProvider.getInputFrom(this.board);
     this.network.propagateInput(input);
     let output = this.network.obtainOutput();
-    let newDirection = this.snake.isOppositeDirection(output[0]) ? output[1] : output[0];
-    this.snake.lookTo(newDirection);
+    let validDirections = this.removeDeathDirections(output);
+    if(validDirections.length){
+      this.snake.lookTo(validDirections[0]);
+    }
+  }
+
+  public removeDeathDirections(output:Array<Direction>):Array<Direction>{
+    let noObstacleDirections = new Array<Direction>();
+    output.forEach(direction => {
+      let newHeadPosition = this.snake.head.forward(direction);
+      if (this.snake.contains(newHeadPosition)){
+        return;
+      }
+      if (this.board.rocks.contains(newHeadPosition)){
+        return;
+      }
+      if (!this.board.contains(newHeadPosition)){
+        return;
+      }
+      noObstacleDirections.push(direction);
+    })
+    return noObstacleDirections;
   }
 
   public checkForReset():void{
