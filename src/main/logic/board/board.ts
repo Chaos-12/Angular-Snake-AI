@@ -21,10 +21,6 @@ export class Board {
     return false;
   }
 
-  public hasRockIn(position:Position):boolean{
-    return this.rocks.contains(position);
-  }
-
   public moveSnake():void{
     let newPosition = this.snake.head.forward(this.snake.direction);
     if(!this.contains(newPosition)){

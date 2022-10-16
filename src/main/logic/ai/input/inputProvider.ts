@@ -6,7 +6,7 @@ export class InputProvider {
 
   public readonly bodyCondition = (board:Board, position:Position) => board.snake.contains(position);
   public readonly wallContidion = (board:Board, position:Position) => !board.contains(position);
-  public readonly rockCondition = (board:Board, position:Position) => board.hasRockIn(position);
+  public readonly rockCondition = (board:Board, position:Position) => board.rocks.contains(position);
 
   public getInputFrom(board:Board):Input{
     return this.getRegularInputFrom(board);

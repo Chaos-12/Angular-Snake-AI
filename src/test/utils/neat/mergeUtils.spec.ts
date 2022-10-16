@@ -16,8 +16,8 @@ describe(TestUtils.title('MergeUtils'), function(){
       mergeConnectionInto(father, mother, network);
       let child = network.connections.get(innovation);
       expect(child?.enabled).toBeTrue();
-      let equalToFather = (child?.from.id === father.from.id) && (child.to.id === father.to.id) && (child.weight === father.weight);
-      let equalToMother = (child?.from.id === mother.from.id) && (child.to.id === mother.to.id) && (child.weight === mother.weight);
+      let equalToFather = (child?.start.id === father.start.id) && (child.final.id === father.final.id) && (child.weight === father.weight);
+      let equalToMother = (child?.start.id === mother.start.id) && (child.final.id === mother.final.id) && (child.weight === mother.weight);
       expect(equalToFather || equalToMother).toBeTrue();
       expect(equalToFather && equalToMother).toBeFalse();
     })
@@ -32,8 +32,8 @@ describe(TestUtils.title('MergeUtils'), function(){
       mergeConnectionInto(father, mother, network);
       let child = network.connections.get(innovation);
       expect(child?.enabled).toBeFalse();
-      let equalToFather = (child?.from.id === father.from.id) && (child.to.id === father.to.id) && (child.weight === father.weight);
-      let equalToMother = (child?.from.id === mother.from.id) && (child.to.id === mother.to.id) && (child.weight === mother.weight);
+      let equalToFather = (child?.start.id === father.start.id) && (child.final.id === father.final.id) && (child.weight === father.weight);
+      let equalToMother = (child?.start.id === mother.start.id) && (child.final.id === mother.final.id) && (child.weight === mother.weight);
       expect(equalToFather || equalToMother).toBeTrue();
       expect(equalToFather && equalToMother).toBeFalse();
 
@@ -49,8 +49,8 @@ describe(TestUtils.title('MergeUtils'), function(){
       mergeConnectionInto(father, mother, network);
       let child = network.connections.get(innovation);
       expect(child?.enabled).toBeTrue();
-      let equalToFather = (child?.from.id === father.from.id) && (child.to.id === father.to.id) && (child.weight === father.weight);
-      let equalToMother = (child?.from.id === mother.from.id) && (child.to.id === mother.to.id) && (child.weight === mother.weight);
+      let equalToFather = (child?.start.id === father.start.id) && (child.final.id === father.final.id) && (child.weight === father.weight);
+      let equalToMother = (child?.start.id === mother.start.id) && (child.final.id === mother.final.id) && (child.weight === mother.weight);
       expect(equalToFather).toBeTrue();
       expect(equalToMother).toBeFalse();
     })
@@ -65,8 +65,8 @@ describe(TestUtils.title('MergeUtils'), function(){
       mergeConnectionInto(father, mother, network);
       let child = network.connections.get(innovation);
       expect(child?.enabled).toBeTrue();
-      let equalToFather = (child?.from.id === father.from.id) && (child.to.id === father.to.id) && (child.weight === father.weight);
-      let equalToMother = (child?.from.id === mother.from.id) && (child.to.id === mother.to.id) && (child.weight === mother.weight);
+      let equalToFather = (child?.start.id === father.start.id) && (child.final.id === father.final.id) && (child.weight === father.weight);
+      let equalToMother = (child?.start.id === mother.start.id) && (child.final.id === mother.final.id) && (child.weight === mother.weight);
       expect(equalToFather).toBeFalse();
       expect(equalToMother).toBeTrue();
     })

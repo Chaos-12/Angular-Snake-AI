@@ -1,4 +1,5 @@
 import { Position, PositionSetList } from "src/main/logic";
+import { RandomUtils } from "src/main/utils/randomUtils";
 
 export class PositionGenerator {
 
@@ -28,7 +29,6 @@ export class PositionGenerator {
   }
 
   public getRandom():Position{
-    let index = Math.floor(Math.random()*this.validPositions.length);
-    return this.validPositions[index];
+    return RandomUtils.getRandomFrom(this.validPositions);
   }
 }

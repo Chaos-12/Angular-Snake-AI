@@ -24,7 +24,7 @@ export class Ai {
     }
   }
 
-  public removeDeathDirections(output:Array<Direction>):Array<Direction>{
+  private removeDeathDirections(output:Array<Direction>):Array<Direction>{
     let noObstacleDirections = new Array<Direction>();
     output.forEach(direction => {
       let newHeadPosition = this.snake.head.forward(direction);

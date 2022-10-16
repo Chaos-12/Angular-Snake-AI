@@ -1,4 +1,5 @@
 import { Connection, Network, NeuronType } from "src/main/logic";
+import { RandomUtils } from "src/main/utils";
 
 
 export function mergeNetworks(father:Network, mother:Network, child:Network = new Network()):Network{
@@ -26,7 +27,7 @@ export function mergeNetworks(father:Network, mother:Network, child:Network = ne
 
 export function mergeConnectionInto(father:Connection, mother:Connection, network:Network):void{
   if(father.enabled === mother.enabled){
-    if(Math.random() < 0.5){
+    if(RandomUtils.checkLowerThan(0.5)){
       network.createConnection(father.start.id, father.final.id, father.weight, father.enabled);
     } else {
       network.createConnection(mother.start.id, mother.final.id, mother.weight, mother.enabled);

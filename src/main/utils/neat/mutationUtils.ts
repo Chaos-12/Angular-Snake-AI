@@ -1,4 +1,5 @@
 import { Connection, Network, Neuron, NeuronType } from "src/main/logic";
+import { RandomUtils } from "src/main/utils";
 
 export function mutateAddConnection(network:Network):void{
   //We compute how many neurons are available to connect
@@ -18,7 +19,7 @@ export function mutateAddConnection(network:Network):void{
   if(validNeurons.length === 0){
     return;
   }
-  let startNeuron = validNeurons[Math.floor(Math.random()*validNeurons.length)];
+  let startNeuron = RandomUtils.getRandomFrom(validNeurons);
   //We choose a neuron that can be connected
   validNeurons = new Array<Neuron>();
   network.neuronMap.forEach(neuron => {
@@ -29,9 +30,9 @@ export function mutateAddConnection(network:Network):void{
   if(validNeurons.length === 0){
     return;
   }
-  let finalNeuron = validNeurons[Math.floor(Math.random()*validNeurons.length)];
+  let finalNeuron = RandomUtils.getRandomFrom(validNeurons);
   //We create a new connection with random weight
-  network.createConnection(startNeuron.id, finalNeuron.id, 1-Math.random()*2, true);
+  network.createConnection(startNeuron.id, finalNeuron.id, RandomUtils.getRandom(1,-1), true);
 }
 
 export function mutateAddNeuron(network:Network):void{
@@ -45,7 +46,7 @@ export function mutateAddNeuron(network:Network):void{
   if (validConnections.length === 0){
     return;
   }
-  let connection = validConnections[Math.floor(Math.random()*validConnections.length)];
+  let connection = RandomUtils.getRandomFrom(validConnections);
   let newNeuronId = network.neuronMap.size;
   network.createNeuron(NeuronType.hidden, newNeuronId);
   network.createConnection(connection.start.id, newNeuronId, 1, true);
