@@ -1,4 +1,5 @@
-import { Directions, InputTypes, Network, NeuronType } from "src/main/logic";
+import { Directions, InputTypes, NeuronType } from "src/main/enum";
+import { Network } from "src/main/logic";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('Network'), function(){
@@ -36,7 +37,7 @@ describe(TestUtils.title('Network'), function(){
         }
         network.createConnection(idNewNeuron, outputId);
         network.orderNetwork();
-        expect(network.deepness).toBe(number+1);
+        expect(network.outputNeurons[0].layer).toBe(number+1);
       });
     });
   });

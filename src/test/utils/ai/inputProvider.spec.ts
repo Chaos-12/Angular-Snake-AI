@@ -1,4 +1,6 @@
-import { Board, Directions, InputProvider, Snake } from "src/main/logic";
+import { Directions } from "src/main/enum";
+import { Board, Snake } from "src/main/logic";
+import { InputProvider } from "src/main/utils";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('InputProvider'), function(){

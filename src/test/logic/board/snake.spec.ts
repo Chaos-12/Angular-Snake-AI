@@ -1,4 +1,5 @@
-import { Snake, SnakeDeath } from "src/main/logic"
+import { SnakeDeath } from "src/main/enum";
+import { Snake } from "src/main/logic"
 import { TestUtils } from "src/test/testUtils";
 
 
