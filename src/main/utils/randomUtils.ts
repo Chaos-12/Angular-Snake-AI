@@ -1,4 +1,4 @@
-export class RandomUtils{
+export class RandomUtils {
 
   public static getRandom(maximum:number = 1, minimum:number = 0):number{
     return minimum + Math.random()*(maximum-minimum);

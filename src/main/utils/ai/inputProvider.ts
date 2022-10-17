@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Position, Input } from "src/main/logic";
+import { Direction, Directions } from "src/main/enum";
+import { Board, Position } from "src/main/logic";
+import { Input } from "src/main/dto";
 
 @Injectable()
 export class InputProvider {

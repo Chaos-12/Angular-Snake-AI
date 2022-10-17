@@ -1,5 +1,8 @@
-import { Connection, Neuron, NeuronType, Directions, Input, InputType, Direction } from "src/main/logic";
+import { Input } from "src/main/dto";
+import { Directions, Direction } from "src/main/enum";
+import { Connection, Neuron } from "src/main/logic";
 import { InnovationUtils, MathUtils } from "src/main/utils";
+import { InputType, NeuronType } from "src/main/enum";
 
 export class Network {
 

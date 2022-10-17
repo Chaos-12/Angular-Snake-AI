@@ -1,4 +1,4 @@
-import { Direction, Directions } from "src/main/logic";
+import { Direction, Directions } from "src/main/enum";
 
 export class Position {
 

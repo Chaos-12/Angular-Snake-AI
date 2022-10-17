@@ -1,4 +1,6 @@
-import { Board, Direction, InputProvider, Network, Snake } from "src/main/logic";
+import { Direction } from "src/main/enum";
+import { Board, Network, Snake } from "src/main/logic";
+import { InputProvider } from "src/main/utils";
 
 export class Ai {
 

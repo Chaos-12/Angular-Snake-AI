@@ -1,3 +1,7 @@
+export * from "./ai/inputProvider";
+export * from "./ai/networkBuilder";
+export * from "./board/boardItemGenerator";
+export * from "./board/positionGenerator";
 export * from "./neat/innovationUtils";
 export * from "./neat/mergeUtils";
 export * from "./pubSub/pubSubService";

@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
-import { Direction, DirectionLabels, Neuron } from "src/main/logic";
+import { Direction, DirectionLabels } from "src/main/enum";
+import { Neuron } from "src/main/logic";
 
 
 @Component({

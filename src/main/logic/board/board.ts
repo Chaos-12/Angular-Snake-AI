@@ -1,4 +1,6 @@
-import { BoardItemGenerator, Position, PositionSetList, Snake, SnakeDeath } from "src/main/logic";
+import { SnakeDeath } from "src/main/enum";
+import { Position, PositionSetList, Snake } from "src/main/logic";
+import { BoardItemGenerator } from "src/main/utils";
 
 export class Board {
   public food:Position = new Position(this.width, this.width);

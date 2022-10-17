@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Ai, InputProvider, Tolerances } from 'src/main/logic';
-import { PubSubService, Subject, Subscriber } from "src/main/utils";
+import { Tolerances } from "src/main/dto";
+import { Ai } from 'src/main/logic';
+import { InputProvider, PubSubService, Subject, Subscriber } from "src/main/utils";
 
 @Component({
   selector: 'app-input-list',

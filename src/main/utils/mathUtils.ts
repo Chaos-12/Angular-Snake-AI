@@ -1,4 +1,4 @@
-export class MathUtils{
+export class MathUtils {
 
   public static getOrderedIndexesOf(list:Array<number>):Array<number>{
     if(list.length === 1){

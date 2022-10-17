@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, AppComponent } from 'src/main/app';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/app/modes';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/app/common';
-import { InputProvider, ToleranceManager } from 'src/main/logic';
+import { InputProvider, NetworkBuilder } from 'src/main/utils';
 import { PubSubService } from 'src/main/utils';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { PubSubService } from 'src/main/utils';
     AppRoutingModule
   ],
   providers: [
-    ToleranceManager,
+    NetworkBuilder,
     InputProvider,
     PubSubService,
   ],

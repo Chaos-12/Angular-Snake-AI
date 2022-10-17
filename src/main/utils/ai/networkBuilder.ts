@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Network, Tolerances, Directions } from "src/main/logic";
+import { Tolerances } from "src/main/dto";
+import { Directions } from "src/main/enum";
+import { Network } from "src/main/logic";
 
 @Injectable()
-export class ToleranceManager {
+export class NetworkBuilder {
 
   public buildNetwork(tolerances:Tolerances):Network{
     let newNetwork = new Network();

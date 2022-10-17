@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Ai, InputProvider, ToleranceManager, Tolerances } from 'src/main/logic';
-import { PubSubService, Subject } from 'src/main/utils';
+import { Tolerances } from "src/main/dto";
+import { Ai } from 'src/main/logic';
+import { NetworkBuilder } from 'src/main/utils';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   public tolerances:Tolerances = new Tolerances(0, 0, 0, 0);
 
-  constructor(private iaBuilder:ToleranceManager) { }
+  constructor(private networkBuilder:NetworkBuilder) { }
 
   ngOnInit(): void {
     this.createIa(new Tolerances(100, -100, -100, -100));
@@ -29,7 +30,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   public createIa(tolerances:Tolerances):void{
-    let network = this.iaBuilder.buildNetwork(tolerances);
+    let network = this.networkBuilder.buildNetwork(tolerances);
     this.aiList.push(new Ai(network));
     this.tolList.push(tolerances);
   }

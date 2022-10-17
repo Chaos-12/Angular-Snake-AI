@@ -1,4 +1,5 @@
-import { Board, Direction, OppoisiteDirection, Position, PositionSetList, SnakeDeath } from "src/main/logic";
+import { Direction, OppositeDirection, SnakeDeath } from "src/main/enum";
+import { Position, PositionSetList } from "src/main/logic";
 
 export class Snake {
 
@@ -91,7 +92,7 @@ export class Snake {
   }
 
   private isOppositeDirection(direction:Direction):boolean{
-    return OppoisiteDirection[direction] === this.lastDirection;
+    return OppositeDirection[direction] === this.lastDirection;
   }
 
   public lookTo(direction:Direction):void{
