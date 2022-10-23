@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateComponent, HomeComponent, PlayComponent } from 'src/main/app';
+import { CreateComponent, HomeComponent, PlayComponent } from 'src/main/components';
 
 @Component({
   selector: 'app-selector',

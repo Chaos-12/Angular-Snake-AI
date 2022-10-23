@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule, AppComponent } from 'src/main/app';
-import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/app/modes';
-import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/app/common';
+import { AppRoutingModule, AppComponent } from 'src/main/components';
+import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
+import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { InputProvider, NetworkBuilder } from 'src/main/utils';
 import { PubSubService } from 'src/main/utils';
 

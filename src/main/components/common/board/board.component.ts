@@ -31,7 +31,7 @@ export class BoardComponent implements OnInit, Subscriber{
     this.board.moveSnake();
   }
 
-  public notify(subject:Subject){
+  public notify(subject:Subject):void{
     switch(subject){
       case Subject.next:
         this.nextStep();
