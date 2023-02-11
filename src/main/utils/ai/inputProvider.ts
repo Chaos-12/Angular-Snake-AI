@@ -2,13 +2,17 @@ import { Injectable } from "@angular/core";
 import { Direction, Directions } from "src/main/enum";
 import { Board, Position } from "src/main/logic";
 import { Input } from "src/main/dto";
+import { DistanceCalculator, MathUtils } from "src/main/utils";
+import { BoardCondition } from "src/main/interface";
 
 @Injectable()
 export class InputProvider {
 
-  public readonly bodyCondition = (board:Board, position:Position) => board.snake.contains(position);
-  public readonly wallContidion = (board:Board, position:Position) => !board.contains(position);
-  public readonly rockCondition = (board:Board, position:Position) => board.rocks.contains(position);
+  private readonly bodyCondition:BoardCondition = (position:Position, board:Board) => board.snake.contains(position);
+  private readonly wallContidion:BoardCondition = (position:Position, board:Board) => !board.contains(position);
+  private readonly rockCondition:BoardCondition = (position:Position, board:Board) => board.rocks.contains(position);
+
+  constructor(private distanceCalculator:DistanceCalculator){ }
 
   public getInputFrom(board:Board):Input{
     return this.getRegularInputFrom(board);
@@ -23,15 +27,15 @@ export class InputProvider {
   }
 
   private getRegularInputFrom(board:Board):Input{
-    let foodInput = this.getDistancesToFood(board).map(distance => this.invertValue(distance, board.width));
+    let foodInput = this.getDistancesToFood(board).map(distance => MathUtils.invertValue(distance, board.width));
     let bodyInput = this.getRegularInput(board, this.bodyCondition);
     let wallInput = this.getRegularInput(board, this.wallContidion);
     let rockInput = this.getRegularInput(board, this.rockCondition);
     return new Input(foodInput, bodyInput, rockInput, wallInput);
   }
 
-  public checkConditionNearHead(board:Board, condition:(board:Board, position:Position)=>Boolean):Array<number>{
-    return Directions.map(direction => condition(board, board.snake.head.forward(direction)) ? 1 : 0);
+  public checkConditionNearHead(board:Board, condition:BoardCondition):Array<number>{
+    return Directions.map(direction => condition(board.snake.head.forward(direction), board) ? 1 : 0);
   }
 
   public getDistancesToFood(board:Board):Array<number>{
@@ -44,27 +48,6 @@ export class InputProvider {
     return distances;
   }
 
-  public getDistancesUntilCondition(board:Board, condition:(board:Board, position:Position)=>Boolean):Array<number>{
-    let distances = new Array<number>(Directions.length);
-    for(let dir of Directions){
-      let searching = true;
-      let distance = 0;
-      let position = board.snake.head;
-      while(searching){
-        distance ++;
-        position = position.forward(dir);
-        if(condition(board, position)){
-          searching = false;
-          distances[dir] = distance;
-        } else if(!board.contains(position)){
-          searching = false;
-          distances[dir] = 0;
-        }
-      }
-    }
-    return distances;
-  }
-
   public getBinaryInputFood(board:Board):Array<number>{
     let inputs = new Array<number>(4);
     inputs[Direction.east] = board.snake.head.x < board.food.x ? 1 : 0;
@@ -74,16 +57,12 @@ export class InputProvider {
     return inputs;
   }
 
-  private invertValue(value:number, maximum:number):number{
-    return value > 0 ? 1-(value/maximum) : 0;
-  }
-
   public getRegularInputFood(board:Board):Array<number>{
-    return this.getDistancesToFood(board).map(distance => this.invertValue(distance, board.width));
+    return this.getDistancesToFood(board).map(distance => MathUtils.invertValue(distance, board.width));
   }
 
-  public getRegularInput(board:Board, condition:(board:Board, position:Position)=>Boolean):Array<number>{
-    return this.getDistancesUntilCondition(board, condition).map(distance => this.invertValue(distance, board.width));
+  public getRegularInput(board:Board, condition:BoardCondition):Array<number>{
+    return this.distanceCalculator.getDistancesUntilCondition(board.snake.head, board, condition).map(distance => MathUtils.invertValue(distance, board.width));
   }
 
 }

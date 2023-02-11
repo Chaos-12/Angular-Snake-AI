@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, AppComponent } from 'src/main/components';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
-import { InputProvider, NetworkBuilder } from 'src/main/utils';
+import { DistanceCalculator, InputProvider, NetworkBuilder } from 'src/main/utils';
 import { PubSubService } from 'src/main/utils';
 
 @NgModule({
@@ -28,6 +28,7 @@ import { PubSubService } from 'src/main/utils';
   providers: [
     NetworkBuilder,
     InputProvider,
+    DistanceCalculator,
     PubSubService,
   ],
   bootstrap: [AppComponent]

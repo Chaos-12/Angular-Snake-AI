@@ -1,7 +1,7 @@
 import { Input } from "src/main/dto";
 import { Directions, Direction } from "src/main/enum";
 import { Connection, Neuron } from "src/main/logic";
-import { InnovationUtils, MathUtils } from "src/main/utils";
+import { ArrayUtils, InnovationUtils } from "src/main/utils";
 import { InputType, NeuronType } from "src/main/enum";
 
 export class Network {
@@ -130,7 +130,7 @@ export class Network {
     for(let dir of Directions){
       output[dir] = this.outputNeurons[dir].weight;
     }
-    return MathUtils.getOrderedIndexesOf(output);
+    return ArrayUtils.getOrderedIndexesOf(output);
   }
 
   public orderNetwork():void{
