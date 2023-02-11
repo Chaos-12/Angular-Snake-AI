@@ -40,9 +40,9 @@ export class InputProvider {
 
   public getDistancesToFood(board:Board):Array<number>{
     let distances = new Array<number>(4);
-    distances[Direction.east] = board.food.x - board.snake.head.x;
+    distances[Direction.east] = board.food.position.x - board.snake.head.x;
     distances[Direction.west] = -distances[Direction.east];
-    distances[Direction.south] = board.food.y - board.snake.head.y;
+    distances[Direction.south] = board.food.position.y - board.snake.head.y;
     distances[Direction.north] = -distances[Direction.south];
     distances.map( value => value > 0 ? value : 0 );
     return distances;
@@ -50,10 +50,10 @@ export class InputProvider {
 
   public getBinaryInputFood(board:Board):Array<number>{
     let inputs = new Array<number>(4);
-    inputs[Direction.east] = board.snake.head.x < board.food.x ? 1 : 0;
-    inputs[Direction.west] = board.snake.head.x > board.food.x ? 1 : 0;
-    inputs[Direction.south] = board.snake.head.y < board.food.y ? 1 : 0;
-    inputs[Direction.north] = board.snake.head.y > board.food.y ? 1 : 0;
+    inputs[Direction.east] = board.snake.head.x < board.food.position.x ? 1 : 0;
+    inputs[Direction.west] = board.snake.head.x > board.food.position.x ? 1 : 0;
+    inputs[Direction.south] = board.snake.head.y < board.food.position.y ? 1 : 0;
+    inputs[Direction.north] = board.snake.head.y > board.food.position.y ? 1 : 0;
     return inputs;
   }
 

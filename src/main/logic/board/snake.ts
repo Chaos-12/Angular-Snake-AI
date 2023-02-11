@@ -3,8 +3,8 @@ import { Position, PositionSetList } from "src/main/logic";
 
 export class Snake {
 
-  private static readonly foodEnergy:number = 100;
-  public energy:number = Snake.foodEnergy;
+  private static readonly initialEnergy:number = 100;
+  public energy:number = Snake.initialEnergy;
 
   private successfulSteps:number = 0;
   get nSteps():number{
@@ -28,21 +28,21 @@ export class Snake {
     return this.nextDirection;
   }
 
+  private death:SnakeDeath = SnakeDeath.none;
+  get isAlive():boolean{
+    return SnakeDeath.none === this.death;
+  }
+  get deathReason():string{
+    if (this.isAlive) {
+      return '';
+    }
+    return this.death.toString();
+  }
+
   public head:Position = new Position(1,1);
   public body:PositionSetList = new PositionSetList();
   get length():number{
     return this.body.length+1;
-  }
-
-  private death:SnakeDeath|undefined = undefined;
-  get isAlive():boolean{
-    return this.death === undefined;
-  }
-  get deathReason():string{
-    if (this.death === undefined) {
-      return '';
-    }
-    return this.death.toString();
   }
 
   constructor(length:number = 3){
@@ -50,10 +50,10 @@ export class Snake {
   }
 
   public reset(length:number = 3):void{
-    this.death = undefined;
+    this.death = SnakeDeath.none;
     this.successfulSteps = 0;
     this.nFoodEaten = 0;
-    this.energy = Snake.foodEnergy;
+    this.energy = Snake.initialEnergy;
     this.lastDirection = Direction.east;
     this.nextDirection = Direction.east;
     this.head = new Position(length,1);
@@ -72,7 +72,7 @@ export class Snake {
     this.lastDirection = this.nextDirection;
     if(eating){
       this.nFoodEaten ++;
-      this.energy = Snake.foodEnergy;
+      this.energy = Snake.initialEnergy;
     } else {
       this.body.removeFirst();
       this.energy --;

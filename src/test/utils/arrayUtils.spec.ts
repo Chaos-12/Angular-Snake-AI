@@ -1,7 +1,7 @@
-import { MathUtils } from "src/main/utils";
+import { ArrayUtils } from "src/main/utils";
 import { TestUtils } from "src/test/testUtils";
 
-describe(TestUtils.title('MathUtils'), function(){
+describe(TestUtils.title('ArrayUtils'), function(){
 
   describe('Function orderArray', function(){
 
@@ -17,7 +17,7 @@ describe(TestUtils.title('MathUtils'), function(){
 
     examples.forEach( example => {
       it(`[${example.list.join(', ')}]`, function(){
-        let output = MathUtils.getOrderedIndexesOf(example.list);
+        let output = ArrayUtils.getOrderedIndexesOf(example.list);
         for(let i=0; i<output.length; i++){
           expect(output[i]).toBe(example.expected[i]);
         }

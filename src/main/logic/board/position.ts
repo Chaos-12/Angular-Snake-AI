@@ -4,8 +4,8 @@ export class Position {
 
   constructor(public x:number, public y:number){ }
 
-  public equals(position:Position):boolean{
-    if(this.x === position.x && this.y === position.y){
+  public equals(other:Position):boolean{
+    if(this.x === other.x && this.y === other.y){
       return true;
     }
     return false;

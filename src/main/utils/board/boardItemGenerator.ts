@@ -1,9 +1,10 @@
+import { Food } from "src/main/entity";
 import { Position, Board } from "src/main/logic";
 import { PositionGenerator } from "src/main/utils";
 
 export class BoardItemGenerator {
 
-  public static generateRandomFood(board:Board):void{
+  public static generateRandomFood(board:Board):Food{
     let foodPositions = new PositionGenerator();
     foodPositions.addException(board.snake.head);
     board.snake.body.forEach(part => {
@@ -13,12 +14,12 @@ export class BoardItemGenerator {
       foodPositions.addException(rock);
     });
     foodPositions.generateValidPositions(1,board.width,1,board.width);
-    board.food = foodPositions.getRandom();
+    return new Food(foodPositions.getRandom());
   }
 
   public static generateRandomRock(board:Board):void{
     let rockPositions = new PositionGenerator();
-    rockPositions.addException(board.food);
+    rockPositions.addException(board.food.position);
     board.snake.head.neighborhood().forEach(position => {
       rockPositions.addException(position);
     });

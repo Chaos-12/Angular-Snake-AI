@@ -1,7 +1,7 @@
 <output class="board square">
   <div class="snake snake-head row{{board.snake.head.y}} column{{board.snake.head.x}} rotate{{90*board.snake.direction}}"></div>
   <div *ngFor="let part of board.snake.body.list" class="snake snake-body row{{part.y}} column{{part.x}}"></div>
-  <div class="food row{{board.food.y}} column{{board.food.x}}"></div>
+  <div class="food row{{board.food.position.y}} column{{board.food.position.x}}"></div>
   <div *ngFor="let rock of board.rocks.list" class="rock row{{rock.y}} column{{rock.x}}"></div>
   <div class="energy-bar"></div>
   <output class="extended blur stats" *ngIf="!board.snake.isAlive">

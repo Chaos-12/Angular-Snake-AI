@@ -1,13 +1,15 @@
+import { Food } from "src/main/entity";
 import { SnakeDeath } from "src/main/enum";
 import { Position, PositionSetList, Snake } from "src/main/logic";
 import { BoardItemGenerator } from "src/main/utils";
 
 export class Board {
-  public food:Position = new Position(this.width, this.width);
+
+  public food:Food;
   public rocks:PositionSetList = new PositionSetList();
 
   constructor(public snake:Snake, public width:number=11){
-    BoardItemGenerator.generateRandomFood(this);
+    this.food = BoardItemGenerator.generateRandomFood(this);
   }
 
   public reset(){
@@ -34,9 +36,9 @@ export class Board {
     if(this.snake.contains(newPosition)){
       this.snake.kill(SnakeDeath.bite);
     }
-    if(this.food.equals(newPosition)){
+    if(this.food.isInPosition(newPosition)){
       this.snake.move(true);
-      BoardItemGenerator.generateRandomFood(this);
+      this.food = BoardItemGenerator.generateRandomFood(this);
       BoardItemGenerator.generateRandomRock(this);
     } else {
       this.snake.move(false);
