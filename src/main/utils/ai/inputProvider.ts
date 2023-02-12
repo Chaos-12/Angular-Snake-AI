@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Board, Direction, Directions, Input } from "src/main/entity";
 import { DistanceCalculator, MathUtils } from "src/main/utils";
-import { BoardCondition } from "src/main/interface";
+import { BiPredicate } from "src/main/interface";
 import { Position } from "src/main/entity";
 
 @Injectable()
 export class InputProvider {
 
-  private readonly bodyCondition:BoardCondition = (position:Position, board:Board) => board.snake.contains(position);
-  private readonly wallContidion:BoardCondition = (position:Position, board:Board) => !board.contains(position);
-  private readonly rockCondition:BoardCondition = (position:Position, board:Board) => board.rocks.contains(position);
+  private readonly bodyCondition:BiPredicate<Position,Board> = (position:Position, board:Board) => board.snake.contains(position);
+  private readonly wallContidion:BiPredicate<Position,Board> = (position:Position, board:Board) => !board.contains(position);
+  private readonly rockCondition:BiPredicate<Position,Board> = (position:Position, board:Board) => board.rocks.contains(position);
 
   constructor(private distanceCalculator:DistanceCalculator){ }
 
@@ -33,7 +33,7 @@ export class InputProvider {
     return new Input(foodInput, bodyInput, rockInput, wallInput);
   }
 
-  public checkConditionNearHead(board:Board, condition:BoardCondition):Array<number>{
+  public checkConditionNearHead(board:Board, condition:BiPredicate<Position, Board>):Array<number>{
     return Directions.map(direction => condition(board.snake.head.forward(direction), board) ? 1 : 0);
   }
 
@@ -60,7 +60,7 @@ export class InputProvider {
     return this.getDistancesToFood(board).map(distance => MathUtils.invertValue(distance, board.width));
   }
 
-  public getRegularInput(board:Board, condition:BoardCondition):Array<number>{
+  public getRegularInput(board:Board, condition:BiPredicate<Position, Board>):Array<number>{
     return this.distanceCalculator.getDistancesUntilCondition(board.snake.head, board, condition).map(distance => MathUtils.invertValue(distance, board.width));
   }
 

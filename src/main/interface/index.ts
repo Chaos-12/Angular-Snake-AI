@@ -1,1 +1,2 @@
-export * from "./boardCondition";
+export * from "./biPredicate";
+export * from "./predicate";

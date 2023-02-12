@@ -7,8 +7,8 @@ import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { DistanceCalculator, InputProvider, NetworkBuilder } from 'src/main/utils';
 import { PubSubService } from 'src/main/utils';
-import { SnakeLogic } from 'src/main/logic';
-import { SnakeLogicImpl } from 'src/main/logicImpl';
+import { BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
+import { BoardLogic, SnakeLogic } from '../logic';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,9 @@ import { SnakeLogicImpl } from 'src/main/logicImpl';
     InputProvider,
     DistanceCalculator,
     PubSubService,
+    BoardLogicImpl,
+    {provide: BoardLogic, useExisting: BoardLogicImpl},
+    SnakeLogicImpl,
     {provide: SnakeLogic, useExisting: SnakeLogicImpl}
   ],
   bootstrap: [AppComponent]

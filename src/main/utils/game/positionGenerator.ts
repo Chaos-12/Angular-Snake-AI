@@ -1,10 +1,11 @@
 import { Position, PositionSetList } from "src/main/entity";
+import { Predicate } from "src/main/interface";
 import { RandomUtils } from "src/main/utils";
 
 export class PositionGenerator {
 
   private exceptionMap:PositionSetList = new PositionSetList();
-  public validPositions:Array<Position> = new Array<Position>();
+  private validPositions:Array<Position> = new Array<Position>();
 
   constructor() { }
 
@@ -16,7 +17,7 @@ export class PositionGenerator {
     return !this.exceptionMap.contains(position);
   }
 
-  public generateValidPositions(minX:number, maxX:number, minY:number, maxY:number, filter:(position:Position) => boolean = (position:Position) => true):void{
+  public generateValidPositions(minX:number, maxX:number, minY:number, maxY:number, filter:Predicate<Position> = (position:Position) => true):void{
     this.validPositions = new Array<Position>();
     for(let x=minX; x<=maxX; x++){
       for(let y=minY; y<=maxY; y++){

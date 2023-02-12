@@ -1,11 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Board, Snake, SnakeDeath } from "src/main/entity";
-import { SnakeLogic } from "src/main/logic";
+import { Board, Food, Snake, SnakeDeath } from "src/main/entity";
+import { BoardLogic, SnakeLogic } from "src/main/logic";
+import { PositionGenerator } from "src/main/utils";
+import { SnakeLogicImpl } from "./snakeLogicImpl";
 
 @Injectable()
-export class boardLogicImpl {
+export class BoardLogicImpl extends BoardLogic {
 
-  constructor(private snakeLogic:SnakeLogic){ }
+  constructor(private snakeLogic:SnakeLogicImpl){
+    super();
+  }
 
   public buildBoard():Board{
     let snake = this.snakeLogic.buildSnake();
@@ -39,10 +43,21 @@ export class boardLogicImpl {
   }
 
   public generateFoodFor(board:Board):void{
-
+    let foodPositions = new PositionGenerator();
+    this.addExceptions(foodPositions, board);
+    foodPositions.generateValidPositions(1, board.width, 1, board.width);
+    let newFood = new Food(foodPositions.getRandom());
+    board.food = newFood;
   }
 
   public generateRockFor(board:Board):void{
+    let rockPositions = new PositionGenerator();
+    this.addExceptions(rockPositions, board);
+    rockPositions.generateValidPositions(1, board.width, 1, board.width);
+    board.rocks.add(rockPositions.getRandom());
+  }
+
+  private addExceptions(positionGenerator:PositionGenerator, board:Board):void{
 
   }
 }

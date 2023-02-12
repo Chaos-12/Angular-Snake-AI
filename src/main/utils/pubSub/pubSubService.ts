@@ -16,7 +16,7 @@ export class PubSubService {
 
   public subscribe(subscriber:Subscriber, subject:Subject):CallableFunction{
     let subscribers = this.interestMap.get(subject);
-    if (subscribers === undefined || subscribers === null){
+    if (!subscribers){
       subscribers = new Set<Subscriber>();
     }
     subscribers.add(subscriber);

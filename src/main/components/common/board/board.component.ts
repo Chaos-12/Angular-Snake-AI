@@ -1,5 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
 import { Board } from "src/main/entity";
+import { BoardLogic } from "src/main/logic";
+import { BoardLogicImpl } from "src/main/logicImpl";
 import { PubSubService, Subject, Subscriber } from "src/main/utils";
 
 
@@ -8,36 +10,31 @@ import { PubSubService, Subject, Subscriber } from "src/main/utils";
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit, Subscriber{
+export class BoardComponent implements OnInit, Subscriber {
 
   @Input()
   public board!:Board;
-
-  @Input()
-  public allowedCheats:boolean = false;
 
   @HostBinding('style.--snake-energy')
   public get snakeEnergy(){
     return `${this.board.snake.energy}%`;
   }
 
-  constructor(private pubSub:PubSubService){ }
+  constructor(
+    private boardLogic:BoardLogic,
+    private pubSub:PubSubService){ }
 
   ngOnInit():void{
     this.pubSub.subscribe(this, Subject.animation);
   }
 
-  private nextStep():void{
-    this.board.moveSnake();
-  }
-
-  public notify(subject:Subject):void{
-    switch(subject){
+  public notify(message:Subject):void{
+    switch(message){
       case Subject.next:
-        this.nextStep();
+        this.boardLogic.moveSnakeInside(this.board, this.board.snake);
         break;
       case Subject.reset:
-        this.board.reset();
+        this.boardLogic.resetBoard(this.board);
         break;
     }
   }

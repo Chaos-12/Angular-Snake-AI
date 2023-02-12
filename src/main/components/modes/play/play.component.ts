@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Board, Direction, Snake } from 'src/main/entity';
+import { BoardLogic, SnakeLogic } from 'src/main/logic';
+import { BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
 
 @Component({
   selector: 'app-play',
@@ -20,9 +22,12 @@ export class PlayComponent implements OnInit, OnDestroy {
   public board:Board;
   public snake:Snake;
 
-  constructor() {
-    this.snake = new Snake();
-    this.board = new Board(this.snake);
+  constructor(
+    private boardLogic:BoardLogicImpl,
+    private snakeLogic:SnakeLogicImpl
+  ) {
+    this.board = this.boardLogic.buildBoard();
+    this.snake = this.board.snake;
   }
 
   ngOnInit():void{
@@ -51,7 +56,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public changeSnakeDirection(direction:Direction):void{
-    this.snake.lookTo(direction);
+    this.snakeLogic.directSnake(this.snake, direction);
   }
 
   public startAnimation():void{
@@ -65,7 +70,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 
   public reset():void{
     this.pauseAnimation();
-    this.board.reset();
+    this.boardLogic.resetBoard(this.board);
   }
 
   public nextAnimation(currentTime:any):void{
@@ -85,6 +90,6 @@ export class PlayComponent implements OnInit, OnDestroy {
   }
 
   public moveSnake():void{
-    this.board.moveSnake();
+    this.boardLogic.moveSnakeInside(this.board, this.snake);
   }
 }

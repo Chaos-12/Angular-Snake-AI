@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Board, Directions, Position } from "src/main/entity";
-import { BoardCondition } from "src/main/interface";
+import { BiPredicate } from "src/main/interface";
 
 @Injectable()
 export class DistanceCalculator {
 
-  public getDistancesUntilCondition(startPosition:Position, board:Board, condition:BoardCondition):Array<number>{
+  public getDistancesUntilCondition(startPosition:Position, board:Board, condition:BiPredicate<Position,Board>):Array<number>{
     let distances = new Array<number>(Directions.length);
     for(let dir of Directions){
       let searching = true;
