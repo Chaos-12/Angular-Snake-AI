@@ -1,5 +1,5 @@
 import { Directions, InputTypes, NeuronType } from "src/main/enum";
-import { Network } from "src/main/logic";
+import { Network } from "src/main/logicImpl";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('Network'), function(){

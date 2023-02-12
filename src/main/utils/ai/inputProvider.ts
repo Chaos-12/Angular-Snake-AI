@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Direction, Directions } from "src/main/enum";
-import { Board, Position } from "src/main/logic";
-import { Input } from "src/main/dto";
+import { Board, Direction, Directions, Input } from "src/main/entity";
 import { DistanceCalculator, MathUtils } from "src/main/utils";
 import { BoardCondition } from "src/main/interface";
+import { Position } from "src/main/entity";
 
 @Injectable()
 export class InputProvider {

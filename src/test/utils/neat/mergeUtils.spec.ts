@@ -1,5 +1,5 @@
 import { NeuronType } from "src/main/enum";
-import { Connection, Network } from "src/main/logic";
+import { Connection, Network } from "src/main/logicImpl";
 import { InnovationUtils, mergeConnectionInto, mergeNetworks } from "src/main/utils";
 import { TestUtils } from "src/test/testUtils";
 

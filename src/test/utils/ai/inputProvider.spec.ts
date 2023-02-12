@@ -1,5 +1,5 @@
 import { Directions } from "src/main/enum";
-import { Board, Snake } from "src/main/logic";
+import { Board, Snake } from "src/main/logicImpl";
 import { InputProvider } from "src/main/utils";
 import { TestUtils } from "src/test/testUtils";
 

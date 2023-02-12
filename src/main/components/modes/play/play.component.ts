@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Direction } from 'src/main/enum';
-import { Board, Snake } from 'src/main/logic';
+import { Board, Direction, Snake } from 'src/main/entity';
 
 @Component({
   selector: 'app-play',

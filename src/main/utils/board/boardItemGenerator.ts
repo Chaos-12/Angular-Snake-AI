@@ -1,5 +1,4 @@
-import { Food } from "src/main/entity";
-import { Position, Board } from "src/main/logic";
+import { Board, Food, Position } from "src/main/entity";
 import { PositionGenerator } from "src/main/utils";
 
 export class BoardItemGenerator {

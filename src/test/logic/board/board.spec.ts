@@ -1,5 +1,5 @@
 import { SnakeDeath } from "src/main/enum";
-import { Board, Snake } from "src/main/logic"
+import { Board, Snake } from "src/main/logicImpl"
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('Board'), function(){

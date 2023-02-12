@@ -1,5 +1,5 @@
 import { SnakeDeath } from "src/main/enum";
-import { Snake } from "src/main/logic"
+import { Snake } from "src/main/logicImpl"
 import { TestUtils } from "src/test/testUtils";
 
 

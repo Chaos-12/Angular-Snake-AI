@@ -1,4 +1,4 @@
-import { Position, PositionSetList } from "src/main/logic";
+import { Position, PositionSetList } from "src/main/entity";
 import { RandomUtils } from "src/main/utils";
 
 export class PositionGenerator {

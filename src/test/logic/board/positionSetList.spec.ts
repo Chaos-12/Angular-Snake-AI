@@ -1,4 +1,4 @@
-import { Position, PositionSetList } from "src/main/logic";
+import { Position, PositionSetList } from "src/main/logicImpl";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('PositionSetList'), function(){

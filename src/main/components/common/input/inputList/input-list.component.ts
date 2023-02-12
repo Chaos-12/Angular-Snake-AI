@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Tolerances } from "src/main/dto";
-import { Ai } from 'src/main/logic';
+import { Ai, Tolerances } from "src/main/entity";
 import { InputProvider, PubSubService, Subject, Subscriber } from "src/main/utils";
 
 @Component({

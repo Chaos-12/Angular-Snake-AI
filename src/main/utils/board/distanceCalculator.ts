@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Directions } from "src/main/enum";
+import { Board, Directions, Position } from "src/main/entity";
 import { BoardCondition } from "src/main/interface";
-import { Board, Position } from "src/main/logic";
 
 @Injectable()
 export class DistanceCalculator {

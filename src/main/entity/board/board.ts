@@ -1,6 +1,4 @@
-import { Food } from "src/main/entity";
-import { SnakeDeath } from "src/main/enum";
-import { Position, PositionSetList, Snake } from "src/main/logic";
+import { Food, Position, PositionSetList, Snake, SnakeDeath } from "src/main/entity";
 import { BoardItemGenerator } from "src/main/utils";
 
 export class Board {

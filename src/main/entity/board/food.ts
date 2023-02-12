@@ -1,4 +1,4 @@
-import { Position } from "src/main/logic";
+import { Position } from "src/main/entity";
 
 export class Food {
   constructor(

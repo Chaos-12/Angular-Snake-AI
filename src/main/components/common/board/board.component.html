@@ -6,8 +6,8 @@
   <div class="energy-bar"></div>
   <output class="extended blur stats" *ngIf="!board.snake.isAlive">
     <p class="text-big bold">Death by {{board.snake.deathReason}}</p>
-    <p class="text-small">nº steps: {{board.snake.nSteps}}</p>
-    <p class="text-small">nº foods: {{board.snake.nFood}}</p>
+    <p class="text-small">nº steps: {{board.snake.nStepTaken}}</p>
+    <p class="text-small">nº foods: {{board.snake.nFoodEaten}}</p>
     <p class="text-medium bold">SCORE: {{board.snake.score}}</p>
   </output>
 </output>
