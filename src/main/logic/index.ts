@@ -1,2 +1,2 @@
-export * from "./game";
-export * from "./robot";
+export * from "./game"
+export * from "./robot"

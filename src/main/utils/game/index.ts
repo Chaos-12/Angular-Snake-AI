@@ -1,2 +1,2 @@
-export * from "./distanceCalculator";
-export * from "./positionGenerator";
+export * from "./distanceCalculator"
+export * from "./positionGenerator"

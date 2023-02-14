@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Robot, Tolerances } from "src/main/entity";
-import { InputProvider, PubSubService, Subject, Subscriber } from "src/main/utils";
 
 @Component({
   selector: 'app-input-list',

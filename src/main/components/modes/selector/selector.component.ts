@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateComponent, HomeComponent, PlayComponent } from 'src/main/components';
+import { CreateComponent, HomeComponent, PlayComponent } from 'src/main/components/modes';
 
 @Component({
   selector: 'app-selector',

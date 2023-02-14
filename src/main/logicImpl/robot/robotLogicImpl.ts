@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Robot, Tolerances } from "src/main/entity";
 import { BoardLogic, RobotLogic, SnakeLogic } from "src/main/logic";
-import { IdService, InputProvider, NetworkBuilder } from "src/main/utils";
+import { IdService } from "src/main/services";
+import { InputProvider, NetworkBuilder } from "src/main/utils";
 
 @Injectable()
 export class RobotLogicImpl extends RobotLogic {

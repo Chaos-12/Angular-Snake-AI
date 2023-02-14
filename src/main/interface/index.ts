@@ -1,2 +1,2 @@
-export * from "./biPredicate";
-export * from "./predicate";
+export * from "./biPredicate"
+export * from "./predicate"

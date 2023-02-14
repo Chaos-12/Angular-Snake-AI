@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { PubSubService, Subject } from "src/main/utils";
+import { PubSubService, Subject } from "src/main/services";
 
 @Component({
   selector: 'app-animation',

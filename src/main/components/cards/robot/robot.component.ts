@@ -1,7 +1,7 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Robot, Tolerances } from "src/main/entity";
 import { RobotLogic, BoardLogic } from "src/main/logic";
-import { PubSubService, Subject, Subscriber } from "src/main/utils";
+import { PubSubService, Subject, Subscriber } from "src/main/services";
 import { CountDownUtil } from "src/main/utils";
 
 @Component({

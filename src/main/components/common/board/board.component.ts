@@ -1,8 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
 import { Board } from "src/main/entity";
 import { BoardLogic } from "src/main/logic";
-import { BoardLogicImpl } from "src/main/logicImpl";
-import { PubSubService, Subject, Subscriber } from "src/main/utils";
+import { PubSubService, Subject, Subscriber } from "src/main/services";
 
 
 @Component({

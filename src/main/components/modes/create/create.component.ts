@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Robot, Tolerances } from "src/main/entity";
 import { RobotLogic } from 'src/main/logic';
-import { NetworkBuilder, PubSubService, Subject, Subscriber } from 'src/main/utils';
-import { IdService } from 'src/main/utils/idService';
+import { IdService, PubSubService, Subject, Subscriber } from 'src/main/services';
 
 
 @Component({

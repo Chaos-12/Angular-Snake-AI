@@ -1,1 +1,1 @@
-export * from "./robot/robot.component";
+export * from "./robot/robot.component"

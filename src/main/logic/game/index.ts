@@ -1,2 +1,2 @@
-export * from "./snakeLogic";
-export * from "./boardLogic";
+export * from "./snakeLogic"
+export * from "./boardLogic"

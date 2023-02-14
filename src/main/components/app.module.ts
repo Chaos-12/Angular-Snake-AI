@@ -3,13 +3,13 @@ import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent } from 'src/main/components';
-import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
+import { RobotComponent } from 'src/main/components/cards';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
+import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { DistanceCalculator, InputProvider, NetworkBuilder } from 'src/main/utils';
-import { IdService, PubSubService } from 'src/main/utils';
-import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
+import { IdService, PubSubService } from 'src/main/services';
 import { RobotLogic, BoardLogic, SnakeLogic } from 'src/main/logic';
-import { RobotComponent } from './cards';
+import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
 
 @NgModule({
   declarations: [

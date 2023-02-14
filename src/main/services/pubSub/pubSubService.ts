@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subscriber, Subject } from "src/main/utils";
+import { Subscriber, Subject } from "src/main/services";
 
 @Injectable()
 export class PubSubService {
