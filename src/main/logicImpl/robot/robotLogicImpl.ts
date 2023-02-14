@@ -1,32 +1,40 @@
 import { Injectable } from "@angular/core";
-import { Robot, Direction } from "src/main/entity";
-import { RobotLogic } from "src/main/logic/robot";
-import { SnakeLogic } from "src/main/logic/game";
-import { InputProvider } from "src/main/utils";
+import { Robot, Tolerances } from "src/main/entity";
+import { BoardLogic, RobotLogic, SnakeLogic } from "src/main/logic";
+import { IdService, InputProvider, NetworkBuilder } from "src/main/utils";
 
 @Injectable()
 export class RobotLogicImpl extends RobotLogic {
 
   constructor(
     private inputProvider:InputProvider,
-    private snakeLogic:SnakeLogic
+    private networkBuilder:NetworkBuilder,
+    private snakeLogic:SnakeLogic,
+    private boardLogic:BoardLogic,
+    private idService:IdService
   ){
     super()
   }
 
-  public makeAiDecide(ai:Robot):void {
-    let input = this.inputProvider.getInputFrom(ai.board);
-    ai.network.propagateInput(input);
-    let output = ai.network.obtainOutput();
-    let validOutputs = this.removeInvalidOutput(output);
-    if(validOutputs.length){
-      this.snakeLogic.directSnake(ai.board.snake, validOutputs[0]);
+  public buildRobot(tolerances: Tolerances): Robot {
+    let network = this.networkBuilder.buildNetwork(tolerances);
+    let robotId = this.idService.generateId();
+    let board = this.boardLogic.buildBoard();
+    let robot = new Robot(robotId, network, board, board.snake);
+    return robot;
+  }
+
+  public makeRobotDecide(robot:Robot):void {
+    let input = this.inputProvider.getInputFrom(robot.board);
+    robot.network.propagateInput(input);
+    let outputs = robot.network.obtainOutput();
+    for (let direction of outputs){
+      let newPosition = robot.snake.head.forward(direction);
+      if(!robot.board.hasObstacleIn(newPosition)){
+        this.snakeLogic.directSnake(robot.board.snake, direction);
+        return;
+      }
     }
   }
 
-  private removeInvalidOutput(output:Array<Direction>):Array<Direction>{
-    let validDirections = new Array<Direction>();
-
-    return validDirections;
-  }
 }

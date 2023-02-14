@@ -16,7 +16,7 @@ export class CountDownUtil {
   public nextStep() : void {
     this.count --;
     if(this.isOver){
-      this.alarm.call;
+      this.alarm();
     }
   }
 }

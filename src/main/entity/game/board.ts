@@ -1,20 +1,13 @@
-import { Food, Position, PositionSetList, Snake, SnakeDeath } from "src/main/entity";
-import { BoardItemGenerator } from "src/main/utils";
+import { Food, Position, PositionSetList, Snake } from "src/main/entity";
 
 export class Board {
 
-  public food:Food;
   public rocks:PositionSetList = new PositionSetList();
 
-  constructor(public snake:Snake, public width:number=11){
-    this.food = BoardItemGenerator.generateRandomFood(this);
-  }
-
-  public reset(){
-    this.snake.reset();
-    BoardItemGenerator.generateRandomFood(this);
-    this.rocks.removeAll();
-  }
+  constructor(
+    public snake:Snake,
+    public food:Food,
+    public width:number=11){ }
 
   public contains(position:Position):boolean{
     if(1<=position.x && position.x<=this.width && 1<=position.y && position.y<=this.width){
@@ -23,23 +16,16 @@ export class Board {
     return false;
   }
 
-  public moveSnake():void{
-    let newPosition = this.snake.head.forward(this.snake.direction);
-    if(!this.contains(newPosition)){
-      this.snake.kill(SnakeDeath.wall);
+  public hasObstacleIn(position:Position):boolean{
+    if(!this.contains(position)){
+      return true;
     }
-    if(this.rocks.contains(newPosition)){
-      this.snake.kill(SnakeDeath.rock);
+    if(this.rocks.contains(position)){
+      return true;
     }
-    if(this.snake.contains(newPosition)){
-      this.snake.kill(SnakeDeath.bite);
+    if(this.snake.contains(position)){
+      return true;
     }
-    if(this.food.isInPosition(newPosition)){
-      this.snake.move(true);
-      this.food = BoardItemGenerator.generateRandomFood(this);
-      BoardItemGenerator.generateRandomRock(this);
-    } else {
-      this.snake.move(false);
-    }
+    return false;
   }
 }

@@ -40,7 +40,7 @@ import { RobotComponent } from './cards';
     SnakeLogicImpl,
     {provide: SnakeLogic, useExisting: SnakeLogicImpl},
     RobotLogicImpl,
-    {provide: RobotLogic, useExisting: RobotLogicImpl}
+    {provide: RobotLogic, useExisting: RobotLogicImpl},
   ],
   bootstrap: [AppComponent]
 })

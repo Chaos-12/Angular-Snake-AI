@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from "@angular/core";
 import { Robot, Tolerances } from "src/main/entity";
 import { RobotLogic, BoardLogic } from "src/main/logic";
 import { PubSubService, Subject, Subscriber } from "src/main/utils";
-import { CountDownUtil } from "src/main/utils/countDownUtil";
+import { CountDownUtil } from "src/main/utils";
 
 @Component({
   selector: 'app-robot',
@@ -23,11 +23,10 @@ export class RobotComponent implements OnInit, Subscriber {
     private pubSub:PubSubService,
     private robotLogic:RobotLogic,
     private boardLogic:BoardLogic) {
-      this.countDown = new CountDownUtil( () => this.reset() );
+      this.countDown = new CountDownUtil( this.reset.bind(this) );
     }
 
   ngOnInit(): void {
-    console.log(this.robot.board);
     this.pubSub.subscribe(this, Subject.animation);
   }
 
@@ -35,7 +34,7 @@ export class RobotComponent implements OnInit, Subscriber {
     switch(message){
       case Subject.next:
         if(this.robot.snake.isAlive){
-          this.robotLogic.makeAiDecide(this.robot);
+          this.robotLogic.makeRobotDecide(this.robot);
         } else {
           this.countDown.nextStep();
         }

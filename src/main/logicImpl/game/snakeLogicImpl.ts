@@ -7,7 +7,7 @@ export class SnakeLogicImpl extends SnakeLogic {
 
   public buildSnake(): Snake {
     let snake = new Snake();
-    this.resetSnake(snake, length);
+    this.resetSnake(snake, 3);
     return snake;
   }
 
@@ -27,7 +27,7 @@ export class SnakeLogicImpl extends SnakeLogic {
     snake.body.add(snake.head);
     snake.head = snake.nextPosition;
     snake.lastDirection = snake.direction;
-    if(food.isInPosition(snake.head)){
+    if(food.isIn(snake.head)){
       this.feedSnake(snake, food);
     } else {
       snake.body.removeFirst();

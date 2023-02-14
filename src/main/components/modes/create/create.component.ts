@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Robot, Tolerances } from "src/main/entity";
+import { RobotLogic } from 'src/main/logic';
 import { NetworkBuilder, PubSubService, Subject, Subscriber } from 'src/main/utils';
 import { IdService } from 'src/main/utils/idService';
 
@@ -11,15 +12,15 @@ import { IdService } from 'src/main/utils/idService';
 })
 export class CreateComponent implements OnInit, OnDestroy, Subscriber {
 
-  public aiList:Array<Robot> = [];
+  public robotList:Array<Robot> = [];
   public tolList:Array<Tolerances> = [];
 
   public tolerances:Tolerances = new Tolerances(0, 0, 0, 0);
 
   constructor(
-    private networkBuilder:NetworkBuilder,
     private pubSub:PubSubService,
-    private idService:IdService) { }
+    private idService:IdService,
+    private robotLogic:RobotLogic) { }
 
   ngOnInit(): void {
     this.pubSub.subscribe(this, Subject.deleteSnake);
@@ -30,7 +31,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   }
 
   ngOnDestroy(): void {
-    this.aiList = [];
+    this.robotList = [];
   }
 
   notify(message:string):void{
@@ -38,15 +39,15 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   }
 
   public createIa(tolerances:Tolerances):void{
-    let network = this.networkBuilder.buildNetwork(tolerances);
-    this.aiList.push(new Robot(this.idService.generateId(), network));
+    let newRobot = this.robotLogic.buildRobot(tolerances);
+    this.robotList.push(newRobot);
     this.tolList.push(tolerances);
   }
 
   private deleteRobot(idRobot:string): void{
-    for (let i = 0; i<this.aiList.length; i++){
-      if (this.aiList[i].id == idRobot){
-        this.aiList.splice(i, 1);
+    for (let i = 0; i<this.robotList.length; i++){
+      if (this.robotList[i].id == idRobot){
+        this.robotList.splice(i, 1);
         this.tolList.splice(i, 1);
         return;
       }

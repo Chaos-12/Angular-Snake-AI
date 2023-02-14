@@ -21,11 +21,11 @@
       <button class="button button-submit" type="button" (click)="createIa(tolerances)">+</button>
     </menu>
   </form>
-  <div class="card" *ngIf="aiList.length>0">
+  <div class="card" *ngIf="robotList.length>0">
     <header class="card-title">Simulation Controls</header>
     <app-animation></app-animation>
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot *ngFor="let ai of aiList; let i=index;" [robot]="aiList[i]" [tolerances]="tolList[i]"></app-robot>
+  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="tolList[i]"></app-robot>
 </main>
