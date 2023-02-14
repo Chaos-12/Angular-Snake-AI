@@ -27,10 +27,5 @@
   </div>
 </menu>
 <main class="card-wrapper">
-  <div class="card" *ngFor="let ai of aiList; let i=index;">
-      <header class="card-title">Custom AI #{{i}}</header>
-      <button class="button button-delete-card" (click)="deleteIa(i)">&#10006;</button>
-      <app-board [board]="ai.board"></app-board>
-      <app-input-list [tolerances]="tolList[i]" [ai]="ai"></app-input-list>
-  </div>
+  <app-robot *ngFor="let ai of aiList; let i=index;" [robot]="aiList[i]" [tolerances]="tolList[i]"></app-robot>
 </main>

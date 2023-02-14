@@ -1,4 +1,4 @@
-export * from "./ai";
+export * from "./robot";
 export * from "./network";
 export * from "./connection";
 export * from "./neuron";

@@ -2,9 +2,9 @@ import { Direction, OppositeDirection, Position, PositionSetList, SnakeDeath } f
 
 export class Snake {
 
-  public static readonly initialEnergy:number = 100;
+  public static readonly maxEnergy:number = 100;
 
-  public energy:number = Snake.initialEnergy;
+  public energy:number = Snake.maxEnergy;
   public nStepTaken:number = 0;
   public nFoodEaten:number = 0;
 
@@ -34,7 +34,7 @@ export class Snake {
     this.deathReason = SnakeDeath.none;
     this.nStepTaken = 0;
     this.nFoodEaten = 0;
-    this.energy = Snake.initialEnergy;
+    this.energy = Snake.maxEnergy;
     this.lastDirection = Direction.east;
     this.direction = Direction.east;
     this.head = new Position(length,1);
@@ -53,7 +53,7 @@ export class Snake {
     this.lastDirection = this.direction;
     if(eating){
       this.nFoodEaten ++;
-      this.energy = Snake.initialEnergy;
+      this.energy = Snake.maxEnergy;
     } else {
       this.body.removeFirst();
       this.energy --;

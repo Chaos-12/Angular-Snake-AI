@@ -15,6 +15,9 @@ export class SnakeLogicImpl extends SnakeLogic {
     snake.nFoodEaten ++;
     snake.score += food.score;
     snake.energy += food.energy;
+    if (snake.energy > Snake.maxEnergy){
+      snake.energy = Snake.maxEnergy;
+    }
   }
 
   public moveSnake(snake:Snake, food:Food): void {
@@ -48,7 +51,7 @@ export class SnakeLogicImpl extends SnakeLogic {
     snake.deathReason = SnakeDeath.none;
     snake.nStepTaken = 0;
     snake.nFoodEaten = 0;
-    snake.energy = Snake.initialEnergy;
+    snake.energy = Snake.maxEnergy;
     snake.lastDirection = Direction.east;
     snake.direction = Direction.east;
     snake.head = new Position(length,1);

@@ -6,9 +6,10 @@ import { AppRoutingModule, AppComponent } from 'src/main/components';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { DistanceCalculator, InputProvider, NetworkBuilder } from 'src/main/utils';
-import { PubSubService } from 'src/main/utils';
-import { BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
-import { BoardLogic, SnakeLogic } from '../logic';
+import { IdService, PubSubService } from 'src/main/utils';
+import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
+import { RobotLogic, BoardLogic, SnakeLogic } from 'src/main/logic';
+import { RobotComponent } from './cards';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { BoardLogic, SnakeLogic } from '../logic';
     PlayComponent,
     CreateComponent,
     BoardComponent,
+    RobotComponent,
     InputItemComponent,
     AnimationComponent,
     InputListComponent
@@ -32,10 +34,13 @@ import { BoardLogic, SnakeLogic } from '../logic';
     InputProvider,
     DistanceCalculator,
     PubSubService,
+    IdService,
     BoardLogicImpl,
     {provide: BoardLogic, useExisting: BoardLogicImpl},
     SnakeLogicImpl,
-    {provide: SnakeLogic, useExisting: SnakeLogicImpl}
+    {provide: SnakeLogic, useExisting: SnakeLogicImpl},
+    RobotLogicImpl,
+    {provide: RobotLogic, useExisting: RobotLogicImpl}
   ],
   bootstrap: [AppComponent]
 })

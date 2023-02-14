@@ -58,6 +58,9 @@ export class BoardLogicImpl extends BoardLogic {
   }
 
   private addExceptions(positionGenerator:PositionGenerator, board:Board):void{
-
+    positionGenerator.addException(board.food.position);
+    board.rocks.forEach( rock => positionGenerator.addException(rock));
+    positionGenerator.addException(board.snake.head);
+    board.snake.body.forEach ( part => positionGenerator.addException(part));
   }
 }

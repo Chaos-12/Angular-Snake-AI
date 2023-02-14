@@ -9,3 +9,4 @@ export * from "./pubSub/subject";
 export * from "./arrayUtils";
 export * from "./mathUtils";
 export * from "./randomUtils";
+export * from "./idService";

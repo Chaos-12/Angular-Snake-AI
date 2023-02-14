@@ -1,18 +1,17 @@
 import { Board, Direction, Network, Snake } from "src/main/entity";
 import { InputProvider } from "src/main/utils";
 
-export class Ai {
+export class Robot {
 
   private static readonly maxResetFrames = 10;
-  public framesUntilReset = Ai.maxResetFrames;
+  public framesUntilReset = Robot.maxResetFrames;
 
   public snake:Snake;
   public board:Board;
 
-  constructor(public network:Network){
+  constructor(public readonly id:string, public network:Network){
     this.snake = new Snake();
     this.board = new Board(this.snake);
-    this.network = network;
   }
 
   public makeSnakeDecide(inputProvider:InputProvider):void{
@@ -46,7 +45,7 @@ export class Ai {
   public checkForReset():void{
     if(!this.snake.isAlive){
       if(this.framesUntilReset < 0){
-        this.framesUntilReset = Ai.maxResetFrames;
+        this.framesUntilReset = Robot.maxResetFrames;
       }
       if(this.framesUntilReset == 0){
         this.reset();

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Ai, Tolerances } from "src/main/entity";
+import { Robot, Tolerances } from "src/main/entity";
 import { InputProvider, PubSubService, Subject, Subscriber } from "src/main/utils";
 
 @Component({
@@ -10,7 +10,7 @@ import { InputProvider, PubSubService, Subject, Subscriber } from "src/main/util
 export class InputListComponent implements OnInit, Subscriber{
 
   @Input()
-  public ai!:Ai;
+  public ai!:Robot;
 
   @Input()
   public tolerances!:Tolerances;
