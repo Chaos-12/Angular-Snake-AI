@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Snake, Food, SnakeDeath, Direction, OppositeDirection, Position, PositionSetList } from "src/main/entity";
+import { Snake, Food, SnakeDeath, Direction, OppositeDirection, Position, PositionSetList } from "src/main/data";
 import { SnakeLogic } from "src/main/logic";
 
 @Injectable()
@@ -9,6 +9,13 @@ export class SnakeLogicImpl extends SnakeLogic {
     let snake = new Snake();
     this.resetSnake(snake, 3);
     return snake;
+  }
+
+  public isInSnake(snake:Snake, position:Position): boolean {
+    if (snake.head.equals(position)){
+      return true;
+    }
+    return snake.body.contains(position);
   }
 
   public feedSnake(snake:Snake, food:Food): void{
@@ -30,7 +37,7 @@ export class SnakeLogicImpl extends SnakeLogic {
     if(food.isIn(snake.head)){
       this.feedSnake(snake, food);
     } else {
-      snake.body.removeFirst();
+      snake.body.shift();
       snake.energy --;
     }
     if(snake.energy < 0){

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Robot, Tolerances } from "src/main/entity";
+import { Robot, Tolerances } from "src/main/data";
 import { BoardLogic, RobotLogic, SnakeLogic } from "src/main/logic";
 import { IdService } from "src/main/services";
 import { InputProvider, NetworkBuilder } from "src/main/utils";
@@ -31,7 +31,7 @@ export class RobotLogicImpl extends RobotLogic {
     let outputs = robot.network.obtainOutput();
     for (let direction of outputs){
       let newPosition = robot.snake.head.forward(direction);
-      if(!robot.board.hasObstacleIn(newPosition)){
+      if(!this.boardLogic.hasObstacleIn(robot.board, newPosition)){
         this.snakeLogic.directSnake(robot.board.snake, direction);
         return;
       }

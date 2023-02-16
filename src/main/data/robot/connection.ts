@@ -1,4 +1,4 @@
-import { Neuron } from "src/main/entity";
+import { Neuron } from "src/main/data";
 
 export class Connection {
 

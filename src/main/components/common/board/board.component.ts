@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
-import { Board } from "src/main/entity";
+import { Board } from "src/main/data";
 import { BoardLogic } from "src/main/logic";
 import { PubSubService, Subject, Subscriber } from "src/main/services";
 

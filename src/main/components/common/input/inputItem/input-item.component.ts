@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
-import { Direction, DirectionLabels, Neuron } from "src/main/entity";
+import { Direction, DirectionLabels, Neuron } from "src/main/data";
 
 
 @Component({

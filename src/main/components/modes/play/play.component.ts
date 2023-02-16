@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Board, Direction, Snake } from 'src/main/entity';
+import { Board, Direction, Snake } from 'src/main/data';
+import { Consumer } from 'src/main/interface';
 import { BoardLogic, SnakeLogic } from 'src/main/logic';
 import { BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
 
@@ -38,7 +39,7 @@ export class PlayComponent implements OnInit, OnDestroy {
     window.removeEventListener('keydown', this.keyPress, false);
   }
 
-  private keyPress = (e:KeyboardEvent) => {
+  private keyPress: Consumer<KeyboardEvent> = (e:KeyboardEvent) => {
     switch (e.key){
       case 'ArrowUp':
         this.changeSnakeDirection(Direction.north);
@@ -93,3 +94,4 @@ export class PlayComponent implements OnInit, OnDestroy {
     this.boardLogic.moveSnakeInside(this.board, this.snake);
   }
 }
+

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Board, Food, Snake, SnakeDeath } from "src/main/entity";
+import { Board, Directions, Food, Position, Snake, SnakeDeath } from "src/main/data";
+import { BiPredicate } from "src/main/interface";
 import { BoardLogic, SnakeLogic } from "src/main/logic";
 import { PositionGenerator } from "src/main/utils";
 
@@ -17,20 +18,30 @@ export class BoardLogicImpl extends BoardLogic {
     return board;
   }
 
+  public isInBoard(board:Board, position:Position):boolean{
+    return 1<=position.x && position.x<=board.width && 1<=position.y && position.y<=board.width;
+  }
+
+  public hasObstacleIn(board:Board, position:Position):boolean{
+    return !this.isInBoard(board, position)
+          || board.rocks.contains(position)
+          || this.snakeLogic.isInSnake(board.snake, position);
+  }
+
   public resetBoard(board:Board):void{
     this.snakeLogic.resetSnake(board.snake);
-    board.rocks.removeAll();
+    board.rocks.reset();
   }
 
   public moveSnakeInside(board:Board, snake:Snake):void{
     let newSnakePosition = snake.nextPosition;
-    if(!board.contains(newSnakePosition)){
+    if(!this.isInBoard(board, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.wall);
     }
     if(board.rocks.contains(newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.rock);
     }
-    if(snake.contains(newSnakePosition)){
+    if(this.snakeLogic.isInSnake(snake, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.bite);
     }
 
@@ -62,5 +73,26 @@ export class BoardLogicImpl extends BoardLogic {
     board.rocks.forEach( rock => positionGenerator.addException(rock));
     positionGenerator.addException(board.snake.head);
     board.snake.body.forEach ( part => positionGenerator.addException(part));
+  }
+
+  public distancesUntilCondition(board:Board, from:Position, condition:BiPredicate<Board,Position>):Array<number>{
+    let distances = new Array<number>(Directions.length);
+    for(let dir of Directions){
+      let searching = true;
+      let distance = 0;
+      let position = from;
+      while(searching){
+        distance ++;
+        position = position.forward(dir);
+        if(condition(board, position)){
+          searching = false;
+          distances[dir] = distance;
+        } else if (!this.isInBoard(board, position)){
+          searching = false;
+          distances[dir] = 0;
+        }
+      }
+    }
+    return distances;
   }
 }

@@ -1,4 +1,4 @@
-import { Connection, Direction, Directions, Input, InputType, Neuron, NeuronType } from "src/main/entity";
+import { Connection, Direction, Directions, Input, InputType, Neuron, NeuronType } from "src/main/data";
 import { ArrayUtils, InnovationUtils } from "src/main/utils";
 
 export class Network {

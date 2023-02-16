@@ -1,4 +1,4 @@
-import { Position, PositionSetList } from "src/main/entity";
+import { Position, PositionSetList } from "src/main/data";
 import { Predicate } from "src/main/interface";
 import { RandomUtils } from "src/main/utils";
 

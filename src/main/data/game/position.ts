@@ -1,4 +1,4 @@
-import { Direction, Directions } from "src/main/entity";
+import { Direction, Directions } from "src/main/data";
 
 export class Position {
 

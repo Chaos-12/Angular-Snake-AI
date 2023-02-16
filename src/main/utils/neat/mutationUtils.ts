@@ -1,4 +1,4 @@
-import { Connection, Network, Neuron, NeuronType } from "src/main/entity";
+import { Connection, Network, Neuron, NeuronType } from "src/main/data";
 import { RandomUtils } from "src/main/utils";
 
 export function mutateAddConnection(network:Network):void{

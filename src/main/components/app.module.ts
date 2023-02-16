@@ -6,7 +6,7 @@ import { AppRoutingModule, AppComponent } from 'src/main/components';
 import { RobotComponent } from 'src/main/components/cards';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
-import { DistanceCalculator, InputProvider, NetworkBuilder } from 'src/main/utils';
+import { InputProvider, NetworkBuilder } from 'src/main/utils';
 import { IdService, PubSubService } from 'src/main/services';
 import { RobotLogic, BoardLogic, SnakeLogic } from 'src/main/logic';
 import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
@@ -32,7 +32,6 @@ import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicIm
   providers: [
     NetworkBuilder,
     InputProvider,
-    DistanceCalculator,
     PubSubService,
     IdService,
     BoardLogicImpl,

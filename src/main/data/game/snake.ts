@@ -1,4 +1,4 @@
-import { Direction, Position, PositionSetList, SnakeDeath } from "src/main/entity";
+import { Direction, Position, PositionSetList, SnakeDeath } from "src/main/data";
 
 export class Snake {
 
@@ -27,12 +27,4 @@ export class Snake {
   get nextPosition():Position{
     return this.head.forward(this.direction);
   }
-
-  public contains(position:Position):boolean{
-    if(this.head.equals(position)){
-      return true;
-    }
-    return this.body.contains(position);
-  }
-
 }

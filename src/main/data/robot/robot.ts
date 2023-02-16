@@ -1,4 +1,4 @@
-import { Board, Network, Snake } from "src/main/entity";
+import { Board, Network, Snake } from "src/main/data";
 
 export class Robot {
 

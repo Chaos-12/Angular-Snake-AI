@@ -1,18 +1,18 @@
-import { Position } from "src/main/entity";
+import { Position } from "src/main/data";
+import { Consumer } from "src/main/interface";
 
 export class PositionSetList {
 
   private coordinateMap:Map<number,Set<number>> = new Map<number,Set<number>>();
   public list:Array<Position> = [];
 
-  constructor() { }
-
-  public forEach(callback:(position:Position)=>void):void{
-    this.list.forEach(position => callback(position));
-  }
-
   get length():number{
     return this.list.length;
+  }
+
+  public reset():void{
+    this.coordinateMap = new Map<number,Set<number>>();
+    this.list = [];
   }
 
   public contains(position:Position):boolean{
@@ -35,14 +35,16 @@ export class PositionSetList {
     }
   }
 
-  public removeFirst():void{
+  public shift():Position|undefined{
     let firstPosition = this.list.shift();
     if(firstPosition){
-      this.removeFromMap(firstPosition);
+      this.remove(firstPosition);
+      return firstPosition;
     }
+    return undefined;
   }
 
-  private removeFromMap(position:Position):boolean{
+  public remove(position:Position):boolean{
     let yCoordinates = this.coordinateMap.get(position.x);
     if(!yCoordinates){
       return false;
@@ -50,8 +52,7 @@ export class PositionSetList {
     return yCoordinates.delete(position.y);
   }
 
-  public removeAll():void{
-    this.coordinateMap = new Map<number,Set<number>>();
-    this.list = [];
+  public forEach(callback:Consumer<Position>):void{
+    this.list.forEach(position => callback(position));
   }
 }

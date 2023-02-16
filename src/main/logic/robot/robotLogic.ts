@@ -1,4 +1,4 @@
-import { Robot, Tolerances } from "src/main/entity";
+import { Robot, Tolerances } from "src/main/data";
 
 export abstract class RobotLogic {
   abstract buildRobot(tolerances:Tolerances):Robot;

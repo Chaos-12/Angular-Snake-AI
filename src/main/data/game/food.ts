@@ -1,4 +1,4 @@
-import { Position } from "src/main/entity";
+import { Position } from "src/main/data";
 
 export class Food {
   constructor(

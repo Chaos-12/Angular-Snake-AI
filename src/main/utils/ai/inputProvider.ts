@@ -1,17 +1,20 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Input } from "src/main/entity";
-import { DistanceCalculator, MathUtils } from "src/main/utils";
+import { Board, Direction, Directions, Input } from "src/main/data";
+import { MathUtils } from "src/main/utils";
 import { BiPredicate } from "src/main/interface";
-import { Position } from "src/main/entity";
+import { Position } from "src/main/data";
+import { BoardLogic, SnakeLogic } from "src/main/logic";
 
 @Injectable()
 export class InputProvider {
 
-  private readonly bodyCondition:BiPredicate<Position,Board> = (position:Position, board:Board) => board.snake.contains(position);
-  private readonly wallContidion:BiPredicate<Position,Board> = (position:Position, board:Board) => !board.contains(position);
-  private readonly rockCondition:BiPredicate<Position,Board> = (position:Position, board:Board) => board.rocks.contains(position);
+  private readonly bodyCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => this.snakeLogic.isInSnake(board.snake, position);
+  private readonly wallContidion:BiPredicate<Board, Position> = (board:Board, position:Position) => !this.boardLogic.isInBoard(board, position);
+  private readonly rockCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => board.rocks.contains(position);
 
-  constructor(private distanceCalculator:DistanceCalculator){ }
+  constructor(
+    private boardLogic:BoardLogic,
+    private snakeLogic:SnakeLogic){ }
 
   public getInputFrom(board:Board):Input{
     return this.getRegularInputFrom(board);
@@ -33,8 +36,8 @@ export class InputProvider {
     return new Input(foodInput, bodyInput, rockInput, wallInput);
   }
 
-  public checkConditionNearHead(board:Board, condition:BiPredicate<Position, Board>):Array<number>{
-    return Directions.map(direction => condition(board.snake.head.forward(direction), board) ? 1 : 0);
+  public checkConditionNearHead(board:Board, condition:BiPredicate<Board, Position>):Array<number>{
+    return Directions.map(direction => condition(board, board.snake.head.forward(direction)) ? 1 : 0);
   }
 
   public getDistancesToFood(board:Board):Array<number>{
@@ -60,8 +63,8 @@ export class InputProvider {
     return this.getDistancesToFood(board).map(distance => MathUtils.invertValue(distance, board.width));
   }
 
-  public getRegularInput(board:Board, condition:BiPredicate<Position, Board>):Array<number>{
-    return this.distanceCalculator.getDistancesUntilCondition(board.snake.head, board, condition).map(distance => MathUtils.invertValue(distance, board.width));
+  public getRegularInput(board:Board, condition:BiPredicate<Board, Position>):Array<number>{
+    return this.boardLogic.distancesUntilCondition(board, board.snake.head, condition).map(distance => MathUtils.invertValue(distance, board.width));
   }
 
 }

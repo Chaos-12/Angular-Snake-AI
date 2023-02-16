@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Directions, Network, Tolerances } from "src/main/entity";
+import { Directions, Network, Tolerances } from "src/main/data";
 
 @Injectable()
 export class NetworkBuilder {
