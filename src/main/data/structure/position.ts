@@ -5,10 +5,7 @@ export class Position {
   constructor(public x:number, public y:number){ }
 
   public equals(other:Position):boolean{
-    if(this.x === other.x && this.y === other.y){
-      return true;
-    }
-    return false;
+    return this.x === other.x && this.y === other.y;
   }
 
   public forward(direction:Direction):Position{
@@ -22,14 +19,5 @@ export class Position {
       case Direction.west:
         return new Position(this.x -1, this.y);
     }
-  }
-
-  public neighborhood():Set<Position>{
-    let result = new Set<Position>();
-    result.add(this);
-    Directions.forEach(direction => {
-      result.add(this.forward(direction));
-    });
-    return result;
   }
 }

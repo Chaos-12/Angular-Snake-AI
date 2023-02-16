@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Board, Direction, Snake } from 'src/main/data';
 import { Consumer } from 'src/main/interface';
 import { BoardLogic, SnakeLogic } from 'src/main/logic';
-import { BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
 
 @Component({
   selector: 'app-play',
@@ -24,8 +23,8 @@ export class PlayComponent implements OnInit, OnDestroy {
   public snake:Snake;
 
   constructor(
-    private boardLogic:BoardLogicImpl,
-    private snakeLogic:SnakeLogicImpl
+    private boardLogic:BoardLogic,
+    private snakeLogic:SnakeLogic
   ) {
     this.board = this.boardLogic.buildBoard();
     this.snake = this.board.snake;

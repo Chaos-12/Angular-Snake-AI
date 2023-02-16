@@ -9,7 +9,6 @@ import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from
 import { InputProvider, NetworkBuilder } from 'src/main/utils';
 import { IdService, PubSubService } from 'src/main/services';
 import { RobotLogic, BoardLogic, SnakeLogic } from 'src/main/logic';
-import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicImpl';
 
 @NgModule({
   declarations: [
@@ -34,12 +33,9 @@ import { RobotLogicImpl, BoardLogicImpl, SnakeLogicImpl } from 'src/main/logicIm
     InputProvider,
     PubSubService,
     IdService,
-    BoardLogicImpl,
-    {provide: BoardLogic, useExisting: BoardLogicImpl},
-    SnakeLogicImpl,
-    {provide: SnakeLogic, useExisting: SnakeLogicImpl},
-    RobotLogicImpl,
-    {provide: RobotLogic, useExisting: RobotLogicImpl},
+    BoardLogic,
+    SnakeLogic,
+    RobotLogic,
   ],
   bootstrap: [AppComponent]
 })

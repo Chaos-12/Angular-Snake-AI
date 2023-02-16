@@ -1,12 +1,80 @@
-import { Direction, Food, Position, Snake, SnakeDeath } from "src/main/data";
+import { Injectable } from "@angular/core";
+import { Snake, Food, SnakeDeath, Direction, OppositeDirection, Position, PositionSetList } from "src/main/data";
 
-export abstract class SnakeLogic {
-  abstract buildSnake():Snake;
+@Injectable()
+export class SnakeLogic {
 
-  abstract isInSnake(snake:Snake,position:Position):boolean;
-  abstract feedSnake(snake:Snake,food:Food):void;
-  abstract moveSnake(snake:Snake,food:Food):void;
-  abstract killSnake(snake:Snake,reason:SnakeDeath):void;
-  abstract resetSnake(snake:Snake):void;
-  abstract directSnake(snake:Snake,direction:Direction):void;
+  public buildSnake(): Snake {
+    let snake = new Snake();
+    this.resetSnake(snake, 3);
+    return snake;
+  }
+
+  public isInSnake(snake:Snake, position:Position): boolean {
+    if (snake.head.equals(position)){
+      return true;
+    }
+    return snake.body.contains(position);
+  }
+
+  public feedSnake(snake:Snake, food:Food): void{
+    snake.nFoodEaten ++;
+    snake.score += food.score;
+    snake.energy += food.energy;
+    if (snake.energy > Snake.maxEnergy){
+      snake.energy = Snake.maxEnergy;
+    }
+  }
+
+  public moveSnake(snake:Snake, food:Food): void {
+    if(!snake.isAlive){
+      return;
+    }
+    snake.body.add(snake.head);
+    snake.head = snake.nextPosition;
+    snake.lastDirection = snake.direction;
+    if(food.isIn(snake.head)){
+      this.feedSnake(snake, food);
+    } else {
+      snake.body.shift();
+      snake.energy --;
+    }
+    if(snake.energy < 0){
+      this.killSnake(snake, SnakeDeath.hunger);
+    }
+    snake.nStepTaken ++;
+    snake.score ++;
+  }
+
+  public killSnake(snake:Snake, deathReason:SnakeDeath): void {
+    snake.deathReason = deathReason;
+    if(snake.record < snake.score){
+      snake.record = snake.score;
+    }
+  }
+
+  public resetSnake(snake:Snake, length:number = 3): void {
+    snake.deathReason = SnakeDeath.none;
+    snake.nStepTaken = 0;
+    snake.nFoodEaten = 0;
+    snake.energy = Snake.maxEnergy;
+    snake.lastDirection = Direction.east;
+    snake.direction = Direction.east;
+    snake.head = new Position(length,1);
+    snake.body = new PositionSetList();
+    for(let i=1; i<length;i++){
+      snake.body.add(new Position(i,1));
+    }
+  }
+
+  public directSnake(snake:Snake, direction:Direction): void {
+    if(!snake.isAlive){
+      return;
+    }
+    if(OppositeDirection[direction] === snake.lastDirection){
+      return;
+    }
+    snake.direction = direction;
+  }
+
 }
