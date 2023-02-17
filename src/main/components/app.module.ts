@@ -7,8 +7,7 @@ import { RobotComponent } from 'src/main/components/cards';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { InputProvider, NetworkBuilder } from 'src/main/utils';
-import { IdService, PubSubService } from 'src/main/services';
-import { RobotLogic, BoardLogic, SnakeLogic } from 'src/main/logic';
+import { RobotLogic, BoardLogic, SnakeLogic, PubSubService, IdService } from 'src/main/services';
 
 @NgModule({
   declarations: [

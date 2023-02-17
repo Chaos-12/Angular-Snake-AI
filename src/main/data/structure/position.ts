@@ -1,4 +1,4 @@
-import { Direction, Directions } from "src/main/data";
+import { Direction } from "src/main/data";
 
 export class Position {
 

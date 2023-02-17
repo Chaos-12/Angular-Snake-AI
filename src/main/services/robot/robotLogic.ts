@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Robot, Tolerances } from "src/main/data";
-import { BoardLogic, SnakeLogic } from "src/main/logic";
-import { IdService } from "src/main/services";
+import { BoardLogic, IdService, SnakeLogic } from "src/main/services";
 import { InputProvider, NetworkBuilder } from "src/main/utils";
 
 @Injectable()

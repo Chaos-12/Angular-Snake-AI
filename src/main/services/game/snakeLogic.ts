@@ -10,7 +10,7 @@ export class SnakeLogic {
     return snake;
   }
 
-  public isInSnake(snake:Snake, position:Position): boolean {
+  public isPositionInSnake(snake:Snake, position:Position): boolean {
     if (snake.head.equals(position)){
       return true;
     }
@@ -26,12 +26,16 @@ export class SnakeLogic {
     }
   }
 
+  public growSnake(snake:Snake): void{
+    snake.body.add(snake.head);
+    snake.head = snake.nextPosition;
+  }
+
   public moveSnake(snake:Snake, food:Food): void {
     if(!snake.isAlive){
       return;
     }
-    snake.body.add(snake.head);
-    snake.head = snake.nextPosition;
+    this.growSnake(snake);
     snake.lastDirection = snake.direction;
     if(food.isIn(snake.head)){
       this.feedSnake(snake, food);

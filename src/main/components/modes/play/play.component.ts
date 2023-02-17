@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Board, Direction, Snake } from 'src/main/data';
 import { Consumer } from 'src/main/interface';
-import { BoardLogic, SnakeLogic } from 'src/main/logic';
+import { BoardLogic, SnakeLogic } from 'src/main/services';
 
 @Component({
   selector: 'app-play',

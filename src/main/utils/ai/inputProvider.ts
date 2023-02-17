@@ -3,12 +3,12 @@ import { Board, Direction, Directions, Input } from "src/main/data";
 import { MathUtils } from "src/main/utils";
 import { BiPredicate } from "src/main/interface";
 import { Position } from "src/main/data";
-import { BoardLogic, SnakeLogic } from "src/main/logic";
+import { BoardLogic, SnakeLogic } from "src/main/services";
 
 @Injectable()
 export class InputProvider {
 
-  private readonly bodyCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => this.snakeLogic.isInSnake(board.snake, position);
+  private readonly bodyCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => this.snakeLogic.isPositionInSnake(board.snake, position);
   private readonly wallContidion:BiPredicate<Board, Position> = (board:Board, position:Position) => !this.boardLogic.isInBoard(board, position);
   private readonly rockCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => board.rocks.contains(position);
 

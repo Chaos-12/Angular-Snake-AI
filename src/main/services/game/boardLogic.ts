@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Board, Directions, Food, Position, Snake, SnakeDeath } from "src/main/data";
 import { BiPredicate } from "src/main/interface";
-import { SnakeLogic } from "src/main/logic";
+import { SnakeLogic } from "src/main/services";
 import { PositionGenerator } from "src/main/utils";
 
 @Injectable()
@@ -23,7 +23,7 @@ export class BoardLogic {
   public hasObstacleIn(board:Board, position:Position):boolean{
     return !this.isInBoard(board, position)
           || board.rocks.contains(position)
-          || this.snakeLogic.isInSnake(board.snake, position);
+          || this.snakeLogic.isPositionInSnake(board.snake, position);
   }
 
   public resetBoard(board:Board):void{
@@ -39,7 +39,7 @@ export class BoardLogic {
     if(board.rocks.contains(newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.rock);
     }
-    if(this.snakeLogic.isInSnake(snake, newSnakePosition)){
+    if(this.snakeLogic.isPositionInSnake(snake, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.bite);
     }
 
