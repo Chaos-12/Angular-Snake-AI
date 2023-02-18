@@ -11,8 +11,7 @@ export class RobotLogic {
     private networkBuilder:NetworkBuilder,
     private snakeLogic:SnakeLogic,
     private boardLogic:BoardLogic,
-    private idService:IdService
-  ){ }
+    private idService:IdService){ }
 
   public buildRobot(tolerances: Tolerances): Robot {
     let network = this.networkBuilder.buildNetwork(tolerances);

@@ -1,6 +1,6 @@
 import { Connection, NeuronType } from "src/main/data";
 
-export class Neuron {
+export class Cell {
 
   public layer:number = 0;
   public index:number = 0;

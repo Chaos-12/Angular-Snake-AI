@@ -1,8 +1,8 @@
-import { Neuron } from "src/main/data";
+import { Cell } from "src/main/data";
 
 export class Connection {
 
-  constructor(public readonly start:Neuron, public readonly final:Neuron, public weight:number, public enabled:boolean = true) { }
+  constructor(public readonly start:Cell, public readonly final:Cell, public weight:number, public enabled:boolean = true) { }
 
   public propagateWeight():void{
     if (this.enabled){

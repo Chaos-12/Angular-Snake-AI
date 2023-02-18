@@ -1,4 +1,4 @@
-export class Input {
+export class InputOld {
 
   constructor(
       private readonly foodInput:Array<number>,

@@ -1,3 +1,7 @@
 export * from "./board"
 export * from "./food"
 export * from "./snake"
+export * from "./brain"
+export * from "./neuron"
+export * from "./infoNeuron"
+export * from "./link"

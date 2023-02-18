@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Input } from "src/main/data";
+import { Board, Direction, Directions, InputOld } from "src/main/data";
 import { MathUtils } from "src/main/utils";
 import { BiPredicate } from "src/main/interface";
 import { Position } from "src/main/data";
@@ -16,24 +16,24 @@ export class InputProvider {
     private boardLogic:BoardLogic,
     private snakeLogic:SnakeLogic){ }
 
-  public getInputFrom(board:Board):Input{
+  public getInputFrom(board:Board):InputOld{
     return this.getRegularInputFrom(board);
   }
 
-  private getBinaryInput(board:Board):Input{
+  private getBinaryInput(board:Board):InputOld{
     let foodInput = this.getBinaryInputFood(board);
     let bodyInput = this.checkConditionNearHead(board, this.bodyCondition);
     let wallInput = this.checkConditionNearHead(board, this.wallContidion);
     let rockInput = this.checkConditionNearHead(board, this.rockCondition);
-    return new Input(foodInput, bodyInput, rockInput, wallInput);
+    return new InputOld(foodInput, bodyInput, rockInput, wallInput);
   }
 
-  private getRegularInputFrom(board:Board):Input{
+  private getRegularInputFrom(board:Board):InputOld{
     let foodInput = this.getDistancesToFood(board).map(distance => MathUtils.invertValue(distance, board.width));
     let bodyInput = this.getRegularInput(board, this.bodyCondition);
     let wallInput = this.getRegularInput(board, this.wallContidion);
     let rockInput = this.getRegularInput(board, this.rockCondition);
-    return new Input(foodInput, bodyInput, rockInput, wallInput);
+    return new InputOld(foodInput, bodyInput, rockInput, wallInput);
   }
 
   public checkConditionNearHead(board:Board, condition:BiPredicate<Board, Position>):Array<number>{

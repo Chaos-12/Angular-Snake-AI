@@ -1,4 +1,4 @@
-import { Connection, Network, Neuron, NeuronType } from "src/main/data";
+import { Connection, Network, Cell, NeuronType } from "src/main/data";
 import { RandomUtils } from "src/main/utils";
 
 export function mutateAddConnection(network:Network):void{
@@ -10,7 +10,7 @@ export function mutateAddConnection(network:Network):void{
     neuronsInHigherLayers[layer] = neuronsInHigherLayers[layer+1] + network.neuronsPerLayer[layer+1];
   }
   //We choose a neuron that can have a new connection
-  let validNeurons = new Array<Neuron>();
+  let validNeurons = new Array<Cell>();
   network.neuronMap.forEach(neuron => {
     if(neuron.connections.size < neuronsInHigherLayers[neuron.layer]){
       validNeurons.push(neuron);
@@ -21,7 +21,7 @@ export function mutateAddConnection(network:Network):void{
   }
   let startNeuron = RandomUtils.getRandomFrom(validNeurons);
   //We choose a neuron that can be connected
-  validNeurons = new Array<Neuron>();
+  validNeurons = new Array<Cell>();
   network.neuronMap.forEach(neuron => {
     if(startNeuron.layer < neuron.layer && !startNeuron.connections.has(neuron.id)){
       validNeurons.push(neuron);

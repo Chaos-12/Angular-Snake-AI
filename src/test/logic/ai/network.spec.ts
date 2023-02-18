@@ -1,5 +1,4 @@
-import { Directions, InputTypes, NeuronType } from "src/main/enum";
-import { Network } from "src/main/logicImpl";
+import { Directions, InfoTypes, Network, NeuronType } from "src/main/data";
 import { TestUtils } from "src/test/testUtils";
 
 describe(TestUtils.title('Network'), function(){
@@ -13,7 +12,7 @@ describe(TestUtils.title('Network'), function(){
 
   it('Right number of input neurons', function(){
     let network = new Network();
-    expect(network.inputNeurons.length).toBe(Directions.length*InputTypes.length);
+    expect(network.inputNeurons.length).toBe(Directions.length*InfoTypes.length);
   })
 
   it('Right number of output neurons', function(){

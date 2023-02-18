@@ -1,4 +1,4 @@
-import { Food, Position, PositionSetList, Snake } from "src/main/data";
+import { Food, PositionSetList, Snake } from "src/main/data";
 
 export class Board {
 

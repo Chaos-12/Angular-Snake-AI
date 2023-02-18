@@ -1,4 +1,4 @@
 export * from "./neuronType"
-export * from "./inputType"
+export * from "./infoType"
 export * from "./snakeDeath"
 export * from "./direction"

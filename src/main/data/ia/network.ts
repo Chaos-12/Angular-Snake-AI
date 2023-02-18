@@ -1,22 +1,22 @@
-import { Connection, Direction, Directions, Input, InputType, Neuron, NeuronType } from "src/main/data";
+import { Connection, Direction, Directions, InputOld, InfoType, Cell, NeuronType } from "src/main/data";
 import { ArrayUtils, InnovationUtils } from "src/main/utils";
 
 export class Network {
 
-  public neuronMap:Map<number,Neuron> = new Map<number,Neuron>();
+  public neuronMap:Map<number,Cell> = new Map<number,Cell>();
 
-  public biasNeuron:Neuron = new Neuron(NeuronType.bias, 0);
+  public biasNeuron:Cell = new Cell(NeuronType.bias, 0);
 
-  public foodNeurons:Array<Neuron> = [];
-  public bodyNeurons:Array<Neuron> = [];
-  public wallNeurons:Array<Neuron> = [];
-  public rockNeurons:Array<Neuron> = [];
-  get inputNeurons():Array<Neuron>{
+  public foodNeurons:Array<Cell> = [];
+  public bodyNeurons:Array<Cell> = [];
+  public wallNeurons:Array<Cell> = [];
+  public rockNeurons:Array<Cell> = [];
+  get inputNeurons():Array<Cell>{
     return this.foodNeurons.concat(this.bodyNeurons, this.wallNeurons, this.rockNeurons);
   }
 
-  public hiddenNeurons:Array<Neuron> = [];
-  public outputNeurons:Array<Neuron> = [];
+  public hiddenNeurons:Array<Cell> = [];
+  public outputNeurons:Array<Cell> = [];
 
   public connections:Map<number,Connection> = new Map();
   public innovation:number = 0;
@@ -26,10 +26,10 @@ export class Network {
   constructor(){
     this.createNeuron(NeuronType.bias, 0);
     for(let dir of Directions){
-      this.createInputNeuron(InputType.food);
-      this.createInputNeuron(InputType.body);
-      this.createInputNeuron(InputType.wall);
-      this.createInputNeuron(InputType.rock);
+      this.createInputNeuron(InfoType.food);
+      this.createInputNeuron(InfoType.body);
+      this.createInputNeuron(InfoType.wall);
+      this.createInputNeuron(InfoType.rock);
       this.createNeuron(NeuronType.output);
     }
   }
@@ -38,7 +38,7 @@ export class Network {
     if(this.neuronMap.has(id)){
       return;
     }
-    let newNeuron = new Neuron(type, id);
+    let newNeuron = new Cell(type, id);
     switch(type){
       case NeuronType.bias:
         this.biasNeuron = newNeuron;
@@ -59,22 +59,22 @@ export class Network {
     }
   }
 
-  private createInputNeuron(type:InputType, id:number = this.neuronMap.size):void{
+  private createInputNeuron(type:InfoType, id:number = this.neuronMap.size):void{
     if(this.neuronMap.has(id)){
       return;
     }
-    let newNeuron = new Neuron(NeuronType.input, id);
+    let newNeuron = new Cell(NeuronType.input, id);
     switch(type){
-      case InputType.food:
+      case InfoType.food:
         this.foodNeurons.push(newNeuron);
         break;
-      case InputType.body:
+      case InfoType.body:
         this.bodyNeurons.push(newNeuron);
         break;
-      case InputType.wall:
+      case InfoType.wall:
         this.wallNeurons.push(newNeuron);
         break;
-      case InputType.rock:
+      case InfoType.rock:
         this.rockNeurons.push(newNeuron);
         break;
     }
@@ -96,7 +96,7 @@ export class Network {
     }
   }
 
-  public propagateInput(input:Input):void{
+  public propagateInput(input:InputOld):void{
     let nDirections = Directions.length;
     //Set the new weights of all neurons
     this.biasNeuron.weight = 1;

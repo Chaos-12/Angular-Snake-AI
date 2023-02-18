@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from "@angular/core";
-import { Direction, DirectionLabels, Neuron } from "src/main/data";
+import { Direction, DirectionLabels, Cell } from "src/main/data";
 
 
 @Component({
@@ -18,7 +18,7 @@ export class InputItemComponent implements OnInit {
   public value:number=0;
 
   @Input()
-  public inputs:Array<Neuron>=[];
+  public inputs:Array<Cell>=[];
 
   @HostBinding('style.--input-value-north')
   public get northValue(){
