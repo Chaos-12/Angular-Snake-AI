@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Link, Neuron, NeuronType } from "src/main/data";
+import { Link, Neuron } from "src/main/data";
 
 @Injectable()
 export class NeuronLogic {

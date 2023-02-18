@@ -1,4 +1,4 @@
-import { Directions, InfoNeuron, InfoTypes, Neuron, NeuronType } from "src/main/data";
+import { InfoNeuron, Neuron } from "src/main/data";
 
 export class Brain {
   public bias:Neuron = new Neuron(0);
