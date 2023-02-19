@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Robot, Tolerances } from "src/main/data";
+import { Robot, TolerancesOld } from "src/main/data";
 import { BoardLogic, IdService, SnakeLogic } from "src/main/services";
 import { InputProvider, NetworkBuilder } from "src/main/utils";
 
@@ -13,7 +13,7 @@ export class RobotLogic {
     private boardLogic:BoardLogic,
     private idService:IdService){ }
 
-  public buildRobot(tolerances: Tolerances): Robot {
+  public buildRobot(tolerances: TolerancesOld): Robot {
     let network = this.networkBuilder.buildNetwork(tolerances);
     let robotId = this.idService.generateId();
     let board = this.boardLogic.buildBoard();

@@ -1,7 +1,7 @@
-import { InfoNeuron, InputNeuron, Neuron } from "src/main/data";
+import { Directions, InfoNeuron, InputNeuron, InputTypes, Neuron } from "src/main/data";
 
 export class Brain {
-  public bias:Neuron = new Neuron(0);
+  public bias:Neuron = new Neuron(Directions.length * InputTypes.length);
   public inputs:Array<InputNeuron> = [];
   public hidden:Array<Neuron> = [];
   public outputs:Array<InfoNeuron> = [];

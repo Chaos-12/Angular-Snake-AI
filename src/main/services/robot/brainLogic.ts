@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Brain, Information, InputType, Link, Directions, NeuronMap, InfoNeuron, Input, InputTypes, Direction, Neuron, InputNeuron } from "src/main/data";
-import { NeuronLogic } from "./neuronLogic";
+import { NeuronLogic } from "src/main/services";
 
 @Injectable()
 export class BrainLogic {
@@ -14,24 +14,28 @@ export class BrainLogic {
     //Create input neurons
     for (let infoType of InputTypes){
       for (let direction of Directions){
-        this.addInfoNeuronTo(brain, id, direction, infoType);
+        this.addInputNeuronTo(brain, id, direction, infoType);
         id ++;
       }
     }
     //Create output neurons
     for (let direction of Directions){
-      this.addInfoNeuronTo(brain, id, direction, undefined);
+      this.addOutputNeuronTo(brain, id, direction);
       id ++;
     }
     return brain;
   }
 
-  private addInfoNeuronTo(brain:Brain, id:number, direction:Direction, info:InputType|undefined){
-    if (undefined === info){
-      brain.outputs.push(new InfoNeuron(id, direction));
-    } else {
-      brain.inputs.push(new InputNeuron(id, direction, info));
-    }
+  private addInputNeuronTo(brain:Brain, id:number, direction:Direction, info:InputType){
+    let neuron = new InputNeuron(id, direction, info);
+    this.neuronLogic.setIndex(neuron, id);
+    brain.inputs.push(neuron);
+  }
+
+  private addOutputNeuronTo(brain:Brain, id:number, direction:Direction){
+    let neuron = new InfoNeuron(id, direction);
+    this.neuronLogic.setIndex(neuron, direction);
+    brain.outputs.push(neuron);
   }
 
   public addNeuronTo(brain:Brain, id:number):void{
@@ -79,6 +83,39 @@ export class BrainLogic {
   }
 
   public order(brain:Brain):void{
-
+    //Assign layer 0 to input neurons (and propagate)
+    for(let neuron of brain.inputs){
+      this.neuronLogic.assignDeepnessTo(neuron, 0);
+    }
+    //The deph of the brain is the highest among output neurons
+    let deph = 1;
+    for (let neuron of brain.outputs){
+      if (deph < neuron.depth){
+        deph = neuron.depth;
+      }
+    }
+    //All output neurons should have the same deph
+    for (let neuron of brain.outputs){
+      this.neuronLogic.assignDeepnessTo(neuron, deph);
+    }
+    //We order the hidden neurons acording to the already assing deph
+    let orderedNeurons = new Array<Neuron>();
+    for (let d=1; d < deph; d++){
+      let index = 0;
+      let justOrderedNeurons = new Array<Neuron>();
+      for(let neuron of brain.hidden){
+        if(neuron.depth == d){
+          this.neuronLogic.setIndex(neuron, index);
+          index ++;
+          justOrderedNeurons.push(neuron);
+        }
+      }
+      for(let neuron of justOrderedNeurons){
+        index = brain.hidden.indexOf(neuron);
+        brain.hidden.splice(index, 1);
+      }
+      orderedNeurons = orderedNeurons.concat(justOrderedNeurons);
+    }
+    brain.hidden = orderedNeurons;
   }
 }

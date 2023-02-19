@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Directions, Network, Tolerances } from "src/main/data";
+import { Directions, Network, TolerancesOld } from "src/main/data";
 
 @Injectable()
 export class NetworkBuilder {
 
-  public buildNetwork(tolerances:Tolerances):Network{
+  public buildNetwork(tolerances:TolerancesOld):Network{
     let newNetwork = new Network();
     for(let dir of Directions){
       newNetwork.createConnection(newNetwork.foodNeurons[dir].id, newNetwork.outputNeurons[dir].id, tolerances.food/100);

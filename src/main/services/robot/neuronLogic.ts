@@ -36,4 +36,8 @@ export class NeuronLogic {
   public setValue(neuron:Neuron, value:number):void {
     neuron.value = value;
   }
+
+  public setIndex(neuron:Neuron, index:number):void {
+    neuron.index = index;
+  }
 }

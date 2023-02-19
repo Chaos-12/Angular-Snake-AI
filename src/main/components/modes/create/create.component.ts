@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Robot, Subject, Tolerances } from "src/main/data";
+import { Robot, Subject, TolerancesOld } from "src/main/data";
 import { RobotLogic } from 'src/main/services';
 import { IdService, PubSubService, Subscriber } from 'src/main/services';
 
@@ -12,9 +12,9 @@ import { IdService, PubSubService, Subscriber } from 'src/main/services';
 export class CreateComponent implements OnInit, OnDestroy, Subscriber {
 
   public robotList:Array<Robot> = [];
-  public tolList:Array<Tolerances> = [];
+  public tolList:Array<TolerancesOld> = [];
 
-  public tolerances:Tolerances = new Tolerances(0, 0, 0, 0);
+  public tolerances:TolerancesOld = new TolerancesOld(0, 0, 0, 0);
 
   constructor(
     private pubSub:PubSubService,
@@ -23,10 +23,10 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
 
   ngOnInit(): void {
     this.pubSub.subscribe(this, Subject.deleteSnake);
-    this.createIa(new Tolerances(100, -100, -100, -100));
-    this.createIa(new Tolerances(40, -100, -20, -100));
-    this.createIa(new Tolerances(30, -100, -10, -80));
-    this.createIa(new Tolerances(25, -100, -25, -30));
+    this.createIa(new TolerancesOld(100, -100, -100, -100));
+    this.createIa(new TolerancesOld(40, -100, -20, -100));
+    this.createIa(new TolerancesOld(30, -100, -10, -80));
+    this.createIa(new TolerancesOld(25, -100, -25, -30));
   }
 
   ngOnDestroy(): void {
@@ -37,7 +37,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     this.deleteRobot(message);
   }
 
-  public createIa(tolerances:Tolerances):void{
+  public createIa(tolerances:TolerancesOld):void{
     let newRobot = this.robotLogic.buildRobot(tolerances);
     this.robotList.push(newRobot);
     this.tolList.push(tolerances);

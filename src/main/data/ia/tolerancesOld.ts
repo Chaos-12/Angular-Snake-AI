@@ -1,4 +1,4 @@
-export class Tolerances {
+export class TolerancesOld {
   constructor(
     public food:number,
     public wall:number,

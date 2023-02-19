@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Robot, Subject, Tolerances } from "src/main/data";
+import { Robot, Subject, TolerancesOld } from "src/main/data";
 import { RobotLogic, BoardLogic, Subscriber, PubSubService } from "src/main/services";
 import { CountDownUtil } from "src/main/utils";
 
@@ -14,7 +14,7 @@ export class RobotComponent implements OnInit, Subscriber {
   public robot!:Robot;
 
   @Input()
-  public tolerances!:Tolerances;
+  public tolerances!:TolerancesOld;
 
   public countDown:CountDownUtil;
 
