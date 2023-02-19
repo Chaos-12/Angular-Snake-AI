@@ -1,19 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Brain, Information, InfoType, Link, Directions, NeuronMap, InfoNeuron, Input, InputTypes, Direction, Neuron } from "src/main/data";
+import { Brain, Information, InputType, Link, Directions, NeuronMap, InfoNeuron, Input, InputTypes, Direction, Neuron, InputNeuron } from "src/main/data";
 import { NeuronLogic } from "./neuronLogic";
 
 @Injectable()
 export class BrainLogic {
 
-  private links:Map<number,Link> = new Map<number,Link>();
-  private innovation:number = 0;
-
   constructor(private neuronLogic:NeuronLogic){ }
-
-  public reset():void{
-    this.links = new Map<number,Link>();
-    this.innovation = 0;
-  }
 
   public buildDefaultBrain():Brain{
     //Bias neuron created by default
@@ -22,24 +14,23 @@ export class BrainLogic {
     //Create input neurons
     for (let infoType of InputTypes){
       for (let direction of Directions){
-        this.addInfoNeuronTo(brain, id, infoType, direction);
+        this.addInfoNeuronTo(brain, id, direction, infoType);
         id ++;
       }
     }
     //Create output neurons
     for (let direction of Directions){
-      this.addInfoNeuronTo(brain, id, InfoType.output, direction);
+      this.addInfoNeuronTo(brain, id, direction, undefined);
       id ++;
     }
     return brain;
   }
 
-  private addInfoNeuronTo(brain:Brain, id:number, info:InfoType, direction:Direction){
-    let neuron = new InfoNeuron(id, info, direction);
-    if (InfoType.output === info){
-      brain.outputs.push(neuron);
+  private addInfoNeuronTo(brain:Brain, id:number, direction:Direction, info:InputType|undefined){
+    if (undefined === info){
+      brain.outputs.push(new InfoNeuron(id, direction));
     } else {
-      brain.inputs.push(neuron);
+      brain.inputs.push(new InputNeuron(id, direction, info));
     }
   }
 
@@ -63,13 +54,13 @@ export class BrainLogic {
   public propagateInput(brain:Brain, input:Input):void{
     //Set the weights of all neurons
     for (let neuron of brain.inputs){
-      neuron.value = input.getValue(neuron.info, neuron.direction);
+      this.neuronLogic.setInfo(neuron, input);
     }
     for (let neuron of brain.hidden){
-      neuron.value = 0;
+      this.neuronLogic.setValue(neuron, 0);
     }
     for (let neuron of brain.outputs){
-      neuron.value = 0;
+      this.neuronLogic.setValue(neuron, 0);
     }
     //Propagate the weights (we assume that the brain is ordered)
     this.neuronLogic.propagateValueFrom(brain.bias);

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subscriber, Subject } from "./";
+import { Subject } from "src/main/data";
 
 @Injectable()
 export class PubSubService {
@@ -38,4 +38,8 @@ export class PubSubService {
       subscribers.delete(subscriber);
     }
   }
+}
+
+export interface Subscriber {
+  notify:CallableFunction;
 }

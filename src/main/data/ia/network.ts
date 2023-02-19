@@ -1,4 +1,4 @@
-import { Connection, Direction, Directions, InputOld, InfoType, Cell, NeuronType } from "src/main/data";
+import { Connection, Direction, Directions, InputOld, InputType, Cell, NeuronType } from "src/main/data";
 import { ArrayUtils, InnovationUtils } from "src/main/utils";
 
 export class Network {
@@ -26,10 +26,10 @@ export class Network {
   constructor(){
     this.createNeuron(NeuronType.bias, 0);
     for(let dir of Directions){
-      this.createInputNeuron(InfoType.food);
-      this.createInputNeuron(InfoType.body);
-      this.createInputNeuron(InfoType.wall);
-      this.createInputNeuron(InfoType.rock);
+      this.createInputNeuron(InputType.food);
+      this.createInputNeuron(InputType.body);
+      this.createInputNeuron(InputType.wall);
+      this.createInputNeuron(InputType.rock);
       this.createNeuron(NeuronType.output);
     }
   }
@@ -59,22 +59,22 @@ export class Network {
     }
   }
 
-  private createInputNeuron(type:InfoType, id:number = this.neuronMap.size):void{
+  private createInputNeuron(type:InputType, id:number = this.neuronMap.size):void{
     if(this.neuronMap.has(id)){
       return;
     }
     let newNeuron = new Cell(NeuronType.input, id);
     switch(type){
-      case InfoType.food:
+      case InputType.food:
         this.foodNeurons.push(newNeuron);
         break;
-      case InfoType.body:
+      case InputType.body:
         this.bodyNeurons.push(newNeuron);
         break;
-      case InfoType.wall:
+      case InputType.wall:
         this.wallNeurons.push(newNeuron);
         break;
-      case InfoType.rock:
+      case InputType.rock:
         this.rockNeurons.push(newNeuron);
         break;
     }

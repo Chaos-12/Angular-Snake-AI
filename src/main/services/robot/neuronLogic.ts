@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Link, Neuron } from "src/main/data";
+import { Input, InputNeuron, Link, Neuron } from "src/main/data";
 
 @Injectable()
 export class NeuronLogic {
@@ -27,5 +27,13 @@ export class NeuronLogic {
         this.assignDeepnessTo(link.final, depth+1);
       }
     }
+  }
+
+  public setInfo(neuron:InputNeuron, input:Input):void {
+    neuron.value = input.getInfo(neuron.inputType, neuron.direction);
+  }
+
+  public setValue(neuron:Neuron, value:number):void {
+    neuron.value = value;
   }
 }

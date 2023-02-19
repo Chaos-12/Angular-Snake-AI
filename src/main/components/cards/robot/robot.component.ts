@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Robot, Tolerances } from "src/main/data";
-import { RobotLogic, BoardLogic, Subscriber, PubSubService, Subject } from "src/main/services";
+import { Robot, Subject, Tolerances } from "src/main/data";
+import { RobotLogic, BoardLogic, Subscriber, PubSubService } from "src/main/services";
 import { CountDownUtil } from "src/main/utils";
 
 @Component({

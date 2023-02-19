@@ -1,23 +1,13 @@
-import { Direction, Information, InfoType, InputTypes } from "src/main/data";
+import { Direction, Information, InputType, InputTypes } from "src/main/data";
+import { AutoList } from "./autoList";
 
-export class Input {
-
-  public infoList:Array<Information> = [];
+export class Input extends AutoList<Information> {
 
   constructor(){
-    for (let input of InputTypes){
-      this.infoList.push(new Information());
-    }
+    super(new Information(), InputTypes);
   }
 
-  public getValue(infoType:InfoType, direction:Direction):number{
-    return this.infoList[infoType].getValue(direction);
-  }
-
-  public setInformation(infoType:InfoType, information:Information):void{
-    if(infoType === InfoType.output){
-      throw new Error("Error: information cannot set as infoType='output'.")
-    }
-    this.infoList[infoType] = information;
+  public getInfo(inputType:InputType, direction:Direction):number{
+    return this.getValue(inputType).getValue(direction);
   }
 }
