@@ -1,6 +1,6 @@
 import { Board, Network, Snake } from "src/main/data";
 
-export class Robot {
+export class RobotOld {
 
   constructor(
     public readonly id:string,

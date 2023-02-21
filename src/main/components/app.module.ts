@@ -3,11 +3,11 @@ import { FormsModule } from "@angular/forms"
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent } from 'src/main/components';
-import { RobotComponent } from 'src/main/components/cards';
+import { RobotComponent, RobotOldComponent } from 'src/main/components/cards';
 import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { InputProvider, NetworkBuilder } from 'src/main/utils';
-import { RobotLogic, BoardLogic, SnakeLogic, PubSubService, IdService } from 'src/main/services';
+import { RobotOldLogic, BoardLogic, SnakeLogic, PubSubService, IdService } from 'src/main/services';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { RobotLogic, BoardLogic, SnakeLogic, PubSubService, IdService } from 'sr
     CreateComponent,
     BoardComponent,
     RobotComponent,
+    RobotOldComponent,
     InputItemComponent,
     AnimationComponent,
     InputListComponent
@@ -34,7 +35,7 @@ import { RobotLogic, BoardLogic, SnakeLogic, PubSubService, IdService } from 'sr
     IdService,
     BoardLogic,
     SnakeLogic,
-    RobotLogic,
+    RobotOldLogic,
   ],
   bootstrap: [AppComponent]
 })

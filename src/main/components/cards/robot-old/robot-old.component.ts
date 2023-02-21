@@ -1,26 +1,26 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Robot, Subject, Tolerances } from "src/main/data";
-import { BoardLogic, Subscriber, PubSubService, RobotLogic } from "src/main/services";
+import { RobotOld, Subject, TolerancesOld } from "src/main/data";
+import { RobotOldLogic, BoardLogic, Subscriber, PubSubService } from "src/main/services";
 import { CountDownUtil } from "src/main/utils";
 
 @Component({
-  selector: 'app-robot',
-  templateUrl: './robot.component.html',
-  styleUrls: ['./robot.component.css']
+  selector: 'app-robot-old',
+  templateUrl: './robot-old.component.html',
+  styleUrls: ['./robot-old.component.css']
 })
-export class RobotComponent implements OnInit, Subscriber {
+export class RobotOldComponent implements OnInit, Subscriber {
 
   @Input()
-  public robot!:Robot;
+  public robot!:RobotOld;
 
   @Input()
-  public tolerances!:Tolerances;
+  public tolerances!:TolerancesOld;
 
-  private countDown:CountDownUtil;
+  public countDown:CountDownUtil;
 
   constructor(
     private pubSub:PubSubService,
-    private robotLogic:RobotLogic,
+    private robotLogic:RobotOldLogic,
     private boardLogic:BoardLogic) {
       this.countDown = new CountDownUtil( this.reset.bind(this) );
     }
@@ -33,7 +33,7 @@ export class RobotComponent implements OnInit, Subscriber {
     switch(message){
       case Subject.next:
         if(this.robot.snake.isAlive){
-          //this.robotLogic.makeRobotDecide(this.robot);
+          this.robotLogic.makeRobotDecide(this.robot);
         } else {
           this.countDown.nextStep();
         }

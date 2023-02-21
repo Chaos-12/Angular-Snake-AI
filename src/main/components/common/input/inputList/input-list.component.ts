@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Robot, TolerancesOld } from "src/main/data";
+import { RobotOld, TolerancesOld } from "src/main/data";
 
 @Component({
   selector: 'app-input-list',
@@ -9,7 +9,7 @@ import { Robot, TolerancesOld } from "src/main/data";
 export class InputListComponent {
 
   @Input()
-  public ai!:Robot;
+  public ai!:RobotOld;
 
   @Input()
   public tolerances!:TolerancesOld;
