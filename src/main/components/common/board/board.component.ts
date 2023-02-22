@@ -14,6 +14,9 @@ export class BoardComponent implements OnInit, Subscriber {
   @Input()
   public board!:Board;
 
+  @Input()
+  public animated:Boolean = true;
+
   @HostBinding('style.--snake-energy')
   public get snakeEnergy(){
     return `${this.board.snake.energy}%`;
@@ -24,7 +27,9 @@ export class BoardComponent implements OnInit, Subscriber {
     private pubSub:PubSubService){ }
 
   ngOnInit():void{
-    this.pubSub.subscribe(this, Subject.animation);
+    if(this.animated){
+      this.pubSub.subscribe(this, Subject.animation);
+    }
   }
 
   public notify(message:Subject):void{

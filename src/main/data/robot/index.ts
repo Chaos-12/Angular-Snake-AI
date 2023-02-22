@@ -1,4 +1,4 @@
 export * from "./brain"
-export * from "./neurons"
+export * from "./neuron"
 export * from "./link"
 export * from "./robot"

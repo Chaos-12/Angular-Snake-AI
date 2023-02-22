@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Brain, Information, InputType, Link, Directions, NeuronMap, InfoNeuron, Input, InputTypes, Direction, Neuron, InputNeuron, Tolerances } from "src/main/data";
+import { Brain, Information, InputType, Link, Directions, NeuronMap, Input, InputTypes, Direction, Neuron, Tolerances } from "src/main/data";
 import { NeuronLogic } from "src/main/services";
 
 @Injectable()
@@ -10,11 +10,11 @@ export class BrainLogic {
   public buildDefaultBrain():Brain{
     //Bias neuron created by default
     let brain = new Brain();
-    let id = 1;
+    let id = 0;
     //Create input neurons
     for (let infoType of InputTypes){
       for (let direction of Directions){
-        this.addInputNeuronTo(brain, id, direction, infoType);
+        this.addInputNeuronTo(brain, id);
         id ++;
       }
     }
@@ -26,33 +26,44 @@ export class BrainLogic {
     return brain;
   }
 
-  private addInputNeuronTo(brain:Brain, id:number, direction:Direction, info:InputType):void{
-    let neuron = new InputNeuron(id, direction, info);
+  public getInputNeuronFrom(brain:Brain, inputType:InputType, direction:Direction):Neuron{
+    return brain.inputs[inputType * Directions.length + direction];
+  }
+
+  public getOutputNeuronFrom(brain:Brain, direction:Direction):Neuron{
+    return brain.outputs[direction];
+  }
+
+  private addInputNeuronTo(brain:Brain, id:number):void{
+    let neuron = new Neuron(id);
     this.neuronLogic.setIndex(neuron, id);
     brain.inputs.push(neuron);
   }
 
   private addOutputNeuronTo(brain:Brain, id:number, direction:Direction):void{
-    let neuron = new InfoNeuron(id, direction);
+    let neuron = new Neuron(id);
     this.neuronLogic.setIndex(neuron, direction);
     brain.outputs.push(neuron);
   }
 
-  public addNeuronTo(brain:Brain, id:number):void{
+  public addHiddenNeuronTo(brain:Brain, id:number):void{
     brain.hidden.push(new Neuron(id));
   }
 
   public buildBrainFrom(tolerances:Tolerances):Brain{
     let brain = this.buildDefaultBrain();
-    for (let neuron of brain.inputs){
-      let output = brain.outputs[neuron.direction];
-      let link = new Link(neuron, output, tolerances.getValue(neuron.inputType), true);
-      this.neuronLogic.addLinkTo(neuron, link);
+    for(let direction of Directions){
+      let final = this.getOutputNeuronFrom(brain, direction);
+      for(let inputType of InputTypes){
+        let start = this.getInputNeuronFrom(brain, inputType, direction);
+        let link = new Link(start, final, tolerances.getValue(inputType), true);
+        this.neuronLogic.addLinkTo(start, link);
+      }
     }
     return brain;
   }
 
-  public createLink(neurons:NeuronMap, startId:number, finalId:number, weight:number, enabled:boolean){
+  public createLink(neurons:NeuronMap, startId:number, finalId:number, weight:number, enabled:boolean):void{
     let startNeuron = neurons.get(startId);
     if ( !startNeuron ){
       throw new Error(`Error in the creation of the link: no neuron with id=${startId} found.`)
@@ -67,8 +78,12 @@ export class BrainLogic {
 
   public propagateInputInto(brain:Brain, input:Input):void{
     //Set the weights of all neurons
-    for (let neuron of brain.inputs){
-      this.neuronLogic.setInfo(neuron, input);
+    for (let inputType of InputTypes){
+      for (let direction of Directions){
+        let neuron = this.getInputNeuronFrom(brain, inputType, direction);
+        let value = input.getInfo(inputType, direction);
+        this.neuronLogic.setValue(neuron, value);
+      }
     }
     for (let neuron of brain.hidden){
       this.neuronLogic.setValue(neuron, 0);
@@ -88,7 +103,10 @@ export class BrainLogic {
 
   public obtainOutputFrom(brain:Brain):Information{
     let information = new Information();
-    brain.outputs.forEach(neuron => information.setValue(neuron.direction, neuron.value))
+    for (let direction of Directions){
+      let neuron = this.getOutputNeuronFrom(brain, direction);
+      information.setValue(direction, neuron.value);
+    }
     return information;
   }
 
