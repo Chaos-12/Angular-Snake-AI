@@ -16,14 +16,30 @@ export class BoardLogic {
     return board;
   }
 
-  public isInBoard(board:Board, position:Position):boolean{
+  public isPositionInBoard(board:Board, position:Position):boolean{
     return 1<=position.x && position.x<=board.width && 1<=position.y && position.y<=board.width;
   }
 
+  public isPositionOutside(board:Board, position:Position):boolean{
+    return position.x < 1 || board.width < position.x || position.y < 1 || board.width < position.y;
+  }
+
+  public hasRockIn(board:Board, position:Position):boolean{
+    return board.rocks.contains(position);
+  }
+
+  public hasSnakeIn(board:Board, position:Position):boolean{
+    return this.snakeLogic.isPositionInSnake(board.snake, position);
+  }
+
+  public hasFoodIn(board:Board, position:Position):boolean{
+    return board.food.isIn(position);
+  }
+
   public hasObstacleIn(board:Board, position:Position):boolean{
-    return !this.isInBoard(board, position)
-          || board.rocks.contains(position)
-          || this.snakeLogic.isPositionInSnake(board.snake, position);
+    return this.isPositionOutside(board, position)
+          || this.hasSnakeIn(board, position)
+          || this.hasRockIn(board, position);
   }
 
   public resetBoard(board:Board):void{
@@ -33,19 +49,19 @@ export class BoardLogic {
 
   public moveSnakeInside(board:Board, snake:Snake):void{
     let newSnakePosition = snake.nextPosition;
-    if(!this.isInBoard(board, newSnakePosition)){
+    if(this.isPositionOutside(board, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.wall);
     }
-    if(board.rocks.contains(newSnakePosition)){
+    if(this.hasRockIn(board, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.rock);
     }
-    if(this.snakeLogic.isPositionInSnake(snake, newSnakePosition)){
+    if(this.hasSnakeIn(board, newSnakePosition)){
       this.snakeLogic.killSnake(snake, SnakeDeath.bite);
     }
 
     this.snakeLogic.moveSnake(snake, board.food);
 
-    if(board.food.isIn(newSnakePosition)){
+    if(this.hasFoodIn(board, newSnakePosition)){
       this.generateFoodFor(board);
       this.generateRockFor(board);
     }
@@ -85,7 +101,7 @@ export class BoardLogic {
         if(condition(board, position)){
           searching = false;
           distances[dir] = distance;
-        } else if (!this.isInBoard(board, position)){
+        } else if (!this.isPositionInBoard(board, position)){
           searching = false;
           distances[dir] = 0;
         }

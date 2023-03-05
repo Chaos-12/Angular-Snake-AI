@@ -16,7 +16,7 @@ constructor(
     return new Robot(robotId, brain, board, board.snake);
   }
 
-  public makeDecide(robot:Robot):void {
+  public makeRobotDecide(robot:Robot):void {
     this.boardLogic.moveSnakeInside(robot.board, robot.snake);
     let input = this.inputLogic.buildInput(robot.board, robot.snake.head);
     this.brainLogic.propagateInputInto(robot.brain, input);

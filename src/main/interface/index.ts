@@ -1,3 +1,3 @@
-export * from "./biPredicate"
 export * from "./predicate"
 export * from "./consumer"
+export * from "./operation"
