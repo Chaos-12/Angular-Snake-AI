@@ -1,5 +1,5 @@
 <div class="card">
   <header class="card-title">Robot {{robot.id}}</header>
   <button class="button button-delete-card" (click)="selfDestroy()">&#10006;</button>
-  <app-board [board]="robot.board"></app-board>
+  <app-board [board]="robot.board" [animated]="false"></app-board>
 </div>

@@ -33,7 +33,7 @@ export class RobotComponent implements OnInit, Subscriber {
     switch(message){
       case Subject.next:
         if(this.robot.snake.isAlive){
-          //this.robotLogic.makeRobotDecide(this.robot);
+          this.robotLogic.makeRobotDecide(this.robot);
         } else {
           this.countDown.nextStep();
         }

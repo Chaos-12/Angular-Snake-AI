@@ -18,14 +18,15 @@
         <label>Rock:</label>
         <input class="input-number" [(ngModel)]="tolerances.rock" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
       </div>
-      <button class="button button-submit" type="button" (click)="createIa(tolerances)">+</button>
+      <button class="button button-submit" type="button" (click)="createOldIa(tolerances)">+</button>
     </menu>
   </form>
-  <div class="card" *ngIf="robotList.length>0">
+  <div class="card" *ngIf="robotOldList.length>0">
     <header class="card-title">Simulation Controls</header>
     <app-animation></app-animation>
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot-old *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="tolList[i]"></app-robot-old>
+  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot"></app-robot>
+  <app-robot-old *ngFor="let robot of robotOldList; let i=index;" [robot]="robot" [tolerances]="tolList[i]"></app-robot-old>
 </main>

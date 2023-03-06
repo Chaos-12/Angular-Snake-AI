@@ -29,7 +29,10 @@ export class BoardLogic {
   }
 
   public hasSnakeIn(board:Board, position:Position):boolean{
-    return this.snakeLogic.isPositionInSnake(board.snake, position);
+    if (board.snake.head.equals(position)){
+      return true;
+    }
+    return board.snake.body.contains(position);
   }
 
   public hasFoodIn(board:Board, position:Position):boolean{

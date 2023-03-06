@@ -7,7 +7,12 @@ import { BoardLogic, SnakeLogic } from "src/main/services";
 @Injectable()
 export class InputProvider {
 
-  private readonly bodyCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => this.snakeLogic.isPositionInSnake(board.snake, position);
+  private readonly bodyCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => {
+    if (board.snake.head.equals(position)){
+      return true;
+    }
+    return board.snake.body.contains(position);
+  };
   private readonly wallContidion:BiPredicate<Board, Position> = (board:Board, position:Position) => !this.boardLogic.isPositionInBoard(board, position);
   private readonly rockCondition:BiPredicate<Board, Position> = (board:Board, position:Position) => board.rocks.contains(position);
 

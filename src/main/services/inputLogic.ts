@@ -1,15 +1,18 @@
+import { Injectable } from "@angular/core";
 import { Board, Direction, Directions, Information, Input, InputType, Position } from "src/main/data";
 import { BiPredicate } from "src/main/interface";
 import { BoardLogic } from "src/main/services";
 
+@Injectable()
 export class InputLogic {
 
   constructor(private boardLogic:BoardLogic){ }
 
   public buildInput(board:Board, position:Position):Input{
     let distances = new Input();
+    //distances.setValue(InputType.food, this.getDistancesUntilCondition(board, position, this.boardLogic.hasFoodIn));
+    distances.setValue(InputType.food, this.getDistancesToFood(board, position));
     distances.setValue(InputType.body, this.getDistancesUntilCondition(board, position, this.boardLogic.hasSnakeIn));
-    distances.setValue(InputType.food, this.getDistancesUntilCondition(board, position, this.boardLogic.hasFoodIn));
     distances.setValue(InputType.wall, this.getDistancesUntilCondition(board, position, this.boardLogic.isPositionOutside));
     distances.setValue(InputType.rock, this.getDistancesUntilCondition(board, position, this.boardLogic.hasRockIn));
     return distances.invertValues(board.width);

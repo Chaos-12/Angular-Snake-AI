@@ -23,7 +23,7 @@ export class RobotOldComponent implements OnInit, Subscriber {
     private robotLogic:RobotOldLogic,
     private boardLogic:BoardLogic) {
       this.countDown = new CountDownUtil( this.reset.bind(this) );
-    }
+  }
 
   ngOnInit(): void {
     this.pubSub.subscribe(this, Subject.animation);

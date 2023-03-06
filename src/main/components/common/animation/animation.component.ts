@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Subject } from "src/main/data";
 import { PubSubService } from "src/main/services";
 
@@ -7,15 +7,12 @@ import { PubSubService } from "src/main/services";
   templateUrl: './animation.component.html',
   styleUrls: ['./animation.component.css']
 })
-export class AnimationComponent implements OnInit {
+export class AnimationComponent {
 
   private lastRenderTime = 0;
   public isOn = false;
 
   constructor(private pubSub:PubSubService){ }
-
-  ngOnInit(): void {
-  }
 
   public play():void{
     this.isOn = true;

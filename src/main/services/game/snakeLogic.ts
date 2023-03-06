@@ -4,20 +4,13 @@ import { Snake, Food, SnakeDeath, Direction, OppositeDirection, Position, Positi
 @Injectable()
 export class SnakeLogic {
 
-  public buildSnake(): Snake {
+  public buildSnake():Snake {
     let snake = new Snake();
     this.resetSnake(snake, 3);
     return snake;
   }
 
-  public isPositionInSnake(snake:Snake, position:Position): boolean {
-    if (snake.head.equals(position)){
-      return true;
-    }
-    return snake.body.contains(position);
-  }
-
-  public feedSnake(snake:Snake, food:Food): void{
+  public feedSnake(snake:Snake, food:Food):void {
     snake.nFoodEaten ++;
     snake.score += food.score;
     snake.energy += food.energy;
@@ -26,12 +19,12 @@ export class SnakeLogic {
     }
   }
 
-  public growSnake(snake:Snake): void{
+  public growSnake(snake:Snake):void {
     snake.body.add(snake.head);
     snake.head = snake.nextPosition;
   }
 
-  public moveSnake(snake:Snake, food:Food): void {
+  public moveSnake(snake:Snake, food:Food):void {
     if(!snake.isAlive){
       return;
     }
@@ -50,14 +43,14 @@ export class SnakeLogic {
     snake.score ++;
   }
 
-  public killSnake(snake:Snake, deathReason:SnakeDeath): void {
+  public killSnake(snake:Snake, deathReason:SnakeDeath):void {
     snake.deathReason = deathReason;
     if(snake.record < snake.score){
       snake.record = snake.score;
     }
   }
 
-  public resetSnake(snake:Snake, length:number = 3): void {
+  public resetSnake(snake:Snake, length:number = 3):void {
     snake.deathReason = SnakeDeath.none;
     snake.nStepTaken = 0;
     snake.nFoodEaten = 0;
@@ -71,7 +64,7 @@ export class SnakeLogic {
     }
   }
 
-  public directSnake(snake:Snake, direction:Direction): void {
+  public directSnake(snake:Snake, direction:Direction):void {
     if(!snake.isAlive){
       return;
     }
