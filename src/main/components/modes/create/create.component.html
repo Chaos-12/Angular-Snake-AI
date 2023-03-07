@@ -1,32 +1,31 @@
 <menu class="card-wrapper">
   <form class="card">
-    <header class="card-title">AI Tolerances</header>
+    <header class="card-title">Robot Tolerances</header>
     <menu class="input-wrapper">
       <div class="input-card">
         <label>Food:</label>
-        <input class="input-number" [(ngModel)]="tolerances.food" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
+        <input class="input-number" [(ngModel)]="foodTol" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
       </div>
       <div class="input-card">
         <label>Body:</label>
-        <input class="input-number" [(ngModel)]="tolerances.body" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
+        <input class="input-number" [(ngModel)]="bodyTol" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
       </div>
       <div class="input-card">
         <label>Wall:</label>
-        <input class="input-number" [(ngModel)]="tolerances.wall" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
+        <input class="input-number" [(ngModel)]="wallTol" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
       </div>
       <div class="input-card">
         <label>Rock:</label>
-        <input class="input-number" [(ngModel)]="tolerances.rock" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
+        <input class="input-number" [(ngModel)]="rockTol" [ngModelOptions]="{standalone: true}" type="number" min="-100" max="100" step="5">
       </div>
-      <button class="button button-submit" type="button" (click)="createOldIa(tolerances)">+</button>
+      <button class="button button-submit" type="button" (click)="createNewRobot(foodTol, bodyTol, wallTol, rockTol)">+</button>
     </menu>
   </form>
-  <div class="card" *ngIf="robotOldList.length>0">
+  <div class="card" *ngIf="robotList.length>0">
     <header class="card-title">Simulation Controls</header>
     <app-animation></app-animation>
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="tolerance"></app-robot>
-  <app-robot-old *ngFor="let robot of robotOldList; let i=index;" [robot]="robot" [tolerances]="tolList[i]"></app-robot-old>
+  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="toleranceList[i]"></app-robot>
 </main>

@@ -1,6 +1,6 @@
 <div class="card">
   <header class="card-title">Robot {{robot.id}}</header>
   <button class="button button-delete-card" (click)="selfDestroy()">&#10006;</button>
-  <app-board [board]="robot.board" [animated]="false"></app-board>
+  <app-board-view [board]="robot.board" [animated]="false"></app-board-view>
   <app-input [input]="robot.input" [tolerances]="tolerances"></app-input>
 </div>

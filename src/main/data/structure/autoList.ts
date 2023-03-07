@@ -2,7 +2,7 @@ import { Operation } from "src/main/interface";
 
 export class AutoList<Value> {
 
-  private valueList:Array<Value> = []
+  public valueList:Array<Value> = []
 
   constructor(initialValue:Value, list:Array<number>){
     for (let item of list){

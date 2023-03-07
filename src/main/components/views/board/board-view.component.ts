@@ -5,11 +5,11 @@ import { PubSubService, Subscriber } from "src/main/services";
 
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  selector: 'app-board-view',
+  templateUrl: './board-view.component.html',
+  styleUrls: ['./board-view.component.scss']
 })
-export class BoardComponent implements OnInit, Subscriber {
+export class BoardViewComponent implements OnInit, Subscriber {
 
   @Input()
   public board!:Board;

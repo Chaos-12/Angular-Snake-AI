@@ -1,6 +1,0 @@
-export * from "./robotOld"
-export * from "./network"
-export * from "./connection"
-export * from "./cell"
-export * from "./inputOld"
-export * from "./tolerancesOld"

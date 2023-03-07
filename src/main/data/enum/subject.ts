@@ -1,3 +1,3 @@
 export enum Subject {
-  snakeDeath, deleteSnake, animation, play, pause, next, reset
+  deleteSnake, animation, play, next, reset
 }
