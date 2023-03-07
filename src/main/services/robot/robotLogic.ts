@@ -22,10 +22,10 @@ constructor(
   public makeRobotDecide(robot:Robot):void {
     this.boardLogic.moveSnakeInside(robot.board, robot.snake);
     let currentPosition = robot.snake.head;
-    let input = this.inputLogic.buildInput(robot.board, currentPosition);
-    this.brainLogic.propagateInputInto(robot.brain, input);
-    let output = this.brainLogic.obtainOutputFrom(robot.brain);
-    let direction = this.getBestDirection(output, currentPosition, robot.board);
+    robot.input = this.inputLogic.buildInput(robot.board, currentPosition);
+    this.brainLogic.propagateInputInto(robot.brain, robot.input);
+    robot.output = this.brainLogic.obtainOutputFrom(robot.brain);
+    let direction = this.getBestDirection(robot.output, currentPosition, robot.board);
     if(direction !== undefined){
       this.snakeLogic.directSnake(robot.snake, direction);
     }

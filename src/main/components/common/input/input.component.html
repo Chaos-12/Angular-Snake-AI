@@ -1,0 +1,3 @@
+<div class="wrapper">
+  <app-information *ngFor="let label of inputLabels; let i=index" [title]="label" [value]="tolerances.getValue(i)" [information]="input.getValue(i)"></app-information>
+</div>

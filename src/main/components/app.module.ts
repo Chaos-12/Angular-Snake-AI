@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule, AppComponent } from 'src/main/components';
 import { RobotComponent, RobotOldComponent } from 'src/main/components/cards';
-import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent } from 'src/main/components/common';
+import { BoardComponent, InputListComponent, InputItemComponent, AnimationComponent, InformationComponent, InputComponent } from 'src/main/components/common';
 import { SelectorComponent, HomeComponent, PlayComponent, CreateComponent } from 'src/main/components/modes';
 import { InputProvider, NetworkBuilder } from 'src/main/utils';
 import { RobotOldLogic, BoardLogic, SnakeLogic, PubSubService, IdService, RobotLogic, BrainLogic, NeuronLogic, InputLogic } from 'src/main/services';
@@ -18,7 +18,9 @@ import { RobotOldLogic, BoardLogic, SnakeLogic, PubSubService, IdService, RobotL
     CreateComponent,
     BoardComponent,
     RobotComponent,
+    InformationComponent,
     RobotOldComponent,
+    InputComponent,
     InputItemComponent,
     AnimationComponent,
     InputListComponent

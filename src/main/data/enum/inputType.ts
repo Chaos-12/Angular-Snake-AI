@@ -3,3 +3,5 @@ export enum InputType {
 }
 
 export const InputTypes:Array<InputType> = [InputType.food, InputType.body, InputType.wall, InputType.rock];
+
+export const InputLabels:Array<string> = ["Food", "Body", "Wall", "Rock"];

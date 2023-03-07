@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InputType, Robot, RobotOld, Subject, Tolerances, TolerancesOld } from "src/main/data";
 import { RobotLogic, RobotOldLogic } from 'src/main/services';
-import { IdService, PubSubService, Subscriber } from 'src/main/services';
+import { PubSubService, Subscriber } from 'src/main/services';
 
 
 @Component({
@@ -16,6 +16,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   public tolList:Array<TolerancesOld> = [];
 
   public tolerances:TolerancesOld = new TolerancesOld(0, 0, 0, 0);
+  public tolerance = new Tolerances();
 
   constructor(
     private pubSub:PubSubService,
@@ -31,12 +32,11 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     //this.createOldIa(new TolerancesOld(100, -80, -20, -80));
     //this.createOldIa(new TolerancesOld(100, -80, -80, -20));
 
-    let tolerances = new Tolerances();
-    //tolerances.setValue(InputType.body, 100);
-    //tolerances.setValue(InputType.wall, 100);
-    //tolerances.setValue(InputType.rock, 100);
-    tolerances.setValue(InputType.food, 100);
-    let newRobot = this.robotLogic.buildRobot(tolerances);
+    this.tolerance.setValue(InputType.food, 1);
+    this.tolerance.setValue(InputType.body, -0.5);
+    this.tolerance.setValue(InputType.wall, -0.5);
+    this.tolerance.setValue(InputType.rock, -0.5);
+    let newRobot = this.robotLogic.buildRobot(this.tolerance);
     this.robotList.push(newRobot);
   }
 

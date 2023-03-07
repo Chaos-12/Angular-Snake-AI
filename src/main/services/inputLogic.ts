@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Directions, Information, Input, InputType, Position } from "src/main/data";
+import { Board, Direction, Directions, Information, RobotInput, InputType, Position } from "src/main/data";
 import { BiPredicate } from "src/main/interface";
 import { BoardLogic } from "src/main/services";
 
@@ -8,8 +8,8 @@ export class InputLogic {
 
   constructor(private boardLogic:BoardLogic){ }
 
-  public buildInput(board:Board, position:Position):Input{
-    let distances = new Input();
+  public buildInput(board:Board, position:Position):RobotInput{
+    let distances = new RobotInput();
     //distances.setValue(InputType.food, this.getDistancesUntilCondition(board, position, this.boardLogic.hasFoodIn));
     distances.setValue(InputType.food, this.getDistancesToFood(board, position));
     distances.setValue(InputType.body, this.getDistancesUntilCondition(board, position, this.boardLogic.hasSnakeIn));

@@ -19,7 +19,11 @@ export class AutoList<Value> {
   }
 
   public map(operation:Operation<Value>):AutoList<Value> {
-    this.valueList.map( value => operation(value) );
+    let newList = new Array<Value>();
+    for (let value of this.valueList){
+      newList.push(operation(value));
+    }
+    this.valueList = newList;
     return this;
   }
 }

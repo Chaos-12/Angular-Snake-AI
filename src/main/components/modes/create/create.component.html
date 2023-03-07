@@ -27,6 +27,6 @@
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot"></app-robot>
+  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="tolerance"></app-robot>
   <app-robot-old *ngFor="let robot of robotOldList; let i=index;" [robot]="robot" [tolerances]="tolList[i]"></app-robot-old>
 </main>

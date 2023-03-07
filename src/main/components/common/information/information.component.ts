@@ -1,13 +1,12 @@
-import { Component, HostBinding, Input, OnInit } from "@angular/core";
+import { Component, HostBinding, Input } from "@angular/core";
 import { Direction, DirectionLabels, Information } from "src/main/data";
-
 
 @Component({
   selector: 'app-information',
   templateUrl: './information.component.html',
   styleUrls: ['./information.component.scss']
 })
-export class InputItemComponent {
+export class InformationComponent {
 
   public labels = DirectionLabels;
 

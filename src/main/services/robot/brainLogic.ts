@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Brain, Information, InputType, Link, Directions, NeuronMap, Input, InputTypes, Direction, Neuron, Tolerances } from "src/main/data";
+import { Brain, Information, InputType, Link, Directions, NeuronMap, RobotInput, InputTypes, Direction, Neuron, Tolerances } from "src/main/data";
 import { NeuronLogic } from "src/main/services";
 
 @Injectable()
@@ -76,7 +76,7 @@ export class BrainLogic {
     this.neuronLogic.addLinkTo(startNeuron, link);
   }
 
-  public propagateInputInto(brain:Brain, input:Input):void{
+  public propagateInputInto(brain:Brain, input:RobotInput):void{
     //Set the weights of all neurons
     for (let inputType of InputTypes){
       for (let direction of Directions){
