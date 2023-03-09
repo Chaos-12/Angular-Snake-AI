@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Board, Direction, Directions, Information, Position, Robot, Tolerances } from "src/main/data";
-import { BoardLogic, BrainLogic, IdService, InputLogic, SnakeLogic } from "src/main/services";
+import { BoardLogic, BrainLogic, IdService, InputLogic, PositionLogic, SnakeLogic } from "src/main/services";
 
 @Injectable()
 export class RobotLogic {
@@ -10,6 +10,7 @@ constructor(
   private brainLogic:BrainLogic,
   private snakeLogic:SnakeLogic,
   private boardLogic:BoardLogic,
+  private positionLogic:PositionLogic,
   private inputLogic:InputLogic){ }
 
   public buildRobot(tolerances:Tolerances):Robot {
@@ -48,7 +49,7 @@ constructor(
     }
     //We return the first direction that is "safe" for the snake
     for (let direction of orderedDirections){
-      if (!this.boardLogic.hasObstacleIn(board, position.forward(direction))){
+      if (this.positionLogic.isPositionFree(board, position.forward(direction))){
         return direction;
       }
     }

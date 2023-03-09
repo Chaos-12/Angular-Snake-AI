@@ -38,13 +38,13 @@ export class PositionSetList {
   public shift():Position|undefined{
     let firstPosition = this.list.shift();
     if(firstPosition){
-      this.remove(firstPosition);
+      this.removeFromMap(firstPosition);
       return firstPosition;
     }
     return undefined;
   }
 
-  public remove(position:Position):boolean{
+  private removeFromMap(position:Position):boolean{
     let yCoordinates = this.coordinateMap.get(position.x);
     if(!yCoordinates){
       return false;
@@ -53,6 +53,6 @@ export class PositionSetList {
   }
 
   public forEach(callback:Consumer<Position>):void{
-    this.list.forEach(position => callback(position));
+    this.list.forEach(callback);
   }
 }

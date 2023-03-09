@@ -28,7 +28,6 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
 
     this.createNewRobot(100, -100, -100, -100);
     this.createNewRobot(100, -80, -80, 0);
-    this.createNewRobot(100, -80, -80, 20);
     this.createNewRobot(100, -80, -80, -20);
     this.createNewRobot(100, -80, -20, -80);
     this.createNewRobot(100, -20, -80, -80);
