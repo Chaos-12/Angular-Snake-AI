@@ -22,10 +22,18 @@
     </menu>
   </form>
   <div class="card" *ngIf="robotList.length>0">
-    <header class="card-title">Simulation Controls</header>
+    <header class="card-title">Animation</header>
     <app-animation></app-animation>
+  </div>
+  <div class="card" *ngIf="robotList.length>0">
+    <header class="card-title">Information</header>
+    <main class="button-wrapper">
+      <button class="button rounded-left prev" type="button" (click)="prevInfo()">&#10094;</button>
+      <output class="text" [innerText]="info[infoIndex]"></output>
+      <button class="button rounded-right next" type="button" (click)="nextInfo()">&#10095;</button>
+    </main>
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot *ngFor="let robot of robotList; let i=index;" [robot]="robot" [tolerances]="toleranceList[i]"></app-robot>
+  <app-robot *ngFor="let robot of robotList; let i=index;" [info]="info[infoIndex]" [robot]="robot" [tolerances]="toleranceList[i]"></app-robot>
 </main>

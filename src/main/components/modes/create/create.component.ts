@@ -19,6 +19,9 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   public robotList:Array<Robot> = [];
   public toleranceList:Array<Tolerances> = [];
 
+  public info:Array<string> = ['None', 'Input']
+  public infoIndex:number = 0;
+
   constructor(
     private pubSub:PubSubService,
     private robotLogic:RobotLogic) { }
@@ -62,6 +65,20 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
         this.toleranceList.splice(i, 1);
         return;
       }
+    }
+  }
+
+  public nextInfo():void{
+    this.infoIndex ++;
+    if (this.infoIndex >= this.info.length){
+      this.infoIndex = 0;
+    }
+  }
+
+  public prevInfo():void{
+    this.infoIndex --;
+    if (this.infoIndex < 0){
+      this.infoIndex = this.info.length-1;
     }
   }
 }

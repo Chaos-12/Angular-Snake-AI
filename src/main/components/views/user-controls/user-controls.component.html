@@ -1,0 +1,6 @@
+<menu class="button-wrapper">
+  <button class="button input-left rounded-left" [ngClass]="{'selected': snake.direction == directions.west}" (click)="changeSnakeDirection(directions.west)">&#9664;</button>
+  <button class="button input-up" [ngClass]="{'selected': snake.direction == directions.north}" (click)="changeSnakeDirection(directions.north)">&#9650;</button>
+  <button class="button input-down" [ngClass]="{'selected': snake.direction == directions.south}" (click)="changeSnakeDirection(directions.south)">&#9660;</button>
+  <button class="button input-right rounded-right" [ngClass]="{'selected': snake.direction == directions.east}" (click)="changeSnakeDirection(directions.east)">&#9654;</button>
+</menu>

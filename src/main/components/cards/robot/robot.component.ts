@@ -16,6 +16,9 @@ export class RobotComponent implements OnInit, Subscriber {
   @Input()
   public tolerances!:Tolerances;
 
+  @Input()
+  public info!:string;
+
   private countDown:CountDownUtil;
 
   constructor(
