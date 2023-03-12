@@ -1,0 +1,5 @@
+<div class="button-wrapper">
+  <button class="button button-start rounded-left" *ngIf="!isOn" (click)="play()">&#9655;</button>
+  <button class="button button-step rounded-right" *ngIf="!isOn" (click)="next()">&#10140;</button>
+  <button class="button button-pause rounded-left rounded-right" *ngIf="isOn" (click)="pause()">&#2405;</button>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { Subject } from "src/main/data";
 import { PubSubService } from "src/main/services";
 
@@ -7,7 +7,7 @@ import { PubSubService } from "src/main/services";
   templateUrl: './animation.component.html',
   styleUrls: ['./animation.component.css']
 })
-export class AnimationComponent {
+export class AnimationComponent implements OnDestroy{
 
   private lastRenderTime = 0;
   public isOn = false;
@@ -27,11 +27,6 @@ export class AnimationComponent {
     this.pubSub.post(Subject.animation, Subject.next);
   }
 
-  public reset():void{
-    this.pause();
-    this.pubSub.post(Subject.animation, Subject.reset);
-  }
-
   private nextFrame(currentTime:number):void{
     if(!this.isOn){
       return;
@@ -43,5 +38,9 @@ export class AnimationComponent {
     }
     this.lastRenderTime = currentTime;
     this.next();
+  }
+
+  ngOnDestroy(): void {
+      this.pause();
   }
 }
