@@ -19,6 +19,7 @@ export class BoardLogic {
   public resetBoard(board:Board):void{
     this.snakeLogic.resetSnake(board.snake);
     board.rocks.reset();
+    board.posibleRocks = [];
   }
 
   public moveSnakeInside(board:Board, snake:Snake):void{

@@ -4,6 +4,7 @@
     <button class="button justify-end rounded-left rounded-right" (click)="selfDestroy()">&#10006;</button>
   </header>
   <app-board-view [board]="robot.board" [animated]="false"></app-board-view>
-  <div *ngIf="info!='input'" class="card-bottom"></div>
+  <div *ngIf="info=='None'" class="card-bottom"></div>
   <app-input *ngIf="info=='Input'" [input]="robot.input" [tolerances]="tolerances"></app-input>
+  <app-information *ngIf="info=='Output'" [title]="'Output'" [information]="robot.output"></app-information>
 </div>

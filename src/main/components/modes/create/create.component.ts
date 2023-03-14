@@ -19,7 +19,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   public robotList:Array<Robot> = [];
   public toleranceList:Array<Tolerances> = [];
 
-  public info:Array<string> = ['None', 'Input']
+  public info:Array<string> = ['None', 'Input', 'Output']
   public infoIndex:number = 0;
 
   constructor(

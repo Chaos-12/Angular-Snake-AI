@@ -51,6 +51,7 @@ export class SnakeLogic {
   }
 
   public resetSnake(snake:Snake, length:number = 3):void {
+    snake.score = 0;
     snake.deathReason = SnakeDeath.none;
     snake.nStepTaken = 0;
     snake.nFoodEaten = 0;
