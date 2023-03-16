@@ -9,29 +9,32 @@ export class BoardLogic {
     private snakeLogic:SnakeLogic,
     private positionLogic:PositionLogic){ }
 
-  public buildBoard():Board{
-    let snake = this.snakeLogic.buildSnake();
-    let board = new Board(snake, new Food());
-    this.generateFoodFor(board);
+  public buildBoard(width:number = 11):Board{
+    let board = new Board(width);
     return board;
   }
 
+  public addSnake(board:Board, snake:Snake):void{
+    board.snakeList.push(snake);
+  }
+
   public resetBoard(board:Board):void{
-    this.snakeLogic.resetSnake(board.snake);
+    board.snakeList.forEach( snake => this.snakeLogic.resetSnake(snake));
     board.rocks.reset();
     board.posibleRocks = [];
+    board.isOver = false;
   }
 
   public moveSnakeInside(board:Board, snake:Snake):void{
     let newSnakePosition = snake.nextPosition;
     if(this.positionLogic.isPositionOutside(board, newSnakePosition)){
-      this.snakeLogic.killSnake(snake, SnakeDeath.wall);
+      this.killSnake(board, snake, SnakeDeath.wall);
     }
     if(this.positionLogic.hasRockIn(board, newSnakePosition)){
-      this.snakeLogic.killSnake(snake, SnakeDeath.rock);
+      this.killSnake(board, snake, SnakeDeath.rock);
     }
     if(this.positionLogic.hasSnakeIn(board, newSnakePosition)){
-      this.snakeLogic.killSnake(snake, SnakeDeath.bite);
+      this.killSnake(board, snake, SnakeDeath.bite);
     }
 
     this.snakeLogic.moveSnake(snake, board.food);
@@ -39,6 +42,19 @@ export class BoardLogic {
     if(this.positionLogic.hasFoodIn(board, newSnakePosition)){
       this.generateRockFor(board);
       this.generateFoodFor(board);
+    }
+  }
+
+  public killSnake(board:Board, snake:Snake, deathReason:SnakeDeath):void{
+    this.snakeLogic.killSnake(snake, deathReason);
+    let someSnakeAlive = false;
+    for (let snake of board.snakeList){
+      if (snake.isAlive){
+        someSnakeAlive = true;
+      }
+    }
+    if (!someSnakeAlive){
+      board.isOver = true;
     }
   }
 

@@ -15,5 +15,5 @@
 }
 
 .selected {
-  background-color: rgba(27, 196, 61, 1);
+  background-color: var(--color-positive);
 }

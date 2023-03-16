@@ -1,15 +1,12 @@
-import { Board, Brain, Information, RobotInput, Snake } from "src/main/data";
+import { Board, Brain, Information, Player, RobotInput, Snake } from "src/main/data";
 
-export class Robot {
+export class Robot extends Player {
 
   public input:RobotInput;
   public output:Information;
 
-  constructor(
-    public readonly id:string,
-    public brain:Brain,
-    public board:Board,
-    public snake:Snake){
+  constructor(id:string, board:Board, snake:Snake, public brain:Brain){
+      super(id, board, snake)
       this.input = new RobotInput();
       this.output = new Information();
     }

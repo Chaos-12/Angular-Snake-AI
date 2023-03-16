@@ -21,7 +21,7 @@ export class PubSubService {
     }
     subscribers.add(subscriber);
     this.interestMap.set(subject, subscribers);
-    return () => this.unsubscribe(subscriber, subject);
+    return this.unsubscribe.bind(this, subscriber, subject);
   }
 
   private unsubscribe(subscriber:Subscriber, subject:Subject):void{

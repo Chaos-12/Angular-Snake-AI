@@ -14,7 +14,7 @@ export class InformationComponent {
   public title:string="";
 
   @Input()
-  public value:string="";
+  public text:string="";
 
   @Input()
   public information!:Information;

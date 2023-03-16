@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Board, Direction, Directions, Information, Position, Robot, Tolerances } from "src/main/data";
-import { BoardLogic, BrainLogic, IdService, InputLogic, PositionLogic, SnakeLogic } from "src/main/services";
+import { BoardLogic, BrainLogic, IdService, InputLogic, PlayerLogic, PositionLogic, SnakeLogic } from "src/main/services";
 
 @Injectable()
 export class RobotLogic {
@@ -10,18 +10,19 @@ constructor(
   private brainLogic:BrainLogic,
   private snakeLogic:SnakeLogic,
   private boardLogic:BoardLogic,
+  private playerLogic:PlayerLogic,
   private positionLogic:PositionLogic,
   private inputLogic:InputLogic){ }
 
   public buildRobot(tolerances:Tolerances):Robot {
     let robotId = this.idService.generateId();
     let brain = this.brainLogic.buildBrainFrom(tolerances);
-    let board = this.boardLogic.buildBoard();
-    return new Robot(robotId, brain, board, board.snake);
+    let player = this.playerLogic.buildPlayer(robotId);
+    return new Robot(robotId, player.board, player.snake, brain);
   }
 
   public makeRobotDecide(robot:Robot):void {
-    this.boardLogic.moveSnakeInside(robot.board, robot.snake);
+    this.playerLogic.nextMove(robot);
     let currentPosition = robot.snake.head;
     robot.input = this.inputLogic.buildInput(robot.board, currentPosition);
     this.brainLogic.propagateInputInto(robot.brain, robot.input);

@@ -14,10 +14,16 @@ export class PositionLogic {
   }
 
   public hasSnakeIn(board:Board, position:Position):boolean{
-    if (board.snake.head.equals(position)){
-      return true;
-    }
-    return board.snake.body.contains(position);
+    let containsSnake = false;
+    board.snakeList.forEach( snake => {
+      if( snake.head.equals(position)){
+        containsSnake = true;
+      }
+      if( snake.body.contains(position)){
+        containsSnake = true;
+      }
+    })
+    return containsSnake;
   }
 
   public hasFoodIn(board:Board, position:Position):boolean{

@@ -1,11 +1,11 @@
 <div class="card-wrapper">
   <div class="card shadow">
     <header class="card-header">
-      <header>User SNAKE</header>
+      <header>User {{player.id}}</header>
       <button class="button justify-end rounded-left rounded-right" (click)="reset()">&#8617;</button>
     </header>
-    <app-board-view [board]="board"></app-board-view>
-    <app-user-controls [snake]="snake" [keyMap]="userKeys"></app-user-controls>
+    <app-board-view [board]="player.board"></app-board-view>
+    <app-user-controls [snake]="player.snake" [keyMap]="userKeys"></app-user-controls>
     <app-animation></app-animation>
   </div>
 </div>

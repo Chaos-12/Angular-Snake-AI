@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Robot, Subject, Tolerances } from "src/main/data";
 import { BoardLogic, Subscriber, PubSubService, RobotLogic } from "src/main/services";
 import { CountDownUtil } from "src/main/utils";
@@ -8,7 +8,7 @@ import { CountDownUtil } from "src/main/utils";
   templateUrl: './robot.component.html',
   styleUrls: ['./robot.component.css']
 })
-export class RobotComponent implements OnInit, Subscriber {
+export class RobotComponent implements OnInit, OnDestroy, Subscriber {
 
   @Input()
   public robot!:Robot;
@@ -21,6 +21,8 @@ export class RobotComponent implements OnInit, Subscriber {
 
   private countDown:CountDownUtil;
 
+  private unSubscribe!:CallableFunction;
+
   constructor(
     private pubSub:PubSubService,
     private robotLogic:RobotLogic,
@@ -29,7 +31,11 @@ export class RobotComponent implements OnInit, Subscriber {
     }
 
   ngOnInit(): void {
-    this.pubSub.subscribe(this, Subject.animation);
+    this.unSubscribe = this.pubSub.subscribe(this, Subject.animation);
+  }
+
+  ngOnDestroy():void{
+    this.unSubscribe();
   }
 
   public notify(message:Subject){

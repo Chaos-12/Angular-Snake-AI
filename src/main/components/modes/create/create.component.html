@@ -35,5 +35,27 @@
   </div>
 </menu>
 <main class="card-wrapper">
-  <app-robot *ngFor="let robot of robotList; let i=index;" [info]="info[infoIndex]" [robot]="robot" [tolerances]="toleranceList[i]"></app-robot>
+  <app-robot class="card" *ngFor="let robot of robotList; let i=index;" [ngClass]="{'card-selected': i==selected}" [info]="info[infoIndex]" [robot]="robot" [tolerances]="toleranceList[i]"></app-robot>
 </main>
+<nav class="card-wrapper">
+  <table class="card table">
+    <tr>
+      <th>Robot Id</th>
+      <th>Record</th>
+      <th>Tolerances</th>
+      <th>Score</th>
+      <th>Foods eaten</th>
+      <th>Steps taken</th>
+      <th>Energy</th>
+    </tr>
+    <tr class="table-row" *ngFor="let robot of robotList; let i=index" [ngClass]="{'row-selected': i==selected}" (click)="selectRobot(i)">
+      <th>{{robot.id}}</th>
+      <th>{{robot.snake.record}}</th>
+      <th>{{toleranceList[i].getValue(0)}}</th>
+      <th>{{robot.snake.score}}</th>
+      <th>{{robot.snake.nFoodEaten}}</th>
+      <th>{{robot.snake.nStepTaken}}</th>
+      <th>{{robot.snake.energy}}</th>
+    </tr>
+  </table>
+</nav>

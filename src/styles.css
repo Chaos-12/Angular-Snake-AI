@@ -2,7 +2,7 @@
   --color-main: rgb(52, 152, 219);
   --color-selected: rgba(255, 255, 255, 0.4);
   --color-font: white;
-  --color-positive: rgb(127,255,0);
+  --color-positive: rgb(26, 202, 26);
 }
 
 html, body {
@@ -114,6 +114,10 @@ menu {
   font-size: 17px;
 }
 
+.card-selected {
+  box-shadow: 0 0 20px var(--color-positive)!important;
+}
+
 .justify-end {
   justify-self: end;
 }
@@ -158,4 +162,30 @@ menu {
   aspect-ratio: 1/1;
   top: 0px;
   right: 0px;
+}
+
+.table {
+  width: 100%;
+  color: var(--color-font);
+  background-color: var(--color-main);
+  padding: 10px;
+  border-spacing: 0;
+}
+
+.table-row {
+  background-color: white;
+  color: rgb(5, 74, 121);
+}
+
+.table-row:hover {
+  background-color: rgb(151, 247, 151)!important;
+}
+
+.table-row:nth-child(even) {
+  background-color: rgb(172, 219, 250);
+}
+
+.row-selected {
+  background-color: var(--color-positive)!important;
+  color: var(--color-font);
 }

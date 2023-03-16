@@ -22,12 +22,16 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   public info:Array<string> = ['None', 'Input', 'Output']
   public infoIndex:number = 0;
 
+  public selected:number = -1;
+
+  private unSubscribe!:CallableFunction;
+
   constructor(
     private pubSub:PubSubService,
     private robotLogic:RobotLogic) { }
 
   ngOnInit(): void {
-    this.pubSub.subscribe(this, Subject.deleteSnake);
+    this.unSubscribe = this.pubSub.subscribe(this, Subject.deleteSnake);
 
     this.createNewRobot(100, -100, -100, -100);
     this.createNewRobot(100, -80, -80, 0);
@@ -37,6 +41,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   }
 
   ngOnDestroy(): void {
+    this.unSubscribe();
     this.robotList = [];
     this.toleranceList = [];
   }
@@ -63,6 +68,12 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
       if (this.robotList[i].id == idRobot){
         this.robotList.splice(i, 1);
         this.toleranceList.splice(i, 1);
+        if(this.selected == i){
+          this.selected = -1;
+        }
+        if(this.selected > i){
+          this.selected --;
+        }
         return;
       }
     }
@@ -79,6 +90,14 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     this.infoIndex --;
     if (this.infoIndex < 0){
       this.infoIndex = this.info.length-1;
+    }
+  }
+
+  public selectRobot(index:number):void{
+    if (this.selected === index){
+      this.selected = -1;
+    } else {
+      this.selected = index;
     }
   }
 }
