@@ -115,7 +115,7 @@ menu {
 }
 
 .card-selected {
-  box-shadow: 0 0 20px var(--color-positive)!important;
+  box-shadow: 0 0 5px white, 0 0 10px 5px var(--color-positive)!important;
 }
 
 .justify-end {
@@ -123,8 +123,14 @@ menu {
 }
 
 .stats {
+  display: flex;
+  flex-direction: column;
   color: var(--color-font);
-  text-align: center;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .button {
@@ -139,11 +145,26 @@ menu {
   box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-.button:hover {
-  background-color: var(--color-selected);
-  transition: 0.4s;
-  transform: translate(-1px, -1px);
-  box-shadow: 6px 6px 3px 3px rgba(0, 0, 0, 0.3);
+.button-active {
+  background-color: var(--color-positive);
+}
+
+.button:disabled {
+  background-color: gray!important;
+}
+
+.button:hover:enabled {
+  animation: up-down 1s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes up-down {
+  0%, 100% {
+    transform: translate(0,0);
+  }
+  50% {
+    transform: translate(-1px, -1px);
+  }
 }
 
 .button-wrapper {
@@ -170,6 +191,7 @@ menu {
   background-color: var(--color-main);
   padding: 10px;
   border-spacing: 0;
+  overflow-x: scroll;
 }
 
 .table-row {

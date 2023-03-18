@@ -30,7 +30,7 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     private pubSub:PubSubService,
     private robotLogic:RobotLogic) { }
 
-  ngOnInit(): void {
+  ngOnInit():void{
     this.unSubscribe = this.pubSub.subscribe(this, Subject.deleteSnake);
 
     this.createNewRobot(100, -100, -100, -100);
@@ -40,14 +40,14 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     this.createNewRobot(100, -20, -80, -80);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy():void{
     this.unSubscribe();
     this.robotList = [];
     this.toleranceList = [];
   }
 
-  notify(message:string):void{
-    this.deleteRobot(message);
+  notify(robotId:string):void{
+    this.deleteRobot(robotId);
   }
 
   public createNewRobot(foodTol:number, bodyTol:number, wallTol:number, rockTol:number):void {
@@ -63,9 +63,9 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
     this.robotList.push(newRobot);
   }
 
-  private deleteRobot(idRobot:string): void{
+  private deleteRobot(robotId:string): void{
     for (let i = 0; i<this.robotList.length; i++){
-      if (this.robotList[i].id == idRobot){
+      if (this.robotList[i].id == robotId){
         this.robotList.splice(i, 1);
         this.toleranceList.splice(i, 1);
         if(this.selected == i){

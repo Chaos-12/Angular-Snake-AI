@@ -38,18 +38,11 @@ export class RobotComponent implements OnInit, OnDestroy, Subscriber {
     this.unSubscribe();
   }
 
-  public notify(message:Subject){
-    switch(message){
-      case Subject.next:
-        if(this.robot.snake.isAlive){
-          this.robotLogic.makeRobotDecide(this.robot);
-        } else {
-          this.countDown.nextStep();
-        }
-        break;
-      case Subject.reset:
-        this.reset();
-        break;
+  public notify(){
+    if(this.robot.snake.isAlive){
+      this.robotLogic.makeRobotDecide(this.robot);
+    } else {
+      this.countDown.nextStep();
     }
   }
 

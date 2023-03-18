@@ -36,9 +36,6 @@ export class SnakeLogic {
       snake.body.shift();
       snake.energy --;
     }
-    if(snake.energy <= 0){
-      this.killSnake(snake, SnakeDeath.hunger);
-    }
     snake.nStepTaken ++;
     snake.score ++;
   }

@@ -3,11 +3,12 @@
   <div *ngFor="let part of board.snakeList[0].body.list" class="snake snake-body row{{part.y}} column{{part.x}}"></div>
   <div class="food row{{board.food.position.y}} column{{board.food.position.x}}"></div>
   <div *ngFor="let rock of board.rocks.list" class="rock row{{rock.y}} column{{rock.x}}"></div>
-  <div class="energy-bar"></div>
+  <div class="energy-bar" *ngIf="board.snakeList.length == 1"></div>
   <output class="extended blur stats" *ngIf="board.isOver && board.snakeList.length == 1">
-    <p class="text-big bold">Death by {{board.snakeList[0].deathReason}}</p>
-    <p class="text-small">nº steps: {{board.snakeList[0].nStepTaken}}</p>
-    <p class="text-small">nº foods: {{board.snakeList[0].nFoodEaten}}</p>
-    <p class="text-medium bold">SCORE: {{board.snakeList[0].score}}</p>
+    <p class="text-medium centered bold">Death by {{board.snakeList[0].deathReason}}</p>
+    <p class="text-small centered">Steps taken: {{board.snakeList[0].nStepTaken}}</p>
+    <p class="text-small centered">Foods eaten: {{board.snakeList[0].nFoodEaten}}</p>
+    <p class="text-medium centered bold">Final Score: {{board.snakeList[0].score}}</p>
+    <button class="button button-reset rounded-left rounded-right" (click)="reset()">&#8617;</button>
   </output>
 </output>

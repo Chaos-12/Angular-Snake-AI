@@ -19,6 +19,12 @@
   background: linear-gradient(to right, var(--color-positive) var(--snake-energy), transparent var(--snake-energy));
 }
 
+.button-reset {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .snake {
   background-color: greenyellow;
   border: 1px solid black;

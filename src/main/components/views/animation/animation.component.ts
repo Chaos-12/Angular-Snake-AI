@@ -24,7 +24,7 @@ export class AnimationComponent implements OnDestroy{
   }
 
   public next():void{
-    this.pubSub.post(Subject.animation, Subject.next);
+    this.pubSub.post(Subject.animation);
   }
 
   private nextFrame(currentTime:number):void{

@@ -35,15 +35,8 @@ export class PlayComponent implements OnInit, OnDestroy, Subscriber {
       this.unsubscribe();
   }
 
-  public notify(message:Subject):void{
-    switch(message){
-      case Subject.next:
-        this.playerLogic.nextMove(this.player);
-        break;
-      case Subject.reset:
-        this.playerLogic.reset(this.player);
-        break;
-    }
+  public notify():void{
+    this.playerLogic.nextMove(this.player);
   }
 
   public reset():void{

@@ -9,9 +9,9 @@ export class PubSubService {
     this.interestMap = new Map<Subject, Set<Subscriber>>();
   }
 
-  public post(subject:Subject, message:any):void{
+  public post(subject:Subject, ...args:any):void{
     let subscribers = this.interestMap.get(subject);
-    subscribers?.forEach(sub => sub.notify(message));
+    subscribers?.forEach(sub => sub.notify(args));
   }
 
   public subscribe(subscriber:Subscriber, subject:Subject):CallableFunction{

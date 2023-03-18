@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input } from "@angular/core";
 import { Board } from "src/main/data";
+import { BoardLogic } from "src/main/services";
 
 @Component({
   selector: 'app-board-view',
@@ -16,5 +17,9 @@ export class BoardViewComponent {
     return `${this.board.snakeList[0].energy}%`;
   }
 
-  constructor(){ }
+  constructor(private boardLogic:BoardLogic){ }
+
+  public reset():void{
+    this.boardLogic.resetBoard(this.board);
+  }
 }

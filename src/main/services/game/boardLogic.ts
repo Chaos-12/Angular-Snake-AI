@@ -43,6 +43,9 @@ export class BoardLogic {
       this.generateRockFor(board);
       this.generateFoodFor(board);
     }
+    if(snake.energy <= 0){
+      this.killSnake(board, snake, SnakeDeath.hunger);
+    }
   }
 
   public killSnake(board:Board, snake:Snake, deathReason:SnakeDeath):void{

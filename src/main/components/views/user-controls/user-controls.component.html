@@ -1,6 +1,6 @@
 <menu class="button-wrapper">
-  <button class="button input-left rounded-left" [ngClass]="{'selected': snake.direction == directions.west}" (click)="changeSnakeDirection(directions.west)">&#9664;</button>
-  <button class="button input-up" [ngClass]="{'selected': snake.direction == directions.north}" (click)="changeSnakeDirection(directions.north)">&#9650;</button>
-  <button class="button input-down" [ngClass]="{'selected': snake.direction == directions.south}" (click)="changeSnakeDirection(directions.south)">&#9660;</button>
-  <button class="button input-right rounded-right" [ngClass]="{'selected': snake.direction == directions.east}" (click)="changeSnakeDirection(directions.east)">&#9654;</button>
+  <button class="button input-left rounded-left" [ngClass]="{'button-active': snake.direction == directions.west}" [disabled]="!snake.isAlive" (click)="changeSnakeDirection(directions.west)">&#9664;</button>
+  <button class="button input-up" [ngClass]="{'button-active': snake.direction == directions.north}" [disabled]="!snake.isAlive" (click)="changeSnakeDirection(directions.north)">&#9650;</button>
+  <button class="button input-down" [ngClass]="{'button-active': snake.direction == directions.south}" [disabled]="!snake.isAlive" (click)="changeSnakeDirection(directions.south)">&#9660;</button>
+  <button class="button input-right rounded-right" [ngClass]="{'button-active': snake.direction == directions.east}" [disabled]="!snake.isAlive" (click)="changeSnakeDirection(directions.east)">&#9654;</button>
 </menu>
