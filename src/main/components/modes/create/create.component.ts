@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { InputType, Robot, Subject, Tolerances } from "src/main/data";
 import { RobotLogic } from 'src/main/services';
 import { PubSubService, Subscriber } from 'src/main/services';
+import { ArrayUtils } from 'src/main/utils';
 
 
 @Component({
@@ -66,8 +67,8 @@ export class CreateComponent implements OnInit, OnDestroy, Subscriber {
   private deleteRobot(robotId:string): void{
     for (let i = 0; i<this.robotList.length; i++){
       if (this.robotList[i].id == robotId){
-        this.robotList.splice(i, 1);
-        this.toleranceList.splice(i, 1);
+        ArrayUtils.removeAtIndex(this.robotList, i);
+        ArrayUtils.removeAtIndex(this.toleranceList, i);
         if(this.selected == i){
           this.selected = -1;
         }

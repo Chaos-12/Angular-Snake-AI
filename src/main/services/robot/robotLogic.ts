@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Board, Direction, Directions, Information, Position, Robot, Tolerances } from "src/main/data";
-import { BoardLogic, BrainLogic, IdService, InputLogic, PlayerLogic, PositionLogic, SnakeLogic } from "src/main/services";
+import { BrainLogic, IdService, InputLogic, PlayerLogic, PositionLogic, SnakeLogic } from "src/main/services";
+import { ArrayUtils } from "src/main/utils";
 
 @Injectable()
 export class RobotLogic {
@@ -9,7 +10,6 @@ constructor(
   private idService:IdService,
   private brainLogic:BrainLogic,
   private snakeLogic:SnakeLogic,
-  private boardLogic:BoardLogic,
   private playerLogic:PlayerLogic,
   private positionLogic:PositionLogic,
   private inputLogic:InputLogic){ }
@@ -35,19 +35,7 @@ constructor(
 
   public getBestDirection(output:Information, position:Position, board:Board):Direction|undefined {
     //We create an array of directions ordered according to the values of the output
-    let orderedDirections = new Array<Direction>();
-    for (let direction of Directions){
-      let unassigned = true;
-      for (let i=0; unassigned && i<orderedDirections.length; i++){
-        if (output.getValue(direction) > output.getValue(orderedDirections[i])){
-          orderedDirections.splice(i, 0, direction);
-          unassigned = false;
-        }
-      }
-      if(unassigned){
-        orderedDirections.push(direction);
-      }
-    }
+    let orderedDirections = ArrayUtils.order(Directions, (direction) => output.getValue(direction));
     //We return the first direction that is "safe" for the snake
     for (let direction of orderedDirections){
       if (this.positionLogic.isPositionFree(board, position.forward(direction))){

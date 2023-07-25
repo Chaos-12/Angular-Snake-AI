@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from 'src/main/app/app.component';
+import { AppComponent } from 'src/main/components';
 import { TestUtils } from 'src/test/testUtils';
 
-describe(TestUtils.title('AppComponent'), () => {
+TestUtils.testClass('AppComponent', function(){
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -13,24 +14,24 @@ describe(TestUtils.title('AppComponent'), () => {
         AppComponent
       ],
     }).compileComponents();
-  });
+  })
 
-  it('should create the app', () => {
+  TestUtils.test('Should create the app', function(){
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
+  })
 
-  it(`should have as title 'angular-snake-ai'`, () => {
+  TestUtils.test(`Should have as title 'angular-snake-ai'`, function(){
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('angular-snake-ai');
-  });
+  })
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('angular snake ai app is running!');
-  // });
-});
+  /*TestUtils.test('should render title', function(){
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular snake ai app is running!');
+  })*/
+})

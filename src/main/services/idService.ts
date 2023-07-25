@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ArrayUtils } from "src/main/utils";
 
 @Injectable()
 export class IdService {
@@ -21,7 +22,7 @@ export class IdService {
   public remove(id: string): void {
     const index = this.idList.indexOf(id);
     if (index >= 0){
-      this.idList.splice(index, 1);
+      ArrayUtils.removeAtIndex(this.idList, index);
     }
   }
 

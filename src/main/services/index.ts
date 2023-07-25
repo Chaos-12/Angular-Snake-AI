@@ -1,3 +1,4 @@
+export * from "./evolution"
 export * from "./game"
 export * from "./robot"
 export * from "./idService"

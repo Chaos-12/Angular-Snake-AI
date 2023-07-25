@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Board, Direction, Position, PositionSetList } from "src/main/data";
-import { RandomUtils } from "src/main/utils";
+import { Board, Direction, Position } from "src/main/data";
+import { ArrayUtils, RandomUtils } from "src/main/utils";
 
 @Injectable()
 export class PositionLogic {
@@ -74,14 +74,14 @@ export class PositionLogic {
     for (let index=startingIndex; index < rockLength; index ++){
       rockPosition = board.posibleRocks[index];
       if(this.isPositionFree(board, rockPosition)){
-        board.posibleRocks.splice(index, 1);
+        ArrayUtils.removeAtIndex(board.posibleRocks, index);
         return rockPosition;
       }
     }
     for (let index=0; index < startingIndex; index ++){
       rockPosition = board.posibleRocks[index];
       if(this.isPositionFree(board, rockPosition)){
-        board.posibleRocks.splice(index, 1);
+        ArrayUtils.removeAtIndex(board.posibleRocks, index);
         return rockPosition;
       }
     }

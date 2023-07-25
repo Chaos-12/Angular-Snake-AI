@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SelectorComponent } from 'src/main/app';
+import { SelectorComponent } from 'src/main/components/modes';
 import { TestUtils } from 'src/test/testUtils';
 
-describe(TestUtils.title('SelectorComponent'), () => {
+TestUtils.testClass('SelectorComponent', function(){
   let component: SelectorComponent;
   let fixture: ComponentFixture<SelectorComponent>;
 
@@ -12,15 +11,15 @@ describe(TestUtils.title('SelectorComponent'), () => {
       declarations: [ SelectorComponent ]
     })
     .compileComponents();
-  });
+  })
 
-  beforeEach(() => {
+  beforeEach(function(){
     fixture = TestBed.createComponent(SelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  })
 
-  it('should create', () => {
+  it('Should create component', () => {
     expect(component).toBeTruthy();
-  });
-});
+  })
+})
