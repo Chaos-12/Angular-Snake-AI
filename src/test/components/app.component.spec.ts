@@ -16,13 +16,13 @@ TestUtils.testClass('AppComponent', function(){
     }).compileComponents();
   })
 
-  TestUtils.test('Should create the app', function(){
+  TestUtils.individualTest('Should create the app', function(){
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   })
 
-  TestUtils.test(`Should have as title 'angular-snake-ai'`, function(){
+  TestUtils.individualTest(`Should have as title 'angular-snake-ai'`, function(){
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('angular-snake-ai');

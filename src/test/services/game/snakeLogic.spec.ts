@@ -7,7 +7,7 @@ TestUtils.testClass('SnakeLogic', function(){
   // Service with no dependences
   let snakeLogic:SnakeLogic = new SnakeLogic();
 
-  TestUtils.test('Creation of initial snake OK', function(){
+  TestUtils.individualTest('Creation of initial snake OK', function(){
     let testSnake = snakeLogic.buildSnake();
 
     expect(testSnake.isAlive)

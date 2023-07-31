@@ -4,6 +4,7 @@ import { TestUtils } from "src/test/testUtils";
 
 TestUtils.testClass('BoardLogic', function(){
 
+  //Service with dependencies
   let boardLogic:BoardLogic;
   let snakeLogic:jasmine.SpyObj<SnakeLogic>;
   let positionLogic:jasmine.SpyObj<PositionLogic>;
@@ -27,27 +28,27 @@ TestUtils.testClass('BoardLogic', function(){
     positionLogic = TestBed.inject(PositionLogic) as jasmine.SpyObj<PositionLogic>;
   })
 
-  TestUtils.test('Creation of initial board OK', function(){
+  TestUtils.individualTest('Creation of initial board OK', function(){
     let testBoard = boardLogic.buildBoard();
 
     expect(testBoard.rocks.length)
-      .withContext('Board has 0 rocks')
+      .withContext('Board starts with 0 rocks')
       .toBe(0);
 
     expect(testBoard.food.position.x)
-      .withContext('Food X >= 0')
+      .withContext('Food.x >= 0')
       .toBeGreaterThanOrEqual(0);
 
     expect(testBoard.food.position.x)
-      .withContext('Food X <= board.with')
+      .withContext('Food.x <= board.with')
       .toBeLessThanOrEqual(testBoard.width);
 
     expect(testBoard.food.position.y)
-      .withContext('Food Y >= 0')
+      .withContext('Food.y >= 0')
       .toBeGreaterThanOrEqual(0);
 
     expect(testBoard.food.position.y)
-      .withContext('Food Y <= board.with')
+      .withContext('Food.y <= board.with')
       .toBeLessThanOrEqual(testBoard.width);
   })
 })
