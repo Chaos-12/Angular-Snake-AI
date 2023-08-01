@@ -1,6 +1,6 @@
 export class TestUtils {
 
-  public static stringify(item:Object):string {
+  private static stringify(item:Object):string {
     return JSON.stringify(item);
   }
 

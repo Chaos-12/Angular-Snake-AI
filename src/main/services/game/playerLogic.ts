@@ -13,7 +13,6 @@ export class PlayerLogic {
     let board = this.boardLogic.buildBoard();
     let snake = this.snakeLogic.buildSnake();
     this.boardLogic.addSnake(board, snake);
-    this.boardLogic.generateFoodFor(board);
     return new Player(id, board, snake);
   }
 

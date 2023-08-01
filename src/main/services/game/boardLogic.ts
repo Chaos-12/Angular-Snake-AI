@@ -11,6 +11,7 @@ export class BoardLogic {
 
   public buildBoard(width:number = 11):Board{
     let board = new Board(width);
+    this.generateFoodFor(board);
     return board;
   }
 
